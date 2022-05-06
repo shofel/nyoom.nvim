@@ -20,6 +20,18 @@
 ;; Mapping and Documentation
 (use-package! :folke/which-key.nvim {:init :which-key})
 
+;; Tim Pope
+(use-package! :tpope/vim-commentary)
+(use-package! :tpope/vim-dispatch)
+(use-package! :tpope/vim-eunuch)
+(use-package! :tpope/vim-fugitive)
+(use-package! :tpope/vim-projectionist)
+(use-package! :tpope/vim-repeat)
+(use-package! :tpope/vim-rsi)
+(use-package! :tpope/vim-sleuth)
+(use-package! :tpope/vim-surround)
+(use-package! :tpope/vim-unimpaired)
+
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :master})
 (use-package! :gpanders/nvim-parinfer {:ft lisp-ft})
@@ -28,7 +40,9 @@
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
               {:branch :main
-               :config! :fzf-lua
+               :config (λ []
+                         (let [{: setup} (require :fzf-lua)]
+                           (setup {:border :single})))
                :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]})
 
 ;; tree-sitter
