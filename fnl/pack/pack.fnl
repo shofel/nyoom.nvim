@@ -10,7 +10,6 @@
                  :open_fn (λ open_fn []
                             (local {: float} (require :packer.util))
                             (float {:border :solid}))}})
- 
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
@@ -26,11 +25,11 @@
 (use-package! :gpanders/nvim-parinfer {:ft lisp-ft})
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
 
-;; File navigation
-(use-package! :kyazdani42/nvim-tree.lua {:cmd :NvimTreeToggle :config! :nvimtree})
-(use-package! :nvim-lua/telescope.nvim {:cmd :Telescope 
-                                        :config! :telescope 
-                                        :requires [(pack :nvim-lua/plenary.nvim {:module :plenary})]})
+;; Fzf
+(use-package! :ibhagwan/fzf-lua
+              {:branch :main
+               :config! :fzf-lua
+               :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
