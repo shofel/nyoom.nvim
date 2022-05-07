@@ -40,10 +40,10 @@
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
               {:branch :main
+               :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
                :config (λ []
-                         (let [{: setup} (require :fzf-lua)]
-                           (setup {:border :single})))
-               :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]})
+                         (let [fzf-lua (require :fzf-lua)]
+                           (fzf-lua.setup {:border :single})))})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -64,9 +64,6 @@
                :config (λ []
                          (local {: setup} (require :trouble))
                          (setup {:icons false}))})
-
-;; git
-(use-package! :TimUntersberger/neogit {:init :neogit :cmd :Neogit})
 
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua

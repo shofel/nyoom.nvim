@@ -1,10 +1,7 @@
 (require-macros :macros.keybind-macros)
 
 ;; Document leader keys with which-key
-(doc-map! :n :<leader>f :silent :Files)
-(doc-map! :n :<leader>t :silent :Visuals)
-(doc-map! :n :<leader>b :silent :Buffers)
-(doc-map! :n :<leader>o :silent :NvimTree)
+(doc-map! :n :<leader>f :silent "fzf")
 
 ;; Document top level keys with which-key
 (doc-map! :n "<leader>:" :silent :M-x)
@@ -36,16 +33,40 @@
 ;; wrap/unwrap
 (map! [n] :<leader>tw "<cmd>set wrap!<CR>")
 
+;;
+(vim.keymap.set [:n] "<leader>s" "<cmd>w<cr>" {:desc "Save file"})
+(vim.keymap.set [:n] "<leader>n" ":nohlsearch<cr>")
+
+;; fzf-lua
+(lambda fzf [x]
+  "Given a topic `x`, return lua function and a description."
+  (let [fzf-lua (require :fzf-lua)]
+    (values (. fzf-lua x)
+            {:desc x})))
+
+(lambda fzf-files []
+  (let [{: files} (require :fzf-lua)]
+    (values (lambda [] (files {:fd-opts "--no-ignore --hidden"}))
+            {:desc "all files"})))
+
+(vim.keymap.set [:n] "<leader>ff" (fzf "git_files"))
+(vim.keymap.set [:n] "<leader>fs" (fzf "git_status"))
+(vim.keymap.set [:n] "<leader>fF" (fzf-files))
+(vim.keymap.set [:n] "<leader>fg" (fzf "live_grep"))
+(vim.keymap.set [:n] "<leader>fh" (fzf "help_tags"))
+(vim.keymap.set [:n] "<leader>fH" (fzf "command_history"))
+(vim.keymap.set [:n] "<leader>fc" (fzf "commands"))
+(vim.keymap.set [:n] "<leader>f," (fzf "builtin"))
+(vim.keymap.set [:n] "<leader>fk" (fzf "keymaps"))
+(vim.keymap.set [:n] "<leader>f." (fzf "resume"))
+(vim.keymap.set [:n] "<leader>fw" (fzf "grep_cword"))
+(vim.keymap.set [:n] "<leader>fW" (fzf "grep_cWORD"))
+(vim.keymap.set [:n] "<leader>/"  (fzf "blines"))
+(vim.keymap.set [:n] "<leader>b"  (fzf "buffers"))
+
 ;; treesitter 
 (map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
 (map! [n] :<Leader>tp ":TSPlayground<CR>")
-
-;; telescope
-(map! [n] :<leader>bb "<cmd>Telescope buffers<CR>")
-(map! [n] :<leader>ff "<cmd>Telescope current_buffer_fuzzy_find<CR>")
-(map! [n] :<leader>fr "<cmd>Telescope oldfiles<CR>")
-(map! [n] "<leader>:" "<cmd>Telescope commands<CR>")
-(map! [n] :<leader><space> "<cmd>Telescope find_files<CR>")
 
 ;; nvimtree
 (map! [n] :<leader>op :<cmd>NvimTreeToggle<CR>)
