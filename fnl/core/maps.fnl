@@ -1,4 +1,5 @@
 (require-macros :macros.keybind-macros)
+(import-macros {: lazy-require!} :macros.package-macros)
 
 ;; Document leader keys with which-key
 (doc-map! :n :<leader>f :silent "fzf")
@@ -40,16 +41,15 @@
 ;; fzf-lua
 (lambda fzf [x]
   "Given a topic `x`, return lua function and a description."
-  (let [fzf-lua (require :fzf-lua)]
-    (values (. fzf-lua x)
-            {:desc x})))
+  (let [fzf-lua (lazy-require! :fzf-lua)] 
+    (values (. fzf-lua x) {:desc x})))
 
 (lambda fzf-files []
-  (let [{: files} (require :fzf-lua)]
+  (let [{: files} (lazy-require! :fzf-lua)]
     (values (lambda [] (files {:fd-opts "--no-ignore --hidden"}))
             {:desc "all files"})))
 
-(vim.keymap.set [:n] "<leader>ff" (fzf "git_files"))
+(vim.keymap.set [:n] "<leader>ff" (fzf :git_files))
 (vim.keymap.set [:n] "<leader>fs" (fzf "git_status"))
 (vim.keymap.set [:n] "<leader>fF" (fzf-files))
 (vim.keymap.set [:n] "<leader>fg" (fzf "live_grep"))

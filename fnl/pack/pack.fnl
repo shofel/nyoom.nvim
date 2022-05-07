@@ -42,8 +42,11 @@
               {:branch :main
                :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
                :config (λ []
-                         (let [fzf-lua (require :fzf-lua)]
-                           (fzf-lua.setup {:border :single})))})
+                         ((. (require :fzf-lua) :setup)
+                          {:border :single}))})
+
+;; Lightspeed
+(use-package! :ggandor/lightspeed.nvim {:config! "lightspeed"})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -59,6 +62,7 @@
               {:config! :lsp
                :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
 
+;; trouble
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble
                :config (λ []
