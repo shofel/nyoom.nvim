@@ -1,4 +1,4 @@
-(require-macros :macros.keybind-macros)
+(import-macros {: map! : doc-map!} :macros.keybind-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 
 ;; Document leader keys with which-key
@@ -35,14 +35,16 @@
 (map! [n] :<leader>tw "<cmd>set wrap!<CR>")
 
 ;;
-(vim.keymap.set [:n] "<leader>s" "<cmd>w<cr>" {:desc "Save file"})
-(vim.keymap.set [:n] "<leader>n" ":nohlsearch<cr>")
+(map! [n] "<leader>s" "<cmd>w<cr>" "Save file")
+(map! [n] "<leader>n" "<cmd>nohlsearch<cr>")
+(map! [n] "<leader>o" "<cmd>only<cr>")
 
 ;; fzf-lua
 (lambda fzf [x]
   "Given a topic `x`, return lua function and a description."
   (let [fzf-lua (lazy-require! :fzf-lua)] 
-    (values (. fzf-lua x) {:desc x})))
+    (values (. fzf-lua x)
+            {:desc x})))
 
 (lambda fzf-files []
   (let [{: files} (lazy-require! :fzf-lua)]
@@ -50,19 +52,19 @@
             {:desc "all files"})))
 
 (vim.keymap.set [:n] "<leader>ff" (fzf :git_files))
-(vim.keymap.set [:n] "<leader>fs" (fzf "git_status"))
+(vim.keymap.set [:n] "<leader>fs" (fzf :git_status))
 (vim.keymap.set [:n] "<leader>fF" (fzf-files))
-(vim.keymap.set [:n] "<leader>fg" (fzf "live_grep"))
-(vim.keymap.set [:n] "<leader>fh" (fzf "help_tags"))
-(vim.keymap.set [:n] "<leader>fH" (fzf "command_history"))
-(vim.keymap.set [:n] "<leader>fc" (fzf "commands"))
-(vim.keymap.set [:n] "<leader>f," (fzf "builtin"))
-(vim.keymap.set [:n] "<leader>fk" (fzf "keymaps"))
-(vim.keymap.set [:n] "<leader>f." (fzf "resume"))
-(vim.keymap.set [:n] "<leader>fw" (fzf "grep_cword"))
-(vim.keymap.set [:n] "<leader>fW" (fzf "grep_cWORD"))
-(vim.keymap.set [:n] "<leader>/"  (fzf "blines"))
-(vim.keymap.set [:n] "<leader>b"  (fzf "buffers"))
+(vim.keymap.set [:n] "<leader>fg" (fzf :live_grep))
+(vim.keymap.set [:n] "<leader>fh" (fzf :help_tags))
+(vim.keymap.set [:n] "<leader>fH" (fzf :command_history))
+(vim.keymap.set [:n] "<leader>fc" (fzf :commands))
+(vim.keymap.set [:n] "<leader>f," (fzf :builtin))
+(vim.keymap.set [:n] "<leader>fk" (fzf :keymaps))
+(vim.keymap.set [:n] "<leader>f." (fzf :resume))
+(vim.keymap.set [:n] "<leader>fw" (fzf :grep_cword))
+(vim.keymap.set [:n] "<leader>fW" (fzf :grep_cWORD))
+(vim.keymap.set [:n] "<leader>/"  (fzf :blines))
+(vim.keymap.set [:n] "<leader>b"  (fzf :buffers))
 
 ;; treesitter 
 (map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
