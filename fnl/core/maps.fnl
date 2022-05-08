@@ -74,12 +74,16 @@
 (vim.keymap.set :n "<Leader>gV" "<cmd>GV!<cr>")
 (vim.keymap.set :n "<Leader>gv" "<cmd>TermExec cmd=\"glog; exit\"<cr>")
 
+;; conjure
+(doc-map! :n "<localleader>E" :silent "eval motion")
+(doc-map! :n "<localleader>e" :silent "execute")
+(doc-map! :n "<localleader>l" :silent "log")
+(doc-map! :n "<localleader>r" :silent "reset")
+(doc-map! :n "<localleader>t" :silent "test")
+
 ;; treesitter 
 (map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
 (map! [n] :<Leader>tp ":TSPlayground<CR>")
-
-;; nvimtree
-(map! [n] :<leader>op :<cmd>NvimTreeToggle<CR>)
 
 ;; truezen
 (map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)
