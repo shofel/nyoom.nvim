@@ -1,7 +1,8 @@
 (import-macros {: map! : doc-map!} :macros.keybind-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 
-(local set-key! vim.keymap.set)
+(local {: set-key!} (require :utils.keymap))
+
 (local doc-key! (. (lazy-require! "which-key") :register))
 
 ;; who actually uses C-z or ex mode?
