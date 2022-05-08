@@ -1,11 +1,10 @@
-(import-macros {: map! : doc-map!} :macros.keybind-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 
 (local {: set-key! : doc-key!} (require :utils.keymap))
 
 ;; TODO
-;;      - migrate lsp keys
-;;      - remove keybind-macros
+;;      - DONE migrate lsp keys
+;;      - DONE remove keybind-macros
 ;;      - rename this file to core.keymaps
 
 ;; who actually uses C-z or ex mode?
