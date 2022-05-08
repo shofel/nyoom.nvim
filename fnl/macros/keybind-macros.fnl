@@ -63,6 +63,5 @@
                              :noremap ,(if (not options.noremap) false)
                              :nowait ,(if options.nowait true)}))))
 
-{: map!
- : buf-map!
+{: buf-map!
  : doc-map!}
