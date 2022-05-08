@@ -6,19 +6,17 @@
 (local doc-key! (. (lazy-require! "which-key") :register))
 
 ;; who actually uses C-z or ex mode?
-(map! [n] "<C-z>" :<Nop>)
-(map! [n] "Q"     :<Nop>)
-
-;; move between windows
-;; ?TODO
+(set-key! :n "<C-z>" :<Nop>)
+(set-key! :n "Q"     :<Nop>)
 
 ;;
-(map! [n] "<leader>s" "<cmd>w<cr>" "Save file")
-(map! [n] "<leader>n" "<cmd>nohlsearch<cr>")
+(set-key! :n "<leader>s" "<cmd>w<cr>" {:desc "Save file"})
+(set-key! :n "<leader>n" "<cmd>nohlsearch<cr>")
 
-(doc-map! :n "<leader>w" :silent "windows")
-(map! [n] "<leader>wo" "<cmd>only<cr>")
-(map! [n] "<leader>wc" "<cmd>bwipeout<cr>")
+(doc-map! :n "<leader>b" :silent "buffers")
+(set-key! :n "<leader>bo" "<cmd>only<cr>")
+(set-key! :n "<leader>bk" "<cmd>bwipeout<cr>")
+(set-key! :n "<leader>bh" "<cmd>close<cr>") ; TODO mini.buffers.delete()
 
 ;; fzf-lua
 (lambda fzf [x]
@@ -32,7 +30,7 @@
     (values (lambda [] (files {:fd-opts "--no-ignore --hidden"}))
             {:desc "all files"})))
 
-(doc-map! :n :<leader>f :silent "fzf")
+(doc-map! :n "<leader>f" :silent "fzf")
 
 (set-key! :n "<leader>ff" (fzf :git_files))
 (set-key! :n "<leader>fs" (fzf :git_status))
@@ -47,7 +45,7 @@
 (set-key! :n "<leader>fw" (fzf :grep_cword))
 (set-key! :n "<leader>fW" (fzf :grep_cWORD))
 (set-key! :n "<leader>/"  (fzf :blines))
-(set-key! :n "<leader>b"  (fzf :buffers))
+(set-key! :n "<leader>bl" (fzf :buffers))
 
 ;; git
 (doc-map! :n "<leader>g"  :silent "git")
@@ -59,7 +57,7 @@
 (set-key! :n "<Leader>gV" "<cmd>GV!<cr>")
 (set-key! :n "<Leader>gv" "<cmd>TermExec cmd=\"glog; exit\"<cr>")
 
-;; conjure
+;; conjure prefixes
 (doc-map! :n "<localleader>E" :silent "eval motion")
 (doc-map! :n "<localleader>e" :silent "execute")
 (doc-map! :n "<localleader>l" :silent "log")
@@ -67,8 +65,8 @@
 (doc-map! :n "<localleader>t" :silent "test")
 
 ;; treesitter 
-(map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
-(map! [n] :<Leader>tp ":TSPlayground<CR>")
+(set-key! :n "<Leader>th" ":TSHighlightCapturesUnderCursor<CR>")
+(set-key! :n "<Leader>tp" ":TSPlayground<CR>")
 
-;; truezen
-(map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)
+;; truezen:n
+(set-key! :n "<leader>tz" :<cmd>TZAtaraxis<CR>)
