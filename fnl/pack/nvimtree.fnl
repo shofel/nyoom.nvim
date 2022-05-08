@@ -1,9 +1,9 @@
 (import-macros {: let!} :macros.option-macros)
-(import-macros {: lazy-require} :macros.package-macros)
+(import-macros {: lazy-require!} :macros.package-macros)
 
 (let! :g.nvim_tree_show_icons {:git 0 :folders 1 :files 0 :folder_arrows 0})
 
-(local {: setup} (lazy-require :nvim-tree))
+(local {: setup} (lazy-require! :nvim-tree))
 (setup {:view {:width 30 :side :left :hide_root_folder true}
         :hijack_cursor true
         :update_cwd true

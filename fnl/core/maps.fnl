@@ -1,33 +1,30 @@
 (import-macros {: map! : doc-map!} :macros.keybind-macros)
-(import-macros {: lazy-require} :macros.package-macros)
-
-(local set-key! vim.keymap.set)
-; (local doc-key! (. (lazy-require)))
+(import-macros {: lazy-require!} :macros.package-macros)
 
 ;; who actually uses C-z or ex mode?
-(vim.keymap.set :n :<C-z> :<Nop>)
-(vim.keymap.set :n :Q     :<Nop>)
+(map! :n "<C-z>" :<Nop>)
+(map! :n "Q"     :<Nop>)
 
 ;; move between windows
 ;; ?TODO
 
 ;;
-(vim.keymap.set :n "<leader>s" "<cmd>w<cr>" "Save file")
-(vim.keymap.set :n "<leader>n" "<cmd>nohlsearch<cr>")
+(map! :n "<leader>s" "<cmd>w<cr>" "Save file")
+(map! :n "<leader>n" "<cmd>nohlsearch<cr>")
 
 (doc-map! :n "<leader>w" :silent "windows")
-(vim.keymap.set :n "<leader>wo" "<cmd>only<cr>")
-(vim.keymap.set :n "<leader>wc" "<cmd>bwipeout<cr>")
+(map! :n "<leader>wo" "<cmd>only<cr>")
+(map! :n "<leader>wc" "<cmd>bwipeout<cr>")
 
 ;; fzf-lua
 (lambda fzf [x]
   "Given a topic `x`, return lua function and a description."
-  (let [fzf-lua (lazy-require :fzf-lua)] 
+  (let [fzf-lua (lazy-require! :fzf-lua)] 
     (values (. fzf-lua x)
             {:desc x})))
 
 (lambda fzf-files []
-  (let [{: files} (lazy-require :fzf-lua)]
+  (let [{: files} (lazy-require! :fzf-lua)]
     (values (lambda [] (files {:fd-opts "--no-ignore --hidden"}))
             {:desc "all files"})))
 
@@ -66,8 +63,8 @@
 (doc-map! :n "<localleader>t" :silent "test")
 
 ;; treesitter 
-(vim.keymap.set :n :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
-(vim.keymap.set :n :<Leader>tp ":TSPlayground<CR>")
+(map! [n] :<Leader>th ":TSHighlightCapturesUnderCursor<CR>")
+(map! [n] :<Leader>tp ":TSPlayground<CR>")
 
 ;; truezen
-(vim.keymap.set :n :<leader>tz :<cmd>TZAtaraxis<CR>)
+(map! [n] :<leader>tz :<cmd>TZAtaraxis<CR>)
