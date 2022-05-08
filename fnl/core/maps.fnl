@@ -2,19 +2,19 @@
 (import-macros {: lazy-require!} :macros.package-macros)
 
 ;; who actually uses C-z or ex mode?
-(map! :n "<C-z>" :<Nop>)
-(map! :n "Q"     :<Nop>)
+(map! [n] "<C-z>" :<Nop>)
+(map! [n] "Q"     :<Nop>)
 
 ;; move between windows
 ;; ?TODO
 
 ;;
-(map! :n "<leader>s" "<cmd>w<cr>" "Save file")
-(map! :n "<leader>n" "<cmd>nohlsearch<cr>")
+(map! [n] "<leader>s" "<cmd>w<cr>" "Save file")
+(map! [n] "<leader>n" "<cmd>nohlsearch<cr>")
 
 (doc-map! :n "<leader>w" :silent "windows")
-(map! :n "<leader>wo" "<cmd>only<cr>")
-(map! :n "<leader>wc" "<cmd>bwipeout<cr>")
+(map! [n] "<leader>wo" "<cmd>only<cr>")
+(map! [n] "<leader>wc" "<cmd>bwipeout<cr>")
 
 ;; fzf-lua
 (lambda fzf [x]
