@@ -1,9 +1,11 @@
 (import-macros {: map! : doc-map!} :macros.keybind-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 
-(local {: set-key!} (require :utils.keymap))
+(local {: set-key! : doc-key!} (require :utils.keymap))
 
-(local doc-key! (. (lazy-require! "which-key") :register))
+;; TODO
+;;      - migrate lsp keys
+;;      - remove keybind-macros
 
 ;; who actually uses C-z or ex mode?
 (set-key! :n "<C-z>" :<Nop>)
@@ -13,7 +15,7 @@
 (set-key! :n "<leader>s" "<cmd>w<cr>" {:desc "Save file"})
 (set-key! :n "<leader>n" "<cmd>nohlsearch<cr>")
 
-(doc-map! :n "<leader>b" :silent "buffers")
+(doc-key!    "<leader>b"  "buffers")
 (set-key! :n "<leader>bo" "<cmd>only<cr>")
 (set-key! :n "<leader>bk" "<cmd>bwipeout<cr>")
 (set-key! :n "<leader>bh" "<cmd>close<cr>") ; TODO mini.buffers.delete()
@@ -30,8 +32,7 @@
     (values (lambda [] (files {:fd-opts "--no-ignore --hidden"}))
             {:desc "all files"})))
 
-(doc-map! :n "<leader>f" :silent "fzf")
-
+(doc-key!    "<leader>f" "fzf")
 (set-key! :n "<leader>ff" (fzf :git_files))
 (set-key! :n "<leader>fs" (fzf :git_status))
 (set-key! :n "<leader>fF" (fzf-files))
@@ -48,7 +49,7 @@
 (set-key! :n "<leader>bl" (fzf :buffers))
 
 ;; git
-(doc-map! :n "<leader>g"  :silent "git")
+(doc-key!    "<leader>g"  "git")
 (set-key! :n "<Leader>gs" "<cmd>vert Git<cr>")
 (set-key! :n "<Leader>ga" "<cmd>Gwrite<cr>")
 (set-key! :n "<Leader>gp" "<cmd>Dispatch git push<cr>")
@@ -58,11 +59,11 @@
 (set-key! :n "<Leader>gv" "<cmd>TermExec cmd=\"glog; exit\"<cr>")
 
 ;; conjure prefixes
-(doc-map! :n "<localleader>E" :silent "eval motion")
-(doc-map! :n "<localleader>e" :silent "execute")
-(doc-map! :n "<localleader>l" :silent "log")
-(doc-map! :n "<localleader>r" :silent "reset")
-(doc-map! :n "<localleader>t" :silent "test")
+(doc-key! "<localleader>E" "eval motion")
+(doc-key! "<localleader>e" "execute")
+(doc-key! "<localleader>l" "log")
+(doc-key! "<localleader>r" "reset")
+(doc-key! "<localleader>t" "test")
 
 ;; treesitter 
 (set-key! :n "<Leader>th" ":TSHighlightCapturesUnderCursor<CR>")
