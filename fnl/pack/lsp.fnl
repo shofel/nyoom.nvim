@@ -57,3 +57,27 @@
                                                      :preloadFileSize 10000}}}})
 
 
+(lsp.powershell_es.setup {:on_attach on_attach
+                          :bundle_path "/home/shovel/opt/PowerShellEditorServices/"})
+
+(lsp.flow.setup {:on_attach on_attach
+                 :cmd ["yarn" "flow" "lsp"]})
+
+
+;; TODO autocmd
+(lsp.eslint.setup {:on_attach (fn [] (vim.api.nvim_command "autocmd BufWritePre <buffer> EslintFixAll"))})
+
+
+(lsp.stylelint_lsp.setup {:cmd ["yarn" "dlx" "-p" "stylelint-lsp" "stylelint-lsp" "--stdio"]
+                          :filetypes ["css" "less" "scss" "sugarss"
+                                      "vue" "wxss" "javascript" "javascriptreact"
+                                      "typescript" "typescriptreact"]
+                          :root_dir (lsp.util.root_pattern ".stylelintrc" "package.json")
+                          :settings {}})
+
+
+(lsp.hls.setup {})
+(lsp.rnix.setup {})
+(lsp.terraformls.setup {})
+(lsp.vimls.setup {})
+(lsp.yamlls.setup {})

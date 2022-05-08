@@ -67,33 +67,35 @@
 
 ;; lsp keys for a buffer
 (lambda set-lsp-keys! [bufnr]
-  (let [wk (require :which-key)]
+  (let [wk (require :which-key)
+        key (lambda [tbl prop] [(. tbl prop) prop])]
     (wk.register {"<leader>d" {:name "lsp"
                                ; inspect
-                               "d" vim.lsp.buf.definition
-                               "D" vim.lsp.buf.declaration
-                               "i" vim.lsp.buf.implementation
-                               "t" vim.lsp.buf.type_definition
-                               "s" vim.lsp.buf.signature_help
-                               "h" vim.lsp.buf.hover
-                               "r" vim.lsp.buf.references
+                               "d" (key vim.lsp.buf :definition)
+                               "D" (key vim.lsp.buf :declaration)
+                               "i" (key vim.lsp.buf :implementation)
+                               "t" (key vim.lsp.buf :type_definition)
+                               "s" (key vim.lsp.buf :signature_help)
+                               "h" (key vim.lsp.buf :hover)
+                               "r" (key vim.lsp.buf :references)
                                ; diagnstic
-                               "k" vim.diagnostic.goto_prev
-                               "j" vim.diagnostic.goto_next
-                               "w" vim.diagnostic.open_float
-                               "q" vim.diagnostic.setloclist
+                               "k" (key vim.diagnostic :goto_prev)
+                               "j" (key vim.diagnostic :goto_next)
+                               "w" (key vim.diagnostic :open_float)
+                               "q" (key vim.diagnostic :setloclist)
                                ; code
-                               "r" vim.lsp.buf.rename
-                               "a" vim.lsp.buf.code_action
-                               "f" vim.lsp.buf.formatting}
+                               "r" (key vim.lsp.buf :rename)
+                               "a" (key vim.lsp.buf :code_action)
+                               "f" (key vim.lsp.buf :formatting)}
                   "<leader>W" {:name "lsp workspace"
-                               "Wa" vim.lsp.buf.add_workspace_folder
-                               "Wr" vim.lsp.buf.remove_workspace_folder
-                               "Wl" (print (vim.inspect (vim.lsp.buf.list_workspace_folders)))}
+                               "a" (key vim.lsp.buf :add_workspace_folder)
+                               "r" (key vim.lsp.buf :remove_workspace_folder)
+                               "l" [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders)))),
+                                    "list_workspace_folders"]}
                   ; reassgn some builtin mappings
-                  "K"  vim.lsp.buf.hover
-                  "gd" vim.lsp.buf.definition
-                  "gD" vim.lsp.buf.declaration}
+                  "K"  (key vim.lsp.buf :hover)
+                  "gd" (key vim.lsp.buf :definition)
+                  "gD" (key vim.lsp.buf :declaration)}
                  ; only for one buffer
                  {:buffer bufnr})))
 
