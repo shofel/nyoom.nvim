@@ -1,6 +1,6 @@
 ;; Sane defaults
 (require :core.defs)
-(require :core.maps)
+(require :core.keymaps)
 
 ;; load packer when its ready
 (require :pack.pack)

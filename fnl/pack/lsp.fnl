@@ -1,5 +1,5 @@
 (local lsp (require :lspconfig))
-(local {: set-lsp-keys!} (require :core.maps))
+(local {: set-lsp-keys!} (require :core.keymaps))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
