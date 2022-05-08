@@ -1,39 +1,20 @@
 (import-macros {: map! : doc-map!} :macros.keybind-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 
-;; Document top level keys with which-key
-(doc-map! :n "<leader>:" :silent :M-x)
-
 ;; who actually uses C-z or ex mode?
-(map! [n] :<C-z> :<Nop>)
-(map! [n] :Q :<Nop>)
-
-;;jk/jj for escape. Some people like this, others don't
-(map! [i] :jk :<esc>)
-
-;; easier command line mode
-(map! [n] ";" ":")
-(map! [v] ";" ":")
+(map! :n "<C-z>" :<Nop>)
+(map! :n "Q"     :<Nop>)
 
 ;; move between windows
-(map! [n] :<C-h> :<C-w>h)
-(map! [n] :<C-j> :<C-w>j)
-(map! [n] :<C-k> :<C-w>k)
-(map! [n] :<C-l> :<C-w>l)
-
-;; Resize splits
-(map! [n] :<C-Up> "<cmd>resize +2<cr>")
-(map! [n] :<C-Down> "<cmd>resize -2<cr>")
-(map! [n] :<C-Left> "<cmd>vertical resize +2<cr>")
-(map! [n] :<C-Right> "<cmd>vertical resize -2<cr>")
-
-;; wrap/unwrap
-(map! [n] :<leader>tw "<cmd>set wrap!<CR>")
+;; ?TODO
 
 ;;
-(map! [n] "<leader>s" "<cmd>w<cr>" "Save file")
-(map! [n] "<leader>n" "<cmd>nohlsearch<cr>")
-(map! [n] "<leader>o" "<cmd>only<cr>")
+(map! :n "<leader>s" "<cmd>w<cr>" "Save file")
+(map! :n "<leader>n" "<cmd>nohlsearch<cr>")
+
+(doc-map! :n "<leader>w" :silent "windows")
+(map! :n "<leader>wo" "<cmd>only<cr>")
+(map! :n "<leader>wc" "<cmd>bwipeout<cr>")
 
 ;; fzf-lua
 (lambda fzf [x]
