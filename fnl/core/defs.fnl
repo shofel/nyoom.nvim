@@ -29,7 +29,7 @@
 
 ;; set leader key
 (let! :g.mapleader " ")
-(let! :g.localleader ",")
+(let! :g.maplocalleader ",")
 
 ;;; Global options
 (set! hidden true updatetime 200 timeoutlen 500 shortmess :filnxtToOFatsc inccommand :split path "**") 
