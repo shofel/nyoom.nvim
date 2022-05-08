@@ -1,4 +1,5 @@
 (local lsp (require :lspconfig))
+(local {: set-lsp-keys!} (require :core.maps))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -23,25 +24,7 @@
 
 ;;; On attach
 (fn on-attach [client bufnr]
-  (import-macros {: buf-map!} :macros.keybind-macros)
-  (local {:hover open-float-doc!
-          :definition goto-definition!
-          :declaration goto-declaration!
-          :rename rename!
-          :type_definition goto-type-definition!
-          :code_action open-float-actions!} vim.lsp.buf)
-  (local {:open_float open-float-diag!
-          :goto_prev goto-prev-diag!
-          :goto_next goto-next-diag!} vim.diagnostic)
-  ;;; Keybinds
-  (buf-map! [n] :K open-float-doc!)
-  (buf-map! [n] :<leader>a open-float-actions!)
-  (buf-map! [n] :<leader>r rename!)
-  (buf-map! [n] :<leader>d open-float-diag! {:focus false})
-  (buf-map! [n] "<leader>[d" goto-prev-diag!)
-  (buf-map! [n] "<leader>]d" goto-next-diag!)
-  (buf-map! [n] :<leader>gd goto-definition!)
-  (buf-map! [n] :<leader>gD goto-declaration!))
+  (set-lsp-keys! bufnr))
 
 ;;; Capabilities
 (local capabilities (vim.lsp.protocol.make_client_capabilities))

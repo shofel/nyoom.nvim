@@ -6,6 +6,7 @@
 ;; TODO
 ;;      - migrate lsp keys
 ;;      - remove keybind-macros
+;;      - rename this file to core.keymaps
 
 ;; who actually uses C-z or ex mode?
 (set-key! :n "<C-z>" :<Nop>)
@@ -65,9 +66,44 @@
 (doc-key! "<localleader>r" "reset")
 (doc-key! "<localleader>t" "test")
 
+;; lsp keys for a buffer
+(lambda set-lsp-keys! [bufnr]
+  (let [wk (require :which-key)]
+    (wk.register {"<leader>d" {:name "lsp"
+                               ; inspect
+                               "d" vim.lsp.buf.definition
+                               "D" vim.lsp.buf.declaration
+                               "i" vim.lsp.buf.implementation
+                               "t" vim.lsp.buf.type_definition
+                               "s" vim.lsp.buf.signature_help
+                               "h" vim.lsp.buf.hover
+                               "r" vim.lsp.buf.references
+                               ; diagnstic
+                               "k" vim.diagnostic.goto_prev
+                               "j" vim.diagnostic.goto_next
+                               "w" vim.diagnostic.open_float
+                               "q" vim.diagnostic.setloclist
+                               ; code
+                               "r" vim.lsp.buf.rename
+                               "a" vim.lsp.buf.code_action
+                               "f" vim.lsp.buf.formatting}
+                  "<leader>W" {:name "lsp workspace"
+                               "Wa" vim.lsp.buf.add_workspace_folder
+                               "Wr" vim.lsp.buf.remove_workspace_folder
+                               "Wl" (print (vim.inspect (vim.lsp.buf.list_workspace_folders)))}
+                  ; reassgn some builtin mappings
+                  "K"  vim.lsp.buf.hover
+                  "gd" vim.lsp.buf.definition
+                  "gD" vim.lsp.buf.declaration}
+                 ; only for one buffer
+                 {:buffer bufnr})))
+
 ;; treesitter 
 (set-key! :n "<Leader>th" ":TSHighlightCapturesUnderCursor<CR>")
 (set-key! :n "<Leader>tp" ":TSPlayground<CR>")
 
 ;; truezen:n
 (set-key! :n "<leader>tz" :<cmd>TZAtaraxis<CR>)
+
+;; export
+{: set-lsp-keys!}
