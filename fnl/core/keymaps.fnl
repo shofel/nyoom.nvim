@@ -12,18 +12,20 @@
 ;;      - remove :utils.keymap
 
 ;; who actually uses C-z or ex mode?
-(set-key! :n "<C-z>" :<Nop>)
-(set-key! :n "Q"     :<Nop>)
+(which-key.register {"<C-z>" [:<Nop> "nop"]
+                     "Q"     [:<Nop> "nop"]})
 
 ;;
-(set-key! :n "<leader>s" "<cmd>w<cr>" {:desc "Save file"})
-(set-key! :n "<leader>n" "<cmd>nohlsearch<cr>")
+(which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
+                     "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
 
-(doc-key!    "<leader>b"  "buffers")
-(set-key! :n "<leader>bo" "<cmd>only<cr>")
-(set-key! :n "<leader>bk" "<cmd>bwipeout<cr>")
-(set-key! :n "<leader>bh" "<cmd>close<cr>") ; TODO mini.buffers.delete()
+;; buffers
+(which-key.register {"<leader>b" {:name "buffers"
+                                  "o" ["<cmd>only<cr>"     "close others"]
+                                  "k" ["<cmd>bwipeout<cr>" "kill buffer"]
+                                  "h" ["<cmd>close<cr>"    "close buffer"]}}) ; TODO mini.buffers.delete()
 
+;; fzf
 (let [fzf-lua (lazy-require! :fzf-lua)]
   (let [key-all-files (lambda []
                         (fzf-lua.files {:fd-opts "--no-ignore --hidden"}))]
