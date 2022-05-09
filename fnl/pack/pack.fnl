@@ -45,8 +45,14 @@
 (use-package! "RRethy/nvim-treesitter-endwise")
 (use-package! "windwp/nvim-autopairs" {:init "nvim-autopairs"})
 
-;; 
+;; Various small plugins
 (use-package! "gbprod/substitute.nvim")
+(use-package! :ggandor/lightspeed.nvim {:config! "lightspeed"})
+(use-package! :echasnovski/mini.nvim)
+
+;; Visual
+(use-package! :lewis6991/gitsigns.nvim {:init "gitsigns"
+                                        :requires [(pack :nvim-lua/plenary.nvim)]})
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
@@ -55,10 +61,6 @@
                :config (λ []
                          ((. (require :fzf-lua) :setup)
                           {:border :single}))})
-
-;; Lightspeed
-(use-package! :ggandor/lightspeed.nvim {:config! "lightspeed"})
-(use-package! :echasnovski/mini.nvim)
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
