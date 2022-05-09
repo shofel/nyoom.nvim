@@ -21,8 +21,38 @@
                      :branch :main}})
 
 ;; the usual
-(setup {:ensure_installed [:lua :vim :fennel :markdown :nix]
-        :highlight {:enable true :use_languagetree true}
+(setup {:ensure_installed ["bash"
+                           "clojure"
+                           "comment"
+                           "commonlisp"
+                           "css"
+                           "dockerfile"
+                           "fennel"
+                           "fish"
+                           "html"
+                           "http"
+                           "javascript"
+                           "jsdoc"
+                           "json"
+                           "json5"
+                           "lua"
+                           "markdown"
+                           "ninja"
+                           "nix"
+                           "perl"
+                           "python"
+                           "regex"
+                           "ruby"
+                           "scss"
+                           "toml"
+                           "tsx"
+                           "typescript"
+                           "vim"
+                           "vue"
+                           "yaml"]
+        :highlight {:enable true
+                    :use_languagetree true
+                    :additional_vim_regex_highlighting true}
         :indent {:enable true}
         :rainbow {:enable true :extended_mode true}
         :incremental_selection {:enable true
