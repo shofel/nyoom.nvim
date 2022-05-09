@@ -1,4 +1,4 @@
-(import-macros {: set!} :macros.option-macros)
+(local {: set-opts!} (require :utils.options))
 
 ;; Icons/text for each mode 
 (local modes {:n :RW
@@ -52,8 +52,6 @@
                                         " %l:%c "])))
 
 ;; And to just set that global statusline, showmode is now redundant
-(set! laststatus 3)
-(set! showmode false)
-(set! statusline "%!v:lua.Statusline.active()")
-
-
+(set-opts! {:laststatus 3
+            :showmode false
+            :statusline "%!v:lua.Statusline.active()"})

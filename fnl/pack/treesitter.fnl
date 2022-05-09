@@ -1,4 +1,3 @@
-(import-macros {: set!} :macros.option-macros)
 (import-macros {: lazy-require!} :macros.package-macros)
 (local {: setup} (lazy-require! :nvim-treesitter.configs))
 (local parsers (lazy-require! :nvim-treesitter.parsers))

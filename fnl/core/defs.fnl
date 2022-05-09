@@ -1,17 +1,9 @@
-(require-macros :macros.option-macros)
+(local {: set-opt! : set-opts!} (require :utils.options))
 
-(lambda set-opt! [name value]
-  "Set a neovim option"
-  (tset vim.o name value))
-
-(lambda set-opts! [opts]
-  "Set more than one nvim option at once"
-  (each [name value (pairs opts)]
-    (set-opt! name value)))
-
+;; TODO
 ;; set leader key
-(set-opts! :mapleader " "
-           :maplocalleader ",")
+; (set-opts! {:mapleader " "
+;             :maplocalleader ","})
 
 ;; shell
 (set-opt! :shell "fish")
