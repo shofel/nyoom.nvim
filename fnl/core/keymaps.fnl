@@ -22,21 +22,21 @@
 (let [fzf-lua (lazy-require! :fzf-lua)]
   (let [key-all-files (lambda []
                         (fzf-lua.files {:fd-opts "--no-ignore --hidden"}))]
-    which-key.register {"<leader>f" {:name "fzf"
-                                     "f" (key fzf-lua :git_files)
-                                     "F" [key-all-files "all files"]
-                                     "s" (key fzf-lua :git_status)
-                                     "g" (key fzf-lua :live_grep)
-                                     "h" (key fzf-lua :help_tags)
-                                     "H" (key fzf-lua :command_history)
-                                     "c" (key fzf-lua :commands)
-                                     "," (key fzf-lua :builtin)
-                                     "k" (key fzf-lua :keymaps)
-                                     "." (key fzf-lua :resume)
-                                     "w" (key fzf-lua :grep_cword)
-                                     "W" (key fzf-lua :grep_cWORD)}
-                        "/"  (key fzf-lua :blines)
-                        "bl" (key fzf-lua :buffers)}))
+    (which-key.register {"<leader>f" {:name "fzf"
+                                      "f" (key fzf-lua :git_files)
+                                      "F" [key-all-files "all files"]
+                                      "s" (key fzf-lua :git_status)
+                                      "g" (key fzf-lua :live_grep)
+                                      "h" (key fzf-lua :help_tags)
+                                      "H" (key fzf-lua :command_history)
+                                      "c" (key fzf-lua :commands)
+                                      "," (key fzf-lua :builtin)
+                                      "k" (key fzf-lua :keymaps)
+                                      "." (key fzf-lua :resume)
+                                      "w" (key fzf-lua :grep_cword)
+                                      "W" (key fzf-lua :grep_cWORD)}
+                         "/"  (key fzf-lua :blines)
+                         "bl" (key fzf-lua :buffers)})))
 
 ;; git
 (which-key.register {"<leader>g" {:name "git"
