@@ -24,11 +24,6 @@
 (set-key! :n "<leader>bk" "<cmd>bwipeout<cr>")
 (set-key! :n "<leader>bh" "<cmd>close<cr>") ; TODO mini.buffers.delete()
 
-(lambda fzf-files []
-  (let [{: files} (lazy-require! :fzf-lua)]
-    [(lambda [] (files {:fd-opts "--no-ignore --hidden"}))
-     "all files"]))
-
 (let [fzf-lua (lazy-require! :fzf-lua)]
   (let [key-all-files (lambda []
                         (fzf-lua.files {:fd-opts "--no-ignore --hidden"}))]
@@ -50,13 +45,26 @@
 
 ;; git
 (which-key.register {"<leader>g" {:name "git"
-                                  "s" ["<cmd>vert Git<cr>" "Fugitive"]
-                                  "a" ["<cmd>Gwrite<cr>"   "Stage file"]
-                                  "p" ["<cmd>Dispatch git push<cr>"                    "Push"]
-                                  "P" ["<cmd>Dispatch git push --force-with-lease<cr>" "Push force"]
-                                  "m" ["<cmd>GitMessenger<cr>" "GitMessenger"]
-                                  "V" ["<cmd>GV!<cr>"                         "GV"]
-                                  "v" ["<cmd>TermExec cmd=\"glog; exit\"<cr>" "Log"]}})
+                                  "s" ["<cmd>vert Git<cr>"
+                                       "Fugitive"]
+
+                                  "a" ["<cmd>Gwrite<cr>"
+                                       "Stage file"]
+
+                                  "p" ["<cmd>Dispatch git push<cr>"
+                                       "Push"]
+
+                                  "P" ["<cmd>Dispatch git push --force-with-lease<cr>"
+                                       "Push force"]
+
+                                  "m" ["<cmd>GitMessenger<cr>"
+                                       "GitMessenger"]
+
+                                  "V" ["<cmd>GV!<cr>"
+                                       "GV"]
+
+                                  "v" ["<cmd>TermExec cmd=\"glog; exit\"<cr>"
+                                       "Log"]}})
 
 ;; document conjure prefixes
 (which-key.register {"<localleader>E" "eval motion"
@@ -98,8 +106,11 @@
                {:buffer bufnr}))
 
 ;; treesitter 
-(which-key.register {"<Leader>th" [":TSHighlightCapturesUnderCursor<CR>" "TS highlight captures"]})
-(which-key.register {"<Leader>tp" [":TSPlayground<CR>"                   "TSPlayground"]})
+(which-key.register {"<Leader>th" ["<cmd>TSHighlightCapturesUnderCursor<cr>"
+                                   "TS highlight captures"]})
+
+(which-key.register {"<Leader>tp" ["<cmd>TSPlayground<cr>"
+                                   "TSPlayground"]})
 
 ;; truezen:n
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
