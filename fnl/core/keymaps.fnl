@@ -1,15 +1,8 @@
 (import-macros {: lazy-require!} :macros.package-macros)
 
 (local which-key (require :which-key))
-(local {: set-key! : doc-key!} (require :utils.keymap))
 
 (lambda key [tbl prop] [(. tbl prop) prop])
-
-;; TODO
-;;      - DONE migrate lsp keys
-;;      - DONE remove keybind-macros
-;;      - DOME rename this file to core.keymaps
-;;      - remove :utils.keymap
 
 ;; who actually uses C-z or ex mode?
 (which-key.register {"<C-z>" [:<Nop> "nop"]
