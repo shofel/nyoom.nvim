@@ -58,12 +58,12 @@
 (set-key! :n "<Leader>gV" "<cmd>GV!<cr>")
 (set-key! :n "<Leader>gv" "<cmd>TermExec cmd=\"glog; exit\"<cr>")
 
-;; conjure prefixes
-(doc-key! "<localleader>E" "eval motion")
-(doc-key! "<localleader>e" "execute")
-(doc-key! "<localleader>l" "log")
-(doc-key! "<localleader>r" "reset")
-(doc-key! "<localleader>t" "test")
+;; document conjure prefixes
+(which-key.register {"<localleader>E" "eval motion"
+                     "<localleader>e" "execute"
+                     "<localleader>l" "log"
+                     "<localleader>r" "reset"
+                     "<localleader>t" "test"})
 
 ;; lsp keys for a buffer
 (lambda set-lsp-keys! [bufnr]
