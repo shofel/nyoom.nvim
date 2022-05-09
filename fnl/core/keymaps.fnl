@@ -14,9 +14,9 @@
 
 ;; buffers
 (which-key.register {"<leader>b" {:name "buffers"
-                                  "o" ["<cmd>only<cr>"     "close others"]
-                                  "k" ["<cmd>bwipeout<cr>" "kill buffer"]
-                                  "h" ["<cmd>close<cr>"    "close buffer"]}}) ; TODO mini.buffers.delete()
+                                  "o" ["<cmd>only<cr>"      "close others"]
+                                  "k" ["<cmd>bwipeout!<cr>" "kill buffer"]
+                                  "h" ["<cmd>close<cr>"     "close buffer"]}}) ; TODO mini.buffers.delete()
 
 ;; fzf
 (let [fzf-lua (lazy-require! :fzf-lua)]
@@ -35,8 +35,8 @@
                                       "." (key fzf-lua :resume)
                                       "w" (key fzf-lua :grep_cword)
                                       "W" (key fzf-lua :grep_cWORD)}
-                         "/"  (key fzf-lua :blines)
-                         "bl" (key fzf-lua :buffers)})))
+                         "<leader>/"  (key fzf-lua :blines)
+                         "<leader>bl" (key fzf-lua :buffers)})))
 
 ;; git
 (which-key.register {"<leader>g" {:name "git"
