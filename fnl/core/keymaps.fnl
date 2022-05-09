@@ -13,11 +13,11 @@
                      "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
 
 ;; buffers
-(which-key.register {"<leader>b" {:name "buffers"
-                                  "o" ["<cmd>only<cr>"      "close others"]
-                                  "k" ["<cmd>bwipeout!<cr>" "kill buffer"]
-                                  "h" ["<cmd>close<cr>"     "close buffer"]}}) ; TODO mini.buffers.delete()
-
+(let [{: unshow_in_window} (lazy-require! "mini.bufremove")]
+  (which-key.register {"<leader>b" {:name "buffers"
+                                    "o" ["<cmd>only<cr>"      "close others"]
+                                    "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
+                                    "h" [unshow_in_window     "hide buffer"]}}))
 ;; fzf
 (let [fzf-lua (lazy-require! :fzf-lua)]
   (let [key-all-files (lambda []
@@ -109,6 +109,12 @@
 
 ;; truezen:n
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
+
+(let [exchange (lazy-require! "substitute.exchange")]
+  (which-key.register {"X"         [exchange.visual   "exchange"]} {:mode "x"})
+  (which-key.register {"X"         [exchange.operator ""]})
+  (which-key.register {"<Leader>x" [exchange.cancel   "cancel"]}))
+
 
 ;; export
 {: set-lsp-keys!}

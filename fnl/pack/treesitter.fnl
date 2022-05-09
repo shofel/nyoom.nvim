@@ -55,6 +55,7 @@
                     :additional_vim_regex_highlighting true}
         :indent {:enable true}
         :rainbow {:enable true :extended_mode true}
+        :endwise {:enable true}
         :incremental_selection {:enable true
                                 :keymaps {:init_selection :gnn
                                           :node_incremental :grn

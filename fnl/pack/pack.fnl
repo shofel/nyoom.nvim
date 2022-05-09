@@ -17,8 +17,8 @@
 ;; Packer can manage itself
 (use-package! :wbthomason/packer.nvim)
 
-;; Mapping and Documentation
-(use-package! :folke/which-key.nvim {:init :which-key})
+;; Set and document keymaps
+(use-package! :folke/which-key.nvim {:init "which-key"})
 
 ;; Tim Pope
 (use-package! :tpope/vim-commentary)
@@ -28,14 +28,25 @@
 (use-package! :tpope/vim-projectionist)
 (use-package! :tpope/vim-repeat)
 (use-package! :tpope/vim-rsi)
-(use-package! :tpope/vim-sleuth)
 (use-package! :tpope/vim-surround)
 (use-package! :tpope/vim-unimpaired)
 
+;; Follow conventions
+(use-package! :tpope/vim-sleuth)
+(use-package! :gpanders/editorconfig.nvim)
+
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :master})
-(use-package! :gpanders/nvim-parinfer {:ft lisp-ft})
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
+(use-package! "guns/vim-sexp")
+(use-package! "tpope/vim-sexp-mappings-for-regular-people")
+
+;; Pairs
+(use-package! "RRethy/nvim-treesitter-endwise")
+(use-package! "windwp/nvim-autopairs" {:init "nvim-autopairs"})
+
+;; 
+(use-package! "gbprod/substitute.nvim")
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
@@ -47,6 +58,7 @@
 
 ;; Lightspeed
 (use-package! :ggandor/lightspeed.nvim {:config! "lightspeed"})
+(use-package! :echasnovski/mini.nvim)
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
@@ -98,11 +110,9 @@
 ;; aesthetics
 (use-package! :RRethy/nvim-base16 {:config! :base16})
 (use-package! :rcarriga/nvim-notify {:config! :notify})
-(use-package! :Pocco81/TrueZen.nvim {:cmd :TZAtaraxis :config! :truezen})
-(use-package! :norcalli/nvim-colorizer.lua {:config! :colorizer :event [:BufRead :BufNewFile]})
-
-;; Notes: orgmode was previously supported, but its quite buggy and not up to part with emacs. I think neorg is the way to go. 
-(use-package! :nvim-neorg/neorg {:config! :neorg :ft :norg :after :nvim-treesitter})
+(use-package! :Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
+                                     :config! "truezen"})
+(use-package! :norcalli/nvim-colorizer.lua {:config! "colorizer" :event [:BufRead :BufNewFile]})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)
