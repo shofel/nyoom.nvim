@@ -27,81 +27,111 @@
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
 
+(lambda set-opt! [name value]
+  "Set a neovim option"
+  (tset vim.o name value))
+
+(lambda set-opts! [opts]
+  "Set more than one nvim option at once"
+  (each [name value (pairs opts)]
+    (set-opt! name value)))
+
 ;; set leader key
-(let! :g.mapleader " ")
-(let! :g.maplocalleader ",")
+(set-opts! :mapleader " "
+           :maplocalleader ",")
+
+;; shell
+(set-opt! :shell "fish")
 
 ;;; Global options
-(set! hidden true updatetime 200 timeoutlen 500 shortmess :filnxtToOFatsc inccommand :split path "**") 
+(set-opts! {:hidden true
+            :list   true
+            :timeoutlen 500
+            :shortmess  "filnxtToOFatsc"
+            :inccommand "split"})
 
 ;; cmp options
-(set! completeopt [:menu :menuone :preview :noinsert])
+(set-opt! :completeopt [:menu :menuone :preview :noinsert])
 
 ;; Use clipboard outside Neovim
-(set! clipboard :unnamedplus)
-
-;; Better guifont
-(set! guifont "Liga SFMono Nerd Font:h14")
+(set-opt! :clipboard :unnamedplus)
 
 ;; Enable mouse input
-(set! mouse :a)
+(set-opt! :mouse :a)
 
 ;; Faster macros
-(set! lazyredraw true)
+(set-opt! :lazyredraw true)
 
 ;; Disable swapfiles and enable undofiles
-(set! swapfile false undofile true)
+(set-opts! {:backup false :backupcopy "yes"
+            :swapfile false :updatetime 20
+            :undofile true})
 
 ;;; UI-related options
-(set! ruler false)
+(set-opt! :ruler false)
 
 ;; Numbering
-(set! number false)
+(set-opt! :number false)
 
 ;; True-color
-(set! termguicolors true)
+(set-opt! :termguicolors true)
 
 ;; Cols and chars
-(set! signcolumn "auto:1-3" foldcolumn "auto:3")
+(set-opts! {:signcolumn "yes:2"
+            :foldcolumn "auto:3"})
 
-(set! fillchars {:eob " "
-                 :horiz "━"
-                 :horizup "┻"
-                 :horizdown "┳"
-                 :vert "┃"
-                 :vertleft "┫"
-                 :vertright "┣"
-                 :verthoriz "╋"
-                 :fold " "
-                 :diff "─"
-                 :msgsep "‾"
-                 :foldsep "│"
-                 :foldopen "▾"
-                 :foldclose "▸"})
+(set-opt! :fillchars {:eob " "
+                      :horiz "━"
+                      :horizup "┻"
+                      :horizdown "┳"
+                      :vert "┃"
+                      :vertleft "┫"
+                      :vertright "┣"
+                      :verthoriz "╋"
+                      :fold " "
+                      :diff "─"
+                      :msgsep "‾"
+                      :foldsep "│"
+                      :foldopen "▾"
+                      :foldclose "▸"})
 
 ;; Smart search
-(set! smartcase true)
+(set-opt! :smartcase true)
 
 ;; Case-insensitive search
-(set! ignorecase true)
+(set-opt! :ignorecase true)
 
-;; Indentation rules
-(set! copyindent true smartindent true preserveindent true)
-
-;; Indentation level
-(set! tabstop 4 shiftwidth 4 softtabstop 4)
-
-;; Expand tabs
-(set! expandtab true)
+;; Indentation
+(set-opts! {:copyindent true
+            :smartindent true
+            :preserveindent true
+            ; numbers
+            :tabstop 4
+            :shiftwidth 4
+            :softtabstop 4
+            ;
+            :expandtab true})
 
 ;; Enable concealing
-(set! conceallevel 2)
+(set-opt! :conceallevel 2)
 
-;; Automatic split locations
-(set! splitright true splitbelow true)
+;; Default split directions
+(set-opts! {:splitright true
+            :splitbelow true})
 
 ;; Scroll off
-(set! scrolloff 8)
+(set-opt! :scrolloff 3)
 
-;; Disable cursorline
-(set! cursorline false)
+;; Cursor guides
+(set-opts! {:cursorcolumn false
+            :cursorline   false})
+
+;; Cursor
+(set-opt! :guicursor (.. "n-v-ve:block-Cursor/lCursor,"
+                         "i-c-ci-cr:ver100-Cursor/lCursor,"
+                         "o-r:hor100-Cursor/lCursor"))
+
+;; Russian keymap
+(set-opts! {:keymap "russian-dvorak"
+            :iminsert 0
+            :imsearch 0})
