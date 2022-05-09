@@ -49,14 +49,14 @@
                         "bl" (key fzf-lua :buffers)}))
 
 ;; git
-(doc-key!    "<leader>g"  "git")
-(set-key! :n "<Leader>gs" "<cmd>vert Git<cr>")
-(set-key! :n "<Leader>ga" "<cmd>Gwrite<cr>")
-(set-key! :n "<Leader>gp" "<cmd>Dispatch git push<cr>")
-(set-key! :n "<Leader>gP" "<cmd>Dispatch git push --force-with-lease<cr>")
-(set-key! :n "<Leader>gm" "<cmd>GitMessenger<cr>")
-(set-key! :n "<Leader>gV" "<cmd>GV!<cr>")
-(set-key! :n "<Leader>gv" "<cmd>TermExec cmd=\"glog; exit\"<cr>")
+(which-key.register {"<leader>g" {:name "git"
+                                  "s" ["<cmd>vert Git<cr>" "Fugitive"]
+                                  "a" ["<cmd>Gwrite<cr>"   "Stage file"]
+                                  "p" ["<cmd>Dispatch git push<cr>"                    "Push"]
+                                  "P" ["<cmd>Dispatch git push --force-with-lease<cr>" "Push force"]
+                                  "m" ["<cmd>GitMessenger<cr>" "GitMessenger"]
+                                  "V" ["<cmd>GV!<cr>"                         "GV"]
+                                  "v" ["<cmd>TermExec cmd=\"glog; exit\"<cr>" "Log"]}})
 
 ;; document conjure prefixes
 (which-key.register {"<localleader>E" "eval motion"
@@ -98,11 +98,11 @@
                {:buffer bufnr}))
 
 ;; treesitter 
-(set-key! :n "<Leader>th" ":TSHighlightCapturesUnderCursor<CR>")
-(set-key! :n "<Leader>tp" ":TSPlayground<CR>")
+(which-key.register {"<Leader>th" [":TSHighlightCapturesUnderCursor<CR>" "TS highlight captures"]})
+(which-key.register {"<Leader>tp" [":TSPlayground<CR>"                   "TSPlayground"]})
 
 ;; truezen:n
-(set-key! :n "<leader>tz" :<cmd>TZAtaraxis<CR>)
+(which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
 
 ;; export
 {: set-lsp-keys!}
