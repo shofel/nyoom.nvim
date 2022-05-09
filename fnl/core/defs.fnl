@@ -1,9 +1,8 @@
 (local {: set-opt! : set-opts!} (require :utils.options))
 
-;; TODO
-;; set leader key
-; (set-opts! {:mapleader " "
-;             :maplocalleader ","})
+;; set leader keys
+(set vim.g.mapleader " ")
+(set vim.g.maplocalleader ",")
 
 ;; shell
 (set-opt! :shell "fish")
