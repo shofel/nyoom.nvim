@@ -65,17 +65,6 @@
 ;; Case-insensitive search
 (set-opt! :ignorecase true)
 
-;; Indentation
-(set-opts! {:copyindent true
-            :smartindent true
-            :preserveindent true
-            ; numbers
-            :tabstop 4
-            :shiftwidth 4
-            :softtabstop 4
-            ;
-            :expandtab true})
-
 ;; Enable concealing
 (set-opt! :conceallevel 2)
 
