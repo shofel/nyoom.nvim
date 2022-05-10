@@ -43,7 +43,7 @@
 
 ;; Pairs
 (use-package! "RRethy/nvim-treesitter-endwise")
-(use-package! "windwp/nvim-autopairs" {:init "nvim-autopairs"})
+(use-package! "windwp/nvim-autopairs" {:init! "nvim-autopairs"})
 
 ;; Various small plugins
 (use-package! "gbprod/substitute.nvim")
@@ -51,7 +51,7 @@
 (use-package! :echasnovski/mini.nvim)
 
 ;; Visual
-(use-package! :lewis6991/gitsigns.nvim {:init "gitsigns"
+(use-package! :lewis6991/gitsigns.nvim {:init! "gitsigns"
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
 (use-package! :nvim-lualine/lualine.nvim {:config! "lualine"})
 
