@@ -15,8 +15,8 @@
   "Check if given parameter is nil"
   (= :nil x))
 
-(fn lazy-require! [module]
-  "Load a module by when it's needed"
+(fn lazy-require [module]
+  "Load a module when it's needed"
   `(let [meta# {:__index #(. (require ,module) $2)}
          ret# {}]
      (setmetatable ret# meta#)
@@ -56,4 +56,4 @@
 {: pack
  : unpack!
  : use-package!
- : lazy-require!}
+ : lazy-require}

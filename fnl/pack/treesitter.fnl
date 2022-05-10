@@ -1,6 +1,6 @@
-(import-macros {: lazy-require!} :macros.package-macros)
-(local {: setup} (lazy-require! :nvim-treesitter.configs))
-(local parsers (lazy-require! :nvim-treesitter.parsers))
+(import-macros {: lazy-require} :macros.package-macros)
+(local {: setup} (lazy-require :nvim-treesitter.configs))
+(local parsers (lazy-require :nvim-treesitter.parsers))
 
 ;;; Extra parsers
 (local parser-config (parsers.get_parser_configs))

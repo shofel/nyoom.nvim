@@ -1,4 +1,4 @@
-(import-macros {: lazy-require!} :macros.package-macros)
+(import-macros {: lazy-require} :macros.package-macros)
 
 (local which-key (require :which-key))
 
@@ -13,13 +13,13 @@
                      "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
 
 ;; buffers
-(let [{: unshow_in_window} (lazy-require! "mini.bufremove")]
+(let [{: unshow_in_window} (lazy-require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"
                                     "o" ["<cmd>only<cr>"      "close others"]
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
                                     "h" [unshow_in_window     "hide buffer"]}}))
 ;; fzf
-(let [fzf-lua (lazy-require! :fzf-lua)]
+(let [fzf-lua (lazy-require :fzf-lua)]
   (let [key-all-files (lambda []
                         (fzf-lua.files {:fd-opts "--no-ignore --hidden"}))]
     (which-key.register {"<leader>f" {:name "fzf"
@@ -110,7 +110,7 @@
 ;; truezen:n
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
 
-(let [exchange (lazy-require! "substitute.exchange")]
+(let [exchange (lazy-require "substitute.exchange")]
   (which-key.register {"X"         [exchange.visual   "exchange"]} {:mode "x"})
   (which-key.register {"X"         [exchange.operator ""]})
   (which-key.register {"<Leader>x" [exchange.cancel   "cancel"]}))
