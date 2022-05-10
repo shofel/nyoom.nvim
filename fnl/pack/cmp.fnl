@@ -1,4 +1,4 @@
-(import-macros {: lazy-require} :macros.package-macros)
+(local {: lazy-require} (require :utils.lazy-require))
 
 (local {: insert} table)
 (local {: setup
