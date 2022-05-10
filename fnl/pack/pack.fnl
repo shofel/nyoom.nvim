@@ -53,6 +53,8 @@
 ;; Visual
 (use-package! :lewis6991/gitsigns.nvim {:init "gitsigns"
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
+(use-package! :nvim-lualine/lualine.nvim {:config! "lualine"})
+
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
