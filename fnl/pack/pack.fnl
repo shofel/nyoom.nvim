@@ -1,4 +1,4 @@
-(local {: use-package! : unpack! : pack} (require :macros.package-macros))
+(local {: use-package! : unpack! : pack} (require :utils.plugins))
 
 ;; Setup packer
 (local {: init} (require :packer))
