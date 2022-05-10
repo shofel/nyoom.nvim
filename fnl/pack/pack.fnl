@@ -18,7 +18,7 @@
 (use-package! :wbthomason/packer.nvim)
 
 ;; Set and document keymaps
-(use-package! :folke/which-key.nvim {:init "which-key"})
+(use-package! :folke/which-key.nvim {:setup "which-key"})
 
 ;; Tim Pope
 (use-package! :tpope/vim-commentary)
@@ -43,17 +43,17 @@
 
 ;; Pairs
 (use-package! "RRethy/nvim-treesitter-endwise")
-(use-package! "windwp/nvim-autopairs" {:init! "nvim-autopairs"})
+(use-package! "windwp/nvim-autopairs" {:setup "nvim-autopairs"})
 
 ;; Various small plugins
 (use-package! "gbprod/substitute.nvim")
-(use-package! :ggandor/lightspeed.nvim {:config! "lightspeed"})
+(use-package! :ggandor/lightspeed.nvim {:config-file "lightspeed"})
 (use-package! :echasnovski/mini.nvim)
 
 ;; Visual
-(use-package! :lewis6991/gitsigns.nvim {:init! "gitsigns"
+(use-package! :lewis6991/gitsigns.nvim {:setup "gitsigns"
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
-(use-package! :nvim-lualine/lualine.nvim {:config! "lualine"})
+(use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
 
 
 ;; Fzf
@@ -67,7 +67,7 @@
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
-               :config! :treesitter
+               :config-file :treesitter
                :event [:BufRead :BufNewFile]
                :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})
@@ -75,8 +75,8 @@
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
-              {:config! :lsp
-               :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :init :fidget})]})
+              {:config-file :lsp
+               :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :setup :fidget})]})
 
 ;; trouble
 (use-package! :folke/trouble.nvim
@@ -93,7 +93,7 @@
                                          ((. (require :copilot) :setup)))))})
 
 (use-package! :hrsh7th/nvim-cmp
-              {:config! :cmp
+              {:config-file :cmp
                :wants [:LuaSnip]
                :event [:InsertEnter :CmdlineEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -107,16 +107,16 @@
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
-                                                   :config! :luasnip
+                                                   :config-file :luasnip
                                                    :requires [(pack :rafamadriz/friendly-snippets
                                                                     {:opt false})]})]})
 
 ;; aesthetics
-(use-package! :RRethy/nvim-base16 {:config! :base16})
-(use-package! :rcarriga/nvim-notify {:config! :notify})
+(use-package! :RRethy/nvim-base16 {:config-file :base16})
+(use-package! :rcarriga/nvim-notify {:config-file :notify})
 (use-package! :Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
-                                     :config! "truezen"})
-(use-package! :norcalli/nvim-colorizer.lua {:config! "colorizer" :event [:BufRead :BufNewFile]})
+                                     :config-file "truezen"})
+(use-package! :norcalli/nvim-colorizer.lua {:config-file "colorizer" :event [:BufRead :BufNewFile]})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)

@@ -26,13 +26,13 @@
   "Return a mixed table with the identifier as the first sequential element
   and options as hash-table items"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (assert-compile (or (not (nil? ?options)) (tbl? ?options))
+  (assert-compile (or (nil? ?options) (tbl? ?options))
                   "expected nil or table for options" ?options)
   (let [options (or ?options {})
         options (collect [k v (pairs options)]
-                  (if (= k :config!)
+                  (if (= k :config-file)
                       (values :config (format "require('pack.%s')" v))
-                      (= k :init!)
+                      (= k :setup)
                       (values :config (format "require('%s').setup()" v))
                       (values k v)))]
     (doto options
@@ -47,9 +47,10 @@
 
 (fn unpack! []
   "Initializes packer with the previously declared plugins"
-  (let [packages (icollect [_ v (ipairs pkgs)]
-                   `((. (require :packer) :use) ,v))]
-    `((. (require :packer) :startup) #(do
+  (let [packer   (require :packer)
+        packages (icollect [_ v (ipairs pkgs)]
+                   `(packer.use ,v))]
+    `(packer.startup #(do
                                         ,(unpack (icollect [_ v (ipairs packages)]
                                                    v))))))
 
