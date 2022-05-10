@@ -37,6 +37,7 @@
 
 ;; lispy configs
 (use-package! :rktjmp/hotpot.nvim {:branch :master})
+(use-package! :gpanders/nvim-parinfer)
 (use-package! :Olical/conjure {:branch :develop :ft lisp-ft})
 (use-package! "guns/vim-sexp")
 (use-package! "tpope/vim-sexp-mappings-for-regular-people")
