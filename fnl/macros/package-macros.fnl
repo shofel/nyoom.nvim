@@ -13,7 +13,7 @@
 
 (fn nil? [x]
   "Check if given parameter is nil"
-  (= :nil x))
+  (= nil x))
 
 (fn lazy-require [module]
   "Load a module when it's needed"
@@ -27,9 +27,9 @@
   and options as hash-table items"
   (assert-compile (str? identifier) "expected string for identifier" identifier)
   (assert-compile (or (nil? ?options) (tbl? ?options))
-                  "expected nil or table for options" ?options)
-  (let [options (or ?options {})
-        options (collect [k v (pairs options)]
+                  (format "expected nil or table for options: identifier=|%s|, options=|%s|"
+                          identifier ?options))
+  (let [options (collect [k v (pairs (or ?options {}))]
                   (if (= k :config-file)
                       (values :config (format "require('pack.%s')" v))
                       (= k :setup)
@@ -40,9 +40,6 @@
 
 (λ use-package! [identifier ?options]
   "Declares a plugin with its options. Saved on the global compile-time variable pkgs"
-  (assert-compile (str? identifier) "expected string for identifier" identifier)
-  (assert-compile (or (not (nil? ?options)) (tbl? ?options))
-                  "expected nil or table for options" ?options)
   (insert pkgs (pack identifier ?options)))
 
 (fn unpack! []
