@@ -11,6 +11,11 @@
                             (local {: float} (require :packer.util))
                             (float {:border :solid}))}})
 
+(macro call-setup [name config]
+  `(λ []
+      ((. (require ,name) :setup)
+       ,config)))
+
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
@@ -18,7 +23,7 @@
 (use-package! :wbthomason/packer.nvim)
 
 ;; Set and document keymaps
-(use-package! :folke/which-key.nvim {:setup "which-key"})
+(use-package! :folke/which-key.nvim {:config (call-setup :which-key)})
 
 ;; Tim Pope
 (use-package! :tpope/vim-commentary)
@@ -44,7 +49,7 @@
 
 ;; Pairs
 (use-package! "RRethy/nvim-treesitter-endwise")
-(use-package! "windwp/nvim-autopairs" {:setup "nvim-autopairs"})
+(use-package! "windwp/nvim-autopairs" {:config (call-setup :nvim-autopairs)})
 
 ;; Various small plugins
 (use-package! "gbprod/substitute.nvim")
@@ -52,14 +57,9 @@
 (use-package! :echasnovski/mini.nvim)
 
 ;; Visual
-(use-package! :lewis6991/gitsigns.nvim {:setup "gitsigns"
+(use-package! :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
 ; TODO (use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
-
-(macro call-setup [name config]
-  `(λ []
-      ((. (require ,name) :setup)
-       ,config)))
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
@@ -79,21 +79,19 @@
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
               {:config-file :lsp
-               :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig :setup :fidget})]})
+               :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
+                                                    :config (call-setup :fidget)})]})
 
 ;; trouble
 (use-package! :folke/trouble.nvim
               {:cmd :Trouble
-               :config (λ []
-                         (local {: setup} (require :trouble))
-                         (setup {:icons false}))})
+               :config (call-setup :trouble {:icons false})})
 
 ;; completion/copilot
 (use-package! :zbirenbaum/copilot.lua
               {:event :InsertEnter
                :config (λ []
-                         (vim.schedule (fn []
-                                         ((. (require :copilot) :setup)))))})
+                         (vim.schedule (call-setup :copilot)))})
 
 (use-package! :hrsh7th/nvim-cmp
               {:config-file :cmp
