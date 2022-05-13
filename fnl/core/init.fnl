@@ -2,7 +2,7 @@
 (require :pack.pack)
 
 ;; Sane defaults
-(require :core.defs)
+(require :core.options)
 (require :core.keymaps)
 
 ;; Statusline
