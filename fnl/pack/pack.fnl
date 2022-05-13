@@ -33,7 +33,7 @@
 (use-package! :tpope/vim-projectionist)
 (use-package! :tpope/vim-repeat)
 (use-package! :tpope/vim-rsi)
-; TODO (use-package! :tpope/vim-surround)
+(use-package! :tpope/vim-surround)
 (use-package! :tpope/vim-unimpaired)
 
 ;; Follow conventions
@@ -59,7 +59,7 @@
 ;; Visual
 (use-package! :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
-; TODO (use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
+(use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua

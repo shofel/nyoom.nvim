@@ -75,20 +75,3 @@
 (setup.cmdline ":"
                {:view {:separator "|"}
                 :sources [{:name :path} {:name :cmdline}]})
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-                
