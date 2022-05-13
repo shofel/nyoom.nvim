@@ -28,7 +28,7 @@
 (use-package! :tpope/vim-projectionist)
 (use-package! :tpope/vim-repeat)
 (use-package! :tpope/vim-rsi)
-(use-package! :tpope/vim-surround)
+; TODO (use-package! :tpope/vim-surround)
 (use-package! :tpope/vim-unimpaired)
 
 ;; Follow conventions
@@ -54,16 +54,18 @@
 ;; Visual
 (use-package! :lewis6991/gitsigns.nvim {:setup "gitsigns"
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
-(use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
+; TODO (use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
 
+(macro call-setup [name config]
+  `(λ []
+      ((. (require ,name) :setup)
+       ,config)))
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
               {:branch :main
                :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
-               :config (λ []
-                         ((. (require :fzf-lua) :setup)
-                          {:border :single}))})
+               :config (call-setup :fzf-lua {:border :single})})
 
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
