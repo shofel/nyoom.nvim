@@ -1,3 +1,11 @@
+;; defer shada loading
+(set! shadafile "NONE")
+(vim.schedule (fn []
+                (set! shadafile
+                     (.. (vim.fn.expand :$HOME)
+                         :/.local/share/nvim/shada/main.shada))
+                (vim.cmd " silent! rsh ")))
+
 ;; Disable some built-in Neovim plugins and unneeded providers
 (let [built-ins [:gzip
                  :zip
