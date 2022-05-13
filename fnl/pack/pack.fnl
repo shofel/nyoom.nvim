@@ -43,7 +43,6 @@
 (use-package! "tpope/vim-sexp-mappings-for-regular-people")
 
 ;; Pairs
-(use-package! "RRethy/nvim-treesitter-endwise")
 (use-package! "windwp/nvim-autopairs" {:setup "nvim-autopairs"})
 
 ;; Various small plugins
@@ -72,7 +71,8 @@
                :event [:BufRead :BufNewFile]
                :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                          (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})]})
+                          (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})
+                          (pack "RRethy/nvim-treesitter-endwise")]})
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
