@@ -86,13 +86,6 @@
                          (local {: setup} (require :trouble))
                          (setup {:icons false}))})
 
-;; completion/copilot
-(use-package! :zbirenbaum/copilot.lua
-              {:event :InsertEnter
-               :config (λ []
-                         (vim.schedule (fn []
-                                         ((. (require :copilot) :setup)))))})
-
 (use-package! :hrsh7th/nvim-cmp
               {:config-file :cmp
                :wants [:LuaSnip]
@@ -104,7 +97,6 @@
                           (pack :onsails/lspkind-nvim {:module :lspkind})
                           (pack :PaterJason/cmp-conjure {:after :conjure})
                           (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                          (pack :zbirenbaum/copilot-cmp {:after :copilot.lua})
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets

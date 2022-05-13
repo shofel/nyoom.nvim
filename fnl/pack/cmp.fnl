@@ -59,8 +59,7 @@
                   {:name :luasnip}
                   {:name :path}
                   {:name :buffer}
-                  {:name :conjure}
-                  {:name :copilot}]
+                  {:name :conjure}]
         :sorting {:comparators [compare.offset
                                 compare.exact
                                 compare.score
