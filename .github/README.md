@@ -1,5 +1,7 @@
 # Nyoom.nvim
 
+## This fork is hopelessly direrged from the upstream
+
 <div align="center">
 
 [![Fennel](	https://img.shields.io/badge/Made%20with%20Fennel-2C2D72?style=for-the-badge&logo=lua&logoColor=white)](https://fennel-lang.org)
