@@ -23,112 +23,113 @@
   `(use (pack ,identifier ,?options)))
 
 (macro call-setup [name config]
-  "A shorthand to make a function, which calls setup()
-  for a plugin."
+  "To config a plugin: call the setup function."
   `(λ []
       ((. (require ,name) :setup)
        ,config)))
 
 (macro load-file [name]
-  ""
+  "To config a plugin: load a file from pack/ folder."
   `#(require ,(.. "pack." name)))
 
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
-(lambda use-plugins [use]
-  (use (pack :wbthomason/packer.nvim))
-  ;; Set and document keymaps
-  (use (pack :folke/which-key.nvim {:config (call-setup :which-key)}))
+(local plugins
+  [[:wbthomason/packer.nvim]
+   ;; Set and document keymaps
+   [:folke/which-key.nvim {:config (call-setup :which-key)}]
 
-  ;; Tim Pope
-  (use (pack :tpope/vim-commentary))
-  (use (pack :tpope/vim-dispatch))
-  (use (pack :tpope/vim-eunuch))
-  (use (pack :tpope/vim-fugitive))
-  (use (pack :tpope/vim-projectionist))
-  (use (pack :tpope/vim-repeat))
-  (use (pack :tpope/vim-rsi))
-  (use (pack :tpope/vim-surround))
-  (use (pack :tpope/vim-unimpaired))
+   ;; Tim Pope
+   [:tpope/vim-commentary]
+   [:tpope/vim-dispatch]
+   [:tpope/vim-eunuch]
+   [:tpope/vim-fugitive]
+   [:tpope/vim-projectionist]
+   [:tpope/vim-repeat]
+   [:tpope/vim-rsi]
+   [:tpope/vim-surround]
+   [:tpope/vim-unimpaired]
 
-  ;; Follow conventions
-  (use (pack :tpope/vim-sleuth))
-  (use (pack :gpanders/editorconfig.nvim))
+   ;; Follow conventions
+   [:tpope/vim-sleuth]
+   [:gpanders/editorconfig.nvim]
 
-  ;; lispy configs
-  (use (pack :rktjmp/hotpot.nvim {:branch :master}))
-  (use (pack :gpanders/nvim-parinfer))
-  (use (pack :Olical/conjure {:branch :develop :ft lisp-ft}))
-  (use (pack :guns/vim-sexp))
-  (use (pack :tpope/vim-sexp-mappings-for-regular-people))
+   ;; lispy configs
+   [:rktjmp/hotpot.nvim {:branch :master}]
+   [:gpanders/nvim-parinfer]
+   [:Olical/conjure {:branch :develop :ft lisp-ft}]
+   [:guns/vim-sexp]
+   [:tpope/vim-sexp-mappings-for-regular-people]
 
-  ;; Pairs
-  (use (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)}))
+   ;; Pairs
+   [:windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)}]
 
-  ;; Various small plugins
-  (use (pack :gbprod/substitute.nvim))
-  (use (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")}))
-  (use (pack :echasnovski/mini.nvim))
+   ;; Various small plugins
+   [:gbprod/substitute.nvim]
+   [:ggandor/lightspeed.nvim {:config (load-file "lightspeed")}]
+   [:echasnovski/mini.nvim]
 
-  ;; Visual
-  (use (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
-                                       :requires [(pack :nvim-lua/plenary.nvim)]}))
-  (use (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")}))
+   ;; Visual
+   [:lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
+                              :requires [(pack :nvim-lua/plenary.nvim)]}]
+   [:nvim-lualine/lualine.nvim {:config (load-file "lualine")}]
 
-  ;; Fzf
-  (use (pack :ibhagwan/fzf-lua
-                {:branch :main
-                 :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
-                 :config (call-setup :fzf-lua {:border :single})}))
+   ;; Fzf
+   [:ibhagwan/fzf-lua
+     {:branch :main
+      :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
+      :config (call-setup :fzf-lua {:border :single})}]
 
-  ;; tree-sitter
-  (use (pack :nvim-treesitter/nvim-treesitter
-                {:run ":TSUpdate"
-                 :config (load-file "treesitter")
-                 :event [:BufRead :BufNewFile]
-                 :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
-                            (pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                            (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})]}))
-                            ;; TODO (pack "RRethy/nvim-treesitter-endwise")
+   ;; tree-sitter
+   [:nvim-treesitter/nvim-treesitter
+     {:run ":TSUpdate"
+      :config (load-file "treesitter")
+      :event [:BufRead :BufNewFile]
+      :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
+                 (pack :nvim-treesitter/playground {:cmd :TSPlayground})
+                 (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})]}]
+                 ;; TODO (pack "RRethy/nvim-treesitter-endwise")
 
-  ;; lsp
-  (use (pack :neovim/nvim-lspconfig
-                {:config (load-file "lsp")
-                 :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
-                                                      :config (call-setup :fidget)})]}))
+   ;; lsp
+   [:neovim/nvim-lspconfig
+     {:config (load-file "lsp")
+      :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
+                                           :config (call-setup :fidget)})]}]
 
-  ;; trouble
-  (use (pack :folke/trouble.nvim
-                {:cmd :Trouble
-                 :config (call-setup :trouble {:icons false})}))
+   ;; trouble
+   [:folke/trouble.nvim
+     {:cmd :Trouble
+      :config (call-setup :trouble {:icons false})}]
 
-  (use (pack :hrsh7th/nvim-cmp
-                {:config (load-file "cmp")
-                 :wants [:LuaSnip]
-                 :event [:InsertEnter :CmdlineEnter]
-                 :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                            (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                            (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
-                            (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
-                            (pack :onsails/lspkind-nvim {:module :lspkind})
-                            (pack :PaterJason/cmp-conjure {:after :conjure})
-                            (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                            (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
-                            (pack :L3MON4D3/LuaSnip {:event :InsertEnter
-                                                     :wants :friendly-snippets
-                                                     :config (load-file "luasnip")
-                                                     :requires [(pack :rafamadriz/friendly-snippets
-                                                                      {:opt false})]})]}))
+   [:hrsh7th/nvim-cmp
+     {:config (load-file "cmp")
+      :wants [:LuaSnip]
+      :event [:InsertEnter :CmdlineEnter]
+      :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
+                 (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
+                 (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
+                 (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
+                 (pack :onsails/lspkind-nvim {:module :lspkind})
+                 (pack :PaterJason/cmp-conjure {:after :conjure})
+                 (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
+                 (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
+                 (pack :L3MON4D3/LuaSnip {:event :InsertEnter
+                                          :wants :friendly-snippets
+                                          :config (load-file "luasnip")
+                                          :requires [(pack :rafamadriz/friendly-snippets
+                                                           {:opt false})]})]}]
 
-  ;; aesthetics
-  (use (pack :RRethy/nvim-base16 {:config (load-file "base16")}))
-  (use (pack :rcarriga/nvim-notify {:config (load-file "notify")}))
-  (use (pack :Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
-                                    :config (load-file "truezen")}))
-  (use (pack :norcalli/nvim-colorizer.lua
-             {:config (load-file "colorizer")
-              :event [:BufRead :BufNewFile]})))
+   ;; aesthetics
+   [:RRethy/nvim-base16 {:config (load-file "base16")}]
+   [:rcarriga/nvim-notify {:config (load-file "notify")}]
+   [:Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
+                           :config (load-file "truezen")}]
+   [:norcalli/nvim-colorizer.lua
+     {:config (load-file "colorizer")
+      :event [:BufRead :BufNewFile]}]])
 
 ;; Call `startup` with prepaired callback.
-(packer.startup use-plugins)
+(packer.startup (lambda [use]
+                  (each [_ x (pairs plugins)]
+                    (use (pack (unpack x))))))
