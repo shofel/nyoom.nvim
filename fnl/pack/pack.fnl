@@ -16,6 +16,9 @@
       ((. (require ,name) :setup)
        ,config)))
 
+(macro load-file [name]
+  `#(require ,(.. "pack." name)))
+
 ;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
 (local lisp-ft [:fennel :clojure :lisp :racket :scheme])
 
@@ -53,13 +56,13 @@
 
 ;; Various small plugins
 (use-package! "gbprod/substitute.nvim")
-(use-package! :ggandor/lightspeed.nvim {:config-file "lightspeed"})
+(use-package! :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
 (use-package! :echasnovski/mini.nvim)
 
 ;; Visual
 (use-package! :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
                                         :requires [(pack :nvim-lua/plenary.nvim)]})
-(use-package! :nvim-lualine/lualine.nvim {:config-file "lualine"})
+(use-package! :nvim-lualine/lualine.nvim {:config (load-file "lualine")})
 
 ;; Fzf
 (use-package! :ibhagwan/fzf-lua
@@ -70,7 +73,7 @@
 ;; tree-sitter
 (use-package! :nvim-treesitter/nvim-treesitter
               {:run ":TSUpdate"
-               :config-file :treesitter
+               :config (load-file "treesitter")
                :event [:BufRead :BufNewFile]
                :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
                           (pack :nvim-treesitter/playground {:cmd :TSPlayground})
@@ -78,7 +81,7 @@
 
 ;; lsp
 (use-package! :neovim/nvim-lspconfig
-              {:config-file :lsp
+              {:config (load-file "lsp")
                :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
                                                     :config (call-setup :fidget)})]})
 
@@ -88,7 +91,7 @@
                :config (call-setup :trouble {:icons false})})
 
 (use-package! :hrsh7th/nvim-cmp
-              {:config-file :cmp
+              {:config (load-file "cmp")
                :wants [:LuaSnip]
                :event [:InsertEnter :CmdlineEnter]
                :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -101,16 +104,16 @@
                           (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
                           (pack :L3MON4D3/LuaSnip {:event :InsertEnter
                                                    :wants :friendly-snippets
-                                                   :config-file :luasnip
+                                                   :config (load-file "luasnip")
                                                    :requires [(pack :rafamadriz/friendly-snippets
                                                                     {:opt false})]})]})
 
 ;; aesthetics
-(use-package! :RRethy/nvim-base16 {:config-file :base16})
-(use-package! :rcarriga/nvim-notify {:config-file :notify})
+(use-package! :RRethy/nvim-base16 {:config (load-file "base16")})
+(use-package! :rcarriga/nvim-notify {:config (load-file "notify")})
 (use-package! :Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
-                                     :config-file "truezen"})
-(use-package! :norcalli/nvim-colorizer.lua {:config-file "colorizer" :event [:BufRead :BufNewFile]})
+                                     :config (load-file "truezen")})
+(use-package! :norcalli/nvim-colorizer.lua {:config (load-file "colorizer" :event [:BufRead :BufNewFile])})
 
 ;; At the end of the file, the unpack! macro is called to initialize packer and pass each package to the packer.nvim plugin.
 (unpack!)

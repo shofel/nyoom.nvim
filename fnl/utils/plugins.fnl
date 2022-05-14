@@ -25,14 +25,8 @@
       (format "expected nil or table for options: identifier=|%s|, options=|%s|"
               identifier ?options))
 
-  (let [options (collect [k v (pairs (or ?options {}))]
-                  (if (= k :config-file)
-                      (values :config (format "require('pack.%s')" v))
-                      (= k :setup)
-                      (values :config (format "require('%s').setup()" v))
-                      (values k v)))]
-    (doto options
-      (tset 1 identifier))))
+  (doto (or ?options {})
+    (tset 1 identifier)))
 
 (λ use-package! [identifier ?options]
   "Declares a plugin with its options. Saved on the global variable pkgs"
