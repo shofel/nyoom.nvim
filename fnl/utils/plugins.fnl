@@ -1,8 +1,6 @@
 (local {: format} string)
 (local {: insert} table)
 
-(global pkgs [])
-
 (fn str? [x]
   "Check if given parameter is a string"
   (= :string (type x)))
@@ -28,9 +26,11 @@
   (doto (or ?options {})
     (tset 1 identifier)))
 
+(local pkgs [])
+
 (λ use-package! [identifier ?options]
-  "Declares a plugin with its options. Saved on the global variable pkgs"
-  (insert _G.pkgs (pack identifier ?options)))
+  "Save plugin spec to the list of packages"
+  (insert pkgs (pack identifier ?options)))
 
 (fn unpack! []
   "Initializes packer with the previously declared plugins"
