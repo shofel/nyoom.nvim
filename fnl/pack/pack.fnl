@@ -11,6 +11,15 @@
                             (local {: float} (require :packer.util))
                             (float {:border :solid}))}})
 
+(λ p [identifier ?options]
+  "Make a mixed table to use it as arg for `packer.use`."
+  (doto (or ?options {})
+    (tset 1 identifier)))
+
+(macro use-p [identifier ?options]
+  "Call `use` function with a mixed table."
+  `(use (p identifier ?options)))
+
 (macro call-setup [name config]
   `(λ []
       ((. (require ,name) :setup)
