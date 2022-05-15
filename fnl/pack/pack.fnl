@@ -26,9 +26,6 @@
   "To config a plugin: load a file from pack/ folder."
   `#(require ,(.. "pack." name)))
 
-;; There are some plugins we only want to load for lisps. Heres a list of lispy filetypes I use
-(local lisp-ft [:fennel :clojure :lisp :racket :scheme])
-
 (local plugins
   [(pack :wbthomason/packer.nvim)
    ;; Set and document keymaps
@@ -52,7 +49,8 @@
    ;; lispy configs
    (pack :rktjmp/hotpot.nvim {:branch :master})
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:branch :develop :ft lisp-ft})
+   (pack :Olical/conjure {:branch "develop"
+                          :ft [:fennel :clojure :lisp :racket :scheme]})
    (pack :guns/vim-sexp)
    (pack :tpope/vim-sexp-mappings-for-regular-people)
 
@@ -65,8 +63,8 @@
    (pack :echasnovski/mini.nvim)
 
    ;; Visual
-   (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)}
-                               :requires [(pack :nvim-lua/plenary.nvim)])
+   (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
+                                   :requires [(pack :nvim-lua/plenary.nvim)]})
    (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")})
 
    ;; Fzf
