@@ -112,6 +112,8 @@
                                               :requires [(pack :rafamadriz/friendly-snippets
                                                                {:opt false})]})]})
 
+   (pack :akinsho/toggleterm.nvim {:config (load-file "toggleterm")})
+
    ;; aesthetics
    (pack :RRethy/nvim-base16 {:config (load-file "base16")})
    (pack :rcarriga/nvim-notify {:config (load-file "notify")})

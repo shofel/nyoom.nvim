@@ -69,7 +69,7 @@
                      "<localleader>t" "test"})
 
 ;; lsp keys for a buffer
-(lambda set-lsp-keys! [bufnr]
+(λ set-lsp-keys! [bufnr]
   (which-key.register {"<leader>d" {:name "lsp"
                                     ; inspect
                                     "d" (key vim.lsp.buf :definition)
@@ -110,6 +110,11 @@
 ;; truezen:n
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
 
+;; toggleterm
+(λ toggleterm-keymaps! [first second]
+  (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggle fish term"]
+                                    "s" [#(second:toggle) "toggle serve term"]}}))
+
 (let [exchange (lazy-require "substitute.exchange")]
   (which-key.register {"X"         [exchange.visual   "exchange"]} {:mode "x"})
   (which-key.register {"X"         [exchange.operator ""]})
@@ -117,4 +122,5 @@
 
 
 ;; export
-{: set-lsp-keys!}
+{: set-lsp-keys!
+ : set-toggleterm-keymaps!}
