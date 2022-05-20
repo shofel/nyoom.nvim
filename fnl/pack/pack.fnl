@@ -26,6 +26,8 @@
   "To config a plugin: load a file from pack/ folder."
   `#(require ,(.. "pack." name)))
 
+;; Describe plugins.
+
 (local plugins
   [(pack :wbthomason/packer.nvim)
    ;; Set and document keymaps
@@ -123,7 +125,7 @@
          {:config (load-file "colorizer")
           :event [:BufRead :BufNewFile]})])
 
-;; Call `startup` with prepaired callback.
+;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
                   (each [_ x (pairs plugins)]
                     (use x))))
