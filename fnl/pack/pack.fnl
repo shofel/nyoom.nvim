@@ -1,14 +1,24 @@
 (local packer (require :packer))
 
-(packer.init {:autoremove true}
-        :git {:clone_timeout 300}
-        :profile {:enable true :threshold 0}
-        :display {:header_lines 2
-                  :title " packer.nvim"
-                  :open_fn (λ open_fn []
-                             (local {: float} (require :packer.util))
-                             (float {:border :solid}))})
+;; Manage compilation.
 
+(local compile-path (.. (vim.fn.stdpath :config)
+                        "/lua/packer_compiled.lua"))
+(local compiled?
+       #(= (vim.fn.filereadable compile-path) 1))
+
+(local load-compiled #(require :packer_compiled))
+
+;; Setup packer
+(packer.init {:autoremove true
+              :git {:clone_timeout 300}
+              :profile {:enable true}
+              :compile_path compile-path
+              :display {:header_lines 2
+                        :title " packer.nvim"
+                        :open_fn (λ open_fn []
+                                         (local {: float} (require :packer.util))
+                                         (float {:border :solid}))}})
 ;; Helpers.
 
 (λ pack [identifier ?options]
@@ -129,3 +139,7 @@
 (packer.startup (lambda [use]
                   (each [_ x (pairs plugins)]
                     (use x))))
+
+;; Exports.
+{: compiled?
+ : load-compiled}
