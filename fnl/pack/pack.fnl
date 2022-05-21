@@ -4,10 +4,13 @@
 
 (local compile-path (.. (vim.fn.stdpath :config)
                         "/lua/packer_compiled.lua"))
-(local compiled?
-       #(= (vim.fn.filereadable compile-path) 1))
 
-(local load-compiled #(require :packer_compiled))
+(λ assure-compiled []
+  (let [compiled? (= (vim.fn.filereadable compile-path) 1)
+        load-compiled #(require :packer_compiled)]
+   (if compiled?
+       (load-compiled)
+       (packer.sync))))
 
 ;; Setup packer
 (packer.init {:autoremove true
@@ -140,6 +143,4 @@
                   (each [_ x (pairs plugins)]
                     (use x))))
 
-;; Exports.
-{: compiled?
- : load-compiled}
+(assure-compiled)
