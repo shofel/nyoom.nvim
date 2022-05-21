@@ -1,7 +1,7 @@
 (local {: setup} (require :toggleterm))
 (local {: Terminal} (require :toggleterm.terminal))
 
-(local {: set-toggleterm-keymaps!} (require :core.keymaps))
+(local {: toggleterm-keymaps!} (require :core.keymaps))
 
 ;;
 

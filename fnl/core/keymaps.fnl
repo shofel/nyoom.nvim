@@ -123,4 +123,4 @@
 
 ;; export
 {: set-lsp-keys!
- : set-toggleterm-keymaps!}
+ : toggleterm-keymaps!}
