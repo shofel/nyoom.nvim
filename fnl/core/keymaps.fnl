@@ -12,6 +12,13 @@
 (which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
                      "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
 
+;; A handier unimpared
+(which-key.register {"<leader>j" ["]" "unimpared-next"]
+                     "<leader>k" ["[" "unimpared-prev"]
+                     "[d" (key vim.diagnostic :goto_prev)
+                     "]d" (key vim.diagnostic :goto_next)}
+                    {:remap true})
+
 ;; buffers
 (let [{: unshow_in_window} (lazy-require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"
@@ -68,39 +75,41 @@
                      "<localleader>r" "reset"
                      "<localleader>t" "test"})
 
-;; lsp keys for a buffer
+;; A tree for lsp keys. They don't shadow anyting,
+;; so I believe it's safe to not wait until lsp attaches.
+(local list-workspace-folders
+       [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
+        "list workspace folders"])
+(which-key.register {"<leader>d" {:name "lsp:inspect"
+                                  "d" (key vim.lsp.buf :definition)
+                                  "D" (key vim.lsp.buf :declaration)
+                                  "i" (key vim.lsp.buf :implementation)
+                                  "t" (key vim.lsp.buf :type_definition)
+                                  "s" (key vim.lsp.buf :signature_help)
+                                  "h" (key vim.lsp.buf :hover)
+                                  "r" (key vim.lsp.buf :references)}
+                     "<leader>h" {:name "lsp:diagnostic"
+                                  "k" (key vim.diagnostic :goto_prev)
+                                  "j" (key vim.diagnostic :goto_next)
+                                  "w" (key vim.diagnostic :open_float)
+                                  "q" (key vim.diagnostic :setloclist)}
+                     "<leader>a" {:name "lsp:action"
+                                  "r" (key vim.lsp.buf :rename)
+                                  "a" (key vim.lsp.buf :code_action)
+                                  "f" (key vim.lsp.buf :formatting)}
+                     "<leader>W" {:name "lsp:workspace"
+                                  "a" (key vim.lsp.buf :add_workspace_folder)
+                                  "r" (key vim.lsp.buf :remove_workspace_folder)
+                                  "l" list-workspace-folders}})
+
+;; upgrade standard keys with lsp
 (λ set-lsp-keys! [bufnr]
-  (which-key.register {"<leader>d" {:name "lsp"
-                                    ; inspect
-                                    "d" (key vim.lsp.buf :definition)
-                                    "D" (key vim.lsp.buf :declaration)
-                                    "i" (key vim.lsp.buf :implementation)
-                                    "t" (key vim.lsp.buf :type_definition)
-                                    "s" (key vim.lsp.buf :signature_help)
-                                    "h" (key vim.lsp.buf :hover)
-                                    "r" (key vim.lsp.buf :references)
-                                    ; diagnstic
-                                    "k" (key vim.diagnostic :goto_prev)
-                                    "j" (key vim.diagnostic :goto_next)
-                                    "w" (key vim.diagnostic :open_float)
-                                    "q" (key vim.diagnostic :setloclist)
-                                    ; code
-                                    "r" (key vim.lsp.buf :rename)
-                                    "a" (key vim.lsp.buf :code_action)
-                                    "f" (key vim.lsp.buf :formatting)}
-                       "<leader>W" {:name "lsp workspace"
-                                    "a" (key vim.lsp.buf :add_workspace_folder)
-                                    "r" (key vim.lsp.buf :remove_workspace_folder)
-                                    "l" [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
-                                         "list_workspace_folders"]}
-                       ; reassgn some builtin mappings
-                       "K"  (key vim.lsp.buf :hover)
+  (which-key.register {"K"  (key vim.lsp.buf :hover)
                        "gd" (key vim.lsp.buf :definition)
                        "gD" (key vim.lsp.buf :declaration)}
-               ; only for one buffer
-               {:buffer bufnr}))
+                      {:buffer bufnr}))
 
-;; treesitter 
+;; treesitter
 (which-key.register {"<Leader>th" ["<cmd>TSHighlightCapturesUnderCursor<cr>"
                                    "TS highlight captures"]})
 
