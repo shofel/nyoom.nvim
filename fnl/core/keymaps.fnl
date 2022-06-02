@@ -4,7 +4,7 @@
 
 (lambda key [tbl prop] [(. tbl prop) prop])
 
-;; who actually uses C-z or ex mode?
+;; Suppress probably unused keys.
 (which-key.register {"<C-z>" [:<Nop> "nop"]
                      "Q"     [:<Nop> "nop"]})
 
@@ -13,11 +13,11 @@
                      "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
 
 ;; A handier unimpared
-(which-key.register {"<leader>j" ["]" "unimpared-next"]
-                     "<leader>k" ["[" "unimpared-prev"]
-                     "[d" (key vim.diagnostic :goto_prev)
-                     "]d" (key vim.diagnostic :goto_next)}
-                    {:remap true})
+(which-key.register {"[d" (key vim.diagnostic :goto_prev)
+                     "]d" (key vim.diagnostic :goto_next)
+                     "<leader>j" ["]" "unimpared-next"]
+                     "<leader>k" ["[" "unimpared-prev"]}
+                    {:noremap false})
 
 ;; buffers
 (let [{: unshow_in_window} (lazy-require "mini.bufremove")]
