@@ -129,8 +129,12 @@
 
    (pack :akinsho/toggleterm.nvim {:config (load-file "toggleterm")})
 
-   ;; aesthetics
-   (pack :RRethy/nvim-base16 {:config (load-file "base16")})
+   ;; Look
+   (pack :catppuccin/nvim {:as "catpuccin"
+                           :config (λ []
+                                      ; latte, frappe, macchiato, mocha
+                                      (set vim.g.catppuccin_flavour "frappe")
+                                      (vim.cmd "colorscheme catppuccin"))})
    (pack :rcarriga/nvim-notify {:config (load-file "notify")})
    (pack :Pocco81/TrueZen.nvim {:cmd     "TZAtaraxis"
                                 :config (load-file "truezen")})
