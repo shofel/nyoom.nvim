@@ -1,3 +1,9 @@
+
+;; Preserve localleader
+;;   see :h lightspeed-disable-default-mappings
+(vim.keymap.set :n "," ",")
+
+;; Call lightspeed.setup
 ((. (require :lightspeed) :setup)
  {:ignore_case false
   :exit_after_idle_msecs {:labeled nil
@@ -14,6 +20,3 @@
   ; f/t
   :limit_ft_matches 4
   :repeat_ft_with_target_char false})
-
-;; Preserve localleader
-(vim.keymap.del :n ",")
