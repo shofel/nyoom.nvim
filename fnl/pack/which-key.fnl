@@ -13,6 +13,8 @@
 ;; A handier unimpared
 (which-key.register {"[d" (key vim.diagnostic :goto_prev)
                      "]d" (key vim.diagnostic :goto_next)
+                     "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
+                     "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]
                      "<leader>j" ["]" "unimpared-next"]
                      "<leader>k" ["[" "unimpared-prev"]}
                     {:noremap false})
