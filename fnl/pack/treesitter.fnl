@@ -61,11 +61,11 @@
                    :smart_rename {:enable true
                                   :keymaps {:smart_rename :grr}}
                    :navigation {:enable true
-                                :keymaps {:goto_definition :gnd
-                                          :list_definitions :gnD
-                                          :list_definitions_toc :gO
-                                          :goto_next_usage :gnu
-                                          :goto_previous_usage :gpu}}}
+                                :keymaps {:goto_definition "gd"
+                                          :list_definitions "gD"
+                                          :list_definitions_toc "gO"
+                                          :goto_next_usage "<M-8>" ; like *, which is <S-8>
+                                          :goto_previous_usage "<M-3>"}}}
         :textobjects {:select {:enable true}
                       :lookahead true
                       :keymaps {:af "@function.outer"
