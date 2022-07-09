@@ -71,8 +71,8 @@
    (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
 
    ;; Pairs
-   ;; TODO disable autopairs for lisp-filetypes
-   (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
+   (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs
+                                                     {:disable_filetype lisp-filetypes})})
 
    ;; Various small plugins
    (pack :gbprod/substitute.nvim)
