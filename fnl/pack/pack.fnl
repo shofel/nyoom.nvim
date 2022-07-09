@@ -66,8 +66,9 @@
    ;; Lisps
    (pack :rktjmp/hotpot.nvim {:branch :master})
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:branch "develop"
-                          :ft lisp-filetypes})
+   (pack :Olical/conjure {:branch :develop}
+                         :ft lisp-filetypes
+                         :config (tset vim.g "conjure#extract#tree_sitter#enabled" true))
    (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
 
    ;; Pairs
