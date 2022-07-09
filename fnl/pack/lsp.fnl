@@ -1,5 +1,5 @@
 (local lsp (require :lspconfig))
-(local {: set-lsp-keys!} (require :core.keymaps))
+(local keymaps (require :pack/which-key))
 
 ;;; Diagnostics configuration
 (let [{: config : severity} vim.diagnostic
@@ -24,7 +24,7 @@
 
 ;;; On attach
 (fn on-attach [client bufnr]
-  (set-lsp-keys! bufnr))
+  (keymaps.set-lsp-keys! bufnr))
 
 ;;; Capabilities
 (local capabilities (vim.lsp.protocol.make_client_capabilities))

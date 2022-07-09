@@ -1,4 +1,4 @@
-(local {: set-sexp-keys!} (require "core/keymaps"))
+(local keymaps (require :pack/which-key))
 
 ;; This is a COPY-PASTE from pack/pack
 (local lisp-filetypes ["fennel" "clojure" "lisp" "racket" "scheme"])
@@ -7,5 +7,5 @@
 
 (vim.api.nvim_create_autocmd ["FileType"]
                              {:pattern lisp-filetypes
-                              :callback set-sexp-keys!
+                              :callback keymaps.set-sexp-keys!
                               : group})

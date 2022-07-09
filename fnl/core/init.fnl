@@ -17,6 +17,3 @@
 
 ;; load packer
 (require :pack.pack)
-
-;; Mappings
-(require :core.keymaps)
