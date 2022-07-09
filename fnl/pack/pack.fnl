@@ -95,10 +95,11 @@
          {:run ":TSUpdate"
           :config (load-file "treesitter")
           :event [:BufRead :BufNewFile]
-          :requires [(pack :p00f/nvim-ts-rainbow {:event [:BufRead :BufNewFile]})
-                     (pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                     (pack :nvim-treesitter/nvim-treesitter-textobjects {:event [:BufRead :BufNewFile]})]})
-                     ;; TODO (pack "RRethy/nvim-treesitter-endwise")
+          :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
+                     (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
+                     (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
+                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
+                     (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})]})
 
    ;; lsp
    (pack :neovim/nvim-lspconfig
