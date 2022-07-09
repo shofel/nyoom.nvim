@@ -34,4 +34,3 @@
   (each [_ v (ipairs providers)]
     (let [provider (.. :loaded_ v :_provider)]
       (tset vim.g provider 0))))
-
