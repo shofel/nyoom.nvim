@@ -129,7 +129,22 @@
   (which-key.register {"X"         [exchange.operator ""]})
   (which-key.register {"<Leader>x" [exchange.cancel   "cancel"]}))
 
+;; TODO 
+(λ set-sexp-keys! [{: buf}]
+  (which-key.register {; Barf and slurp.
+                       "<I" ["<Plug>(sexp_insert_at_list_head)"   "insert at head"]
+                       ">I" ["<Plug>(sexp_insert_at_list_tail)"   "insert at tail"]
+                       "<f" ["<Plug>(sexp_swap_list_backward)"    "gswap list backward"]
+                       ">f" ["<Plug>(sexp_swap_list_forward)"     "swap list forward"]
+                       "<e" ["<Plug>(sexp_swap_element_backward)" "swap element backward"]
+                       ">e" ["<Plug>(sexp_swap_element_forward)"  "swap element forward"]
+                       ">(" ["<Plug>(sexp_emit_head_element)"     "emit head"]
+                       "<)" ["<Plug>(sexp_emit_tail_element)"     "emit tail"]
+                       "<(" ["<Plug>(sexp_capture_prev_element)"  "capture prev"]
+                       ">)" ["<Plug>(sexp_capture_next_element)"  "capture next"]}
+                      {:buffer buf}))
 
 ;; export
 {: set-lsp-keys!
- : toggleterm-keymaps!}
+ : toggleterm-keymaps!
+ : set-sexp-keys!}

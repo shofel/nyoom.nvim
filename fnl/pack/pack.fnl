@@ -41,6 +41,8 @@
 
 ;; Describe plugins.
 
+(local lisp-filetypes ["fennel" "clojure" "lisp" "racket" "scheme"])
+
 (local plugins
   [(pack :wbthomason/packer.nvim)
    ;; Set and document keymaps
@@ -61,15 +63,15 @@
    (pack :tpope/vim-sleuth)
    (pack :gpanders/editorconfig.nvim)
 
-   ;; lispy configs
+   ;; Lisps
    (pack :rktjmp/hotpot.nvim {:branch :master})
    (pack :gpanders/nvim-parinfer)
    (pack :Olical/conjure {:branch "develop"
-                          :ft [:fennel :clojure :lisp :racket :scheme]})
-   (pack :guns/vim-sexp)
-   (pack :tpope/vim-sexp-mappings-for-regular-people)
+                          :ft lisp-filetypes})
+   (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
 
    ;; Pairs
+   ;; TODO disable autopairs for lisp-filetypes
    (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs)})
 
    ;; Various small plugins
