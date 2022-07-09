@@ -129,10 +129,9 @@
   (which-key.register {"X"         [exchange.operator ""]})
   (which-key.register {"<Leader>x" [exchange.cancel   "cancel"]}))
 
-;; TODO 
 (λ set-sexp-keys! [{: buf}]
-  ; Barf and slurp.
-  (which-key.register {
+  (which-key.register {"dsf" ["<Plug>(sexp_splice_list)" "sexp splice list"]
+                       ; Barf and slurp.
                        "<I" ["<Plug>(sexp_insert_at_list_head)"   "insert at head"]
                        ">I" ["<Plug>(sexp_insert_at_list_tail)"   "insert at tail"]
                        "<f" ["<Plug>(sexp_swap_list_backward)"    "gswap list backward"]
