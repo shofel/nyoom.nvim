@@ -75,6 +75,7 @@
                                                      {:disable_filetype lisp-filetypes})})
 
    ;; Various small plugins
+   (pack :tommcdo/vim-exchange)
    (pack :gbprod/substitute.nvim)
    (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
    (pack :echasnovski/mini.nvim)
