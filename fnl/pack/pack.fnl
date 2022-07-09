@@ -13,12 +13,12 @@
        (packer.sync))))
 
 ;; Setup packer
-(packer.init {:autoremove true
+(packer.init {:max_jobs 50
+              :autoremove true
               :git {:clone_timeout 300}
               :profile {:enable true}
               :compile_path compile-path
               :display {:header_lines 2
-                        :title " packer.nvim"
                         :open_fn (λ open_fn []
                                          (local {: float} (require :packer.util))
                                          (float {:border :solid}))}})
