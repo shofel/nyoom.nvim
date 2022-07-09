@@ -1,5 +1,3 @@
-(local {: lazy-require} (require :utils.lazy-require))
-
 (local which-key (require :which-key))
 
 (lambda key [tbl prop] [(. tbl prop) prop])
@@ -20,13 +18,13 @@
                     {:noremap false})
 
 ;; buffers
-(let [{: unshow_in_window} (lazy-require "mini.bufremove")]
+(let [{: unshow_in_window} (require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"
                                     "o" ["<cmd>only<cr>"      "close others"]
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
                                     "h" [unshow_in_window     "hide buffer"]}}))
 ;; fzf
-(let [fzf-lua (lazy-require :fzf-lua)]
+(let [fzf-lua (require :fzf-lua)]
   (let [key-all-files (lambda []
                         (fzf-lua.files {:fd-opts "--no-ignore --hidden"}))]
     (which-key.register {"<leader>f" {:name "fzf"
@@ -124,12 +122,8 @@
   (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggle fish term"]
                                     "s" [#(second:toggle) "toggle serve term"]}}))
 
-(let [exchange (lazy-require "substitute.exchange")]
-  (which-key.register {"X"         [exchange.visual   "exchange"]} {:mode "x"})
-  (which-key.register {"X"         [exchange.operator ""]})
-  (which-key.register {"<Leader>x" [exchange.cancel   "cancel"]}))
-
 (λ set-sexp-keys! [{: buf}]
+  "@see https://github.com/tpope/vim-sexp-mappings-for-regular-people"
   (which-key.register {"dsf" ["<Plug>(sexp_splice_list)" "sexp splice list"]
                        ; Barf and slurp.
                        "<I" ["<Plug>(sexp_insert_at_list_head)"   "insert at head"]
