@@ -57,7 +57,7 @@
         :rainbow {:enable true :extended_mode true}
         :endwise {:enable true}
         :refactor {:highlight_definitions {:enable false}
-                   :highlight_current_scope {:enable false}
+                   :highlight_current_scope {:enable true}
                    :smart_rename {:enable true
                                   :keymaps {:smart_rename :grr}}
                    :navigation {:enable true
