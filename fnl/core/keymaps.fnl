@@ -120,7 +120,7 @@
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
 
 ;; toggleterm
-(λ toggleterm-keymaps! [first second]
+(λ set-toggleterm-keys! [first second]
   (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggle fish term"]
                                     "s" [#(second:toggle) "toggle serve term"]}}))
 
@@ -131,7 +131,8 @@
 
 ;; TODO 
 (λ set-sexp-keys! [{: buf}]
-  (which-key.register {; Barf and slurp.
+  ; Barf and slurp.
+  (which-key.register {
                        "<I" ["<Plug>(sexp_insert_at_list_head)"   "insert at head"]
                        ">I" ["<Plug>(sexp_insert_at_list_tail)"   "insert at tail"]
                        "<f" ["<Plug>(sexp_swap_list_backward)"    "gswap list backward"]
@@ -142,9 +143,17 @@
                        "<)" ["<Plug>(sexp_emit_tail_element)"     "emit tail"]
                        "<(" ["<Plug>(sexp_capture_prev_element)"  "capture prev"]
                        ">)" ["<Plug>(sexp_capture_next_element)"  "capture next"]}
-                      {:buffer buf}))
+                      {:buffer buf})
+
+  ; Navigate by word
+  (let [word-navigation {"B"  ["<Plug>(sexp_move_to_prev_element_head)" "prev head"]
+                         "W"  ["<Plug>(sexp_move_to_next_element_head)" "next head"]
+                         "gE" ["<Plug>(sexp_move_to_prev_element_tail)" "prev tail"]
+                         "E"  ["<Plug>(sexp_move_to_next_element_tail)" "next tail"]}]
+    (each [_ mode (ipairs ["n" "x" "o"])]
+      (which-key.register word-navigation {: mode :buffer buf}))))
 
 ;; export
 {: set-lsp-keys!
- : toggleterm-keymaps!
+ : set-toggleterm-keys!
  : set-sexp-keys!}

@@ -1,7 +1,7 @@
 (local {: setup} (require :toggleterm))
 (local {: Terminal} (require :toggleterm.terminal))
 
-(local {: toggleterm-keymaps!} (require :core.keymaps))
+(local {: set-toggleterm-keys!} (require :core.keymaps))
 
 ;;
 
@@ -9,4 +9,4 @@
 
 (let [first (Terminal:new {:cmd "fish" :hidden false})
       second (Terminal:new {:cmd "fish"})]
-  (toggleterm-keymaps! first second))
+  (set-toggleterm-keys! first second))
