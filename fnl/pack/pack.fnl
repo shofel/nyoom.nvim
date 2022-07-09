@@ -109,24 +109,6 @@
          {:cmd :Trouble
           :config (call-setup :trouble {:icons false})})
 
-   (pack :hrsh7th/nvim-cmp
-         {:config (load-file "cmp")
-          :wants [:LuaSnip]
-          :event [:InsertEnter :CmdlineEnter]
-          :requires [(pack :hrsh7th/cmp-path {:after :nvim-cmp})
-                     (pack :hrsh7th/cmp-buffer {:after :nvim-cmp})
-                     (pack :hrsh7th/cmp-cmdline {:after :nvim-cmp})
-                     (pack :hrsh7th/cmp-nvim-lsp {:after :nvim-cmp})
-                     (pack :onsails/lspkind-nvim {:module :lspkind})
-                     (pack :PaterJason/cmp-conjure {:after :conjure})
-                     (pack :saadparwaiz1/cmp_luasnip {:after :nvim-cmp})
-                     (pack :lukas-reineke/cmp-under-comparator {:module :cmp-under-comparator})
-                     (pack :L3MON4D3/LuaSnip {:event :InsertEnter
-                                              :wants :friendly-snippets
-                                              :config (load-file "luasnip")
-                                              :requires [(pack :rafamadriz/friendly-snippets
-                                                               {:opt false})]})]})
-
    (pack :akinsho/toggleterm.nvim {:config (load-file "toggleterm")})
 
    ;; Look
