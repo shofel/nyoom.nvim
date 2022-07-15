@@ -91,7 +91,9 @@
           :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
           :config (call-setup :fzf-lua {:border :single})})
 
-   ;; tree-sitter
+   ;; Neorg
+
+   ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
          {:run ":TSUpdate"
           :config (load-file "treesitter")
@@ -102,13 +104,13 @@
                      (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
                      (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})]})
 
-   ;; lsp
+   ;; LSP
    (pack :neovim/nvim-lspconfig
          {:config (load-file "lsp")
           :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
                                                :config (call-setup :fidget)})]})
 
-   ;; trouble
+   ;; Trouble
    (pack :folke/trouble.nvim
          {:cmd :Trouble
           :config (call-setup :trouble {:icons false})})
