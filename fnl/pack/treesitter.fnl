@@ -4,8 +4,24 @@
       ts-install (require :nvim-treesitter.install)]
   (tset ts-install :compilers [gcc]))
 
-(local {: setup} (require :nvim-treesitter.configs))
+;; Neorg parsers.
+(let [tsp (require :nvim-treesitter.parsers)
+      parser-config (tsp.get_parser_configs)]
+  (set parser-config.norg
+       {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
+                       :files [:src/parser.c :src/scanner.cc]
+                       :branch :main}})
+  (set parser-config.norg_meta
+       {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
+                       :files [:src/parser.c]
+                       :branch :main}})
+  (set parser-config.norg_table
+       {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
+                       :files [:src/parser.c]
+                       :branch :main}}))
 
+;; Setup.
+(local {: setup} (require :nvim-treesitter.configs))
 (setup {:ensure_installed "all"
         :ignore_install []
         :highlight {:enable true
