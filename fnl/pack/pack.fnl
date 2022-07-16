@@ -88,7 +88,7 @@
    ;; Fzf
    (pack :ibhagwan/fzf-lua
          {:branch :main
-          :requires [(pack :junegunn/fzf {:run (. vim.fn :fzf#install)})]
+          :requires [(pack :junegunn/fzf {:run ":call fzf#install()"})]
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
