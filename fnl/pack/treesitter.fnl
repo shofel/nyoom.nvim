@@ -29,7 +29,7 @@
                       :keymaps {:af "@function.outer"
                                 :if "@function.inner"
                                 :ac "@class.outer"
-                                :ic "@class.inner"}  
+                                :ic "@class.inner"}
                       :move {:enable true
                              :set_jumps true
                              :goto_next_start {"]m" "@function.outer"
