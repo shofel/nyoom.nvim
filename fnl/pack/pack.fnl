@@ -92,12 +92,16 @@
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
+   (pack :nvim-neorg/neorg
+         {:config (call-setup :neorg {:load {:core.defaults {}
+                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/notes/knowledge"
+                                                                                      :gtd "~/notes/gtd"}}}}}) ;; TODO rename XXX to johnydecimal
+          :requires [(pack :nvim-lua/plenary.nvim)]
+          :after :nvim-treesitter})
 
    ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
-         {:run ":TSUpdate"
-          :config (load-file "treesitter")
-          :event [:BufRead :BufNewFile]
+         {:config (load-file "treesitter")
           :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                      (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})

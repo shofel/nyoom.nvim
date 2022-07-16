@@ -121,8 +121,9 @@
 
 ;; toggleterm
 (λ set-toggleterm-keys! [first second]
-  (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggle fish term"]
-                                    "s" [#(second:toggle) "toggle serve term"]}}))
+  (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggeterm first"]
+                                    "s" [#(second:toggle) "toggleterm second"]
+                                    "h" ["<cmd>ToggleTermToggleAll<cr>" "toggleterm all"]}}))
 
 (λ set-sexp-keys! [{: buf}]
   "@see https://github.com/tpope/vim-sexp-mappings-for-regular-people"

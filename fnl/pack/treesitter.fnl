@@ -1,6 +1,5 @@
-(local {: lazy-require} (require :utils.lazy-require))
-(local {: setup} (lazy-require :nvim-treesitter.configs))
-(local parsers (lazy-require :nvim-treesitter.parsers))
+(local {: setup} (require :nvim-treesitter.configs))
+(local parsers (require :nvim-treesitter.parsers))
 
 ;;; Extra parsers
 (local parser-config (parsers.get_parser_configs))
