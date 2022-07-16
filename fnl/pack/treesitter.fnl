@@ -1,54 +1,11 @@
+;; Use nix's gcc to compile parsers.
+;; @see https://www.reddit.com/r/neovim/comments/vyqcny/comment/ig3s444/
+(require :pack.treesitter-set-gcc)
+
 (local {: setup} (require :nvim-treesitter.configs))
-(local parsers (require :nvim-treesitter.parsers))
 
-;;; Extra parsers
-(local parser-config (parsers.get_parser_configs))
-
-;; neorg treesitter parsers 
-(set parser-config.norg {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg"
-                                        :files [:src/parser.c :src/scanner.cc]
-                                        :branch :main}})
-
-(set parser-config.norg_meta
-     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-meta"
-                     :files [:src/parser.c]
-                     :branch :main}})
-
-(set parser-config.norg_table
-     {:install_info {:url "https://github.com/nvim-neorg/tree-sitter-norg-table"
-                     :files [:src/parser.c]
-                     :branch :main}})
-
-;; the usual
-(setup {:ensure_installed ["bash"
-                           "clojure"
-                           "comment"
-                           "commonlisp"
-                           "css"
-                           "dockerfile"
-                           "fennel"
-                           "fish"
-                           "html"
-                           "http"
-                           "javascript"
-                           "jsdoc"
-                           "json"
-                           "json5"
-                           "lua"
-                           "markdown"
-                           "ninja"
-                           "nix"
-                           "perl"
-                           "python"
-                           "regex"
-                           "ruby"
-                           "scss"
-                           "toml"
-                           "tsx"
-                           "typescript"
-                           "vim"
-                           "vue"
-                           "yaml"]
+(setup {:ensure_installed "all"
+        :ignore_install []
         :highlight {:enable true
                     :use_languagetree true
                     :additional_vim_regex_highlighting true}
@@ -80,4 +37,4 @@
                              :goto_previous_start {"[m" "@function.outer"
                                                    "[[" "@class.outer"}
                              :goto_previous_end {"[M" "@function.outer"
-                                                 "[]" "@class.outer"}}}})  
+                                                 "[]" "@class.outer"}}}})
