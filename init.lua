@@ -14,23 +14,22 @@ local function assure_plugin(plugin, branch)
     local plugin_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/" .. plugin_name
     if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
         fprint("Couldn't find '%s', cloning new copy to %s", plugin_name, plugin_path)
-        local branch_args = branch and {"--branch", branch} or {}
         vim.fn.system({
             "git",
             "clone",
             "--depth",
             "1",
             "https://github.com/" .. plugin,
-            unpack(branch_args),
+            "--branch", branch,
             plugin_path,
         })
     end
 end
 
 -- assure the essential plugins are installed
-assure_plugin("wbthomason/packer.nvim")
+assure_plugin("wbthomason/packer.nvim", "master")
 assure_plugin("rktjmp/hotpot.nvim", "nightly")
 
 -- load/cache config
 require [[hotpot]].setup()
-require [[core]]
+require [[init]]
