@@ -94,8 +94,8 @@
    ;; Neorg
    (pack :nvim-neorg/neorg
          {:config (call-setup :neorg {:load {:core.defaults {}
-                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/notes/knowledge"
-                                                                                      :gtd "~/notes/gtd"}}}}}) ;; TODO rename XXX to johnydecimal
+                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
+                                                                                      :gtd "~/10-19-Computer/15-GTD"}}}}})
           :requires [(pack :nvim-lua/plenary.nvim)]
           :after :nvim-treesitter})
 
