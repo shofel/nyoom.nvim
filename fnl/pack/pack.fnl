@@ -64,7 +64,7 @@
    (pack :gpanders/editorconfig.nvim)
 
    ;; Lisps
-   (pack :rktjmp/hotpot.nvim {:branch :master})
+   (pack :rktjmp/hotpot.nvim {:branch :nightly}) ;; in sync with init.lua
    (pack :gpanders/nvim-parinfer)
    (pack :Olical/conjure {:branch :develop}
                          :ft lisp-filetypes
