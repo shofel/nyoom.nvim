@@ -1,6 +1,8 @@
 ;; Use nix's gcc to compile parsers.
 ;; @see https://www.reddit.com/r/neovim/comments/vyqcny/comment/ig3s444/
-(require :pack.treesitter-set-gcc)
+(let [gcc (require :home-managed/gcc-path)
+      ts-install (require :nvim-treesitter.install)]
+  (tset ts-install :compilers [gcc]))
 
 (local {: setup} (require :nvim-treesitter.configs))
 
