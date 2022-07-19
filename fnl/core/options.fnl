@@ -88,7 +88,7 @@
             :splitbelow true})
 
 ;; Scroll off
-(set-opt! :scrolloff 3)
+(set-opt! :scrolloff 0)
 
 ;; Cursor guides
 (set-opts! {:cursorcolumn false
