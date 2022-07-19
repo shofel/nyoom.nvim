@@ -59,6 +59,10 @@
                       :foldopen "▾"
                       :foldclose "▸"})
 
+;; Folding by treesitter
+(set-opt! :foldmethod "expr")
+(set-opt! :foldexpr "nvim_treesitter#foldexpr()")
+
 ;; Smart search
 (set-opt! :smartcase true)
 
