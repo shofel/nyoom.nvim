@@ -112,8 +112,13 @@
    ;; LSP
    (pack :neovim/nvim-lspconfig
          {:config (load-file "lsp")
-          :requires [(pack :j-hui/fidget.nvim {:after :nvim-lspconfig
-                                               :config (call-setup :fidget)})]})
+          :requires [(pack :j-hui/fidget.nvim
+                           {:after :nvim-lspconfig
+                            :config (call-setup :fidget)})
+                     (pack "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+                           {:after :nvim-lspconfig
+                            :config (call-setup :lsp_lines)})]})
+
 
    ;; Trouble
    (pack :folke/trouble.nvim
