@@ -23,7 +23,7 @@
        (with handlers.hover {:border :solid})))
 
 ;;; On attach
-(fn on-attach [client bufnr]
+(fn on_attach [client bufnr]
   (keymaps.set-lsp-keys! bufnr))
 
 ;;; Capabilities
@@ -39,7 +39,7 @@
 (set capabilities.textDocument.completion.completionItem.resolveSupport {:properties {1 :documentation 2 :detail 3 :additionalTextEdits}})
 
 ;;; Setup servers
-(local defaults {:on_attach on-attach
+(local defaults {: on_attach
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
@@ -48,7 +48,7 @@
   (lsp.tsserver.setup defaults))
 
 ;; and for trickier servers you can do it yourself
-(lsp.sumneko_lua.setup {:on_attach on-attach
+(lsp.sumneko_lua.setup {: on_attach
                         : capabilities
                         :settings {:Lua {:diagnostics {:globals {1 :vim}}
                                          :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
@@ -57,14 +57,13 @@
                                                      :preloadFileSize 10000}}}})
 
 
-(lsp.powershell_es.setup {:on_attach on_attach
+(lsp.powershell_es.setup {: on_attach
                           :bundle_path "/home/shovel/opt/PowerShellEditorServices/"})
 
-(lsp.flow.setup {:on_attach on_attach
+(lsp.flow.setup {: on_attach
                  :cmd ["yarn" "flow" "lsp"]})
 
 
-;; TODO autocmd
 (lsp.eslint.setup {:on_attach (fn [] (vim.api.nvim_command "autocmd BufWritePre <buffer> EslintFixAll"))})
 
 
