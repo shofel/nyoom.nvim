@@ -138,7 +138,10 @@
                                 :config (load-file "truezen")})
    (pack :norcalli/nvim-colorizer.lua
          {:config (load-file "colorizer")
-          :event [:BufRead :BufNewFile]})])
+          :event [:BufRead :BufNewFile]})
+   ;; Folds
+   (pack  :anuvyklack/pretty-fold.nvim {:config (call-setup "pretty-fold")})])
+
 
 ;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
