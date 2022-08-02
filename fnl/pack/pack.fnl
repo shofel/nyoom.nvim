@@ -130,7 +130,7 @@
    ;; Look
    (pack :catppuccin/nvim {:as "catpuccin"
                            :config (λ []
-                                      ; latte, frappe, macchiato, mocha
+                                      ; [latte frappe macchiato mocha]
                                       (set vim.g.catppuccin_flavour "frappe")
                                       (vim.cmd "colorscheme catppuccin"))})
    (pack :rcarriga/nvim-notify {:config (load-file "notify")})
@@ -140,7 +140,12 @@
          {:config (load-file "colorizer")
           :event [:BufRead :BufNewFile]})
    ;; Folds
-   (pack  :anuvyklack/pretty-fold.nvim {:config (call-setup "pretty-fold")})])
+   (pack  :anuvyklack/pretty-fold.nvim
+          {:config (call-setup "pretty-fold" {:sections {:left ["content"]
+                                                         :right [" " "number_of_folded_lines" ": " "percentage" " "
+                                                                 (λ [config] (config.fill_char:rep 3))]}
+                                              :fill_char "•"
+                                              :remove_fold_markers true})})])
 
 
 ;; Call `startup` with the plugins described.
