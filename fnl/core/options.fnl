@@ -41,8 +41,7 @@
 (set-opt! :termguicolors true)
 
 ;; Cols and chars
-(set-opts! {:signcolumn "yes:2"
-            :foldcolumn "auto:3"})
+(set-opts! {:signcolumn "yes:2"})
 
 (set-opt! :fillchars {:eob " "
                       :horiz "━"
@@ -59,9 +58,11 @@
                       :foldopen "▾"
                       :foldclose "▸"})
 
-;; Folding by treesitter
-(set-opt! :foldmethod "expr")
-(set-opt! :foldexpr "nvim_treesitter#foldexpr()")
+;; Folding
+(set-opts! {:foldcolumn "1"
+            :foldlevel 99
+            :foldlevelstart 99
+            :foldenable true})
 
 ;; Smart search
 (set-opt! :smartcase true)

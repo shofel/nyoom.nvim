@@ -139,13 +139,13 @@
    (pack :norcalli/nvim-colorizer.lua
          {:config (load-file "colorizer")
           :event [:BufRead :BufNewFile]})
-   ;; Folds
-   (pack  :anuvyklack/pretty-fold.nvim
-          {:config (call-setup "pretty-fold" {:sections {:left ["content"]
-                                                         :right []}
-                                              :fill_char ""
-                                              :remove_fold_markers true})})])
 
+   ;; Folds
+   (pack :kevinhwang91/nvim-ufo
+         {:requires [(pack :kevinhwang91/promise-async)]
+          :config (call-setup :ufo {:provider_selector
+                                    (λ [bufnr filetype buftype]
+                                       ["treesitter" "indent"])})})])
 
 ;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
