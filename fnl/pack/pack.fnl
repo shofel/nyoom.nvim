@@ -78,7 +78,8 @@
    ;; Various small plugins
    (pack :tommcdo/vim-exchange)
    (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
-   (pack :echasnovski/mini.nvim)
+   (pack :echasnovski/mini.nvim {:config (λ []
+                                            ((call-setup :mini.completion)))})
 
    ;; Visual
    (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)

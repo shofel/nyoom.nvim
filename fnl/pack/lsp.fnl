@@ -44,8 +44,7 @@
                  :flags {:debounce_text_changes 150}})
 
 ;; example: typescript server 
-(when (= (vim.fn.executable :tsserver) 1)
-  (lsp.tsserver.setup defaults))
+(lsp.tsserver.setup defaults)
 
 ;; and for trickier servers you can do it yourself
 (lsp.sumneko_lua.setup {: on_attach
@@ -75,8 +74,8 @@
                           :settings {}})
 
 
-(lsp.hls.setup {})
-(lsp.rnix.setup {})
-(lsp.terraformls.setup {})
-(lsp.vimls.setup {})
-(lsp.yamlls.setup {})
+(lsp.hls.setup defaults)
+(lsp.rnix.setup defaults)
+(lsp.terraformls.setup defaults)
+(lsp.vimls.setup defaults)
+(lsp.yamlls.setup defaults)
