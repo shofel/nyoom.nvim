@@ -28,15 +28,6 @@
 
 ;;; Capabilities
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
-(set capabilities.textDocument.completion.completionItem.documentationFormat {1 :markdown 2 :plaintext})
-(set capabilities.textDocument.completion.completionItem.snippetSupport true)
-(set capabilities.textDocument.completion.completionItem.preselectSupport true)
-(set capabilities.textDocument.completion.completionItem.insertReplaceSupport true)
-(set capabilities.textDocument.completion.completionItem.labelDetailsSupport true)
-(set capabilities.textDocument.completion.completionItem.deprecatedSupport true)
-(set capabilities.textDocument.completion.completionItem.commitCharactersSupport true)
-(set capabilities.textDocument.completion.completionItem.tagSupport {:valueSet {1 1}})
-(set capabilities.textDocument.completion.completionItem.resolveSupport {:properties {1 :documentation 2 :detail 3 :additionalTextEdits}})
 
 ;;; Setup servers
 (local defaults {: on_attach
