@@ -15,7 +15,7 @@
             :inccommand "split"})
 
 ;; cmp options
-(set-opt! :completeopt [:menu :menuone :preview :noinsert])
+(set-opt! :completeopt [:menu :menuone :preview])
 
 ;; Use clipboard outside Neovim
 (set-opt! :clipboard :unnamedplus)

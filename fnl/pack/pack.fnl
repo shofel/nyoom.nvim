@@ -18,6 +18,7 @@
               :git {:clone_timeout 300}
               :profile {:enable true}
               :compile_path compile-path
+              :auto_reload_compiled true
               :display {:header_lines 2
                         :open_fn (λ open_fn []
                                          (local {: float} (require :packer.util))
@@ -71,6 +72,9 @@
                          :config (tset vim.g "conjure#extract#tree_sitter#enabled" true))
    (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
 
+   ;; Languages
+   (pack :fladson/vim-kitty)
+
    ;; Pairs
    (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs
                                                      {:disable_filetype lisp-filetypes})})
@@ -78,8 +82,7 @@
    ;; Various small plugins
    (pack :tommcdo/vim-exchange)
    (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
-   (pack :echasnovski/mini.nvim {:config (λ []
-                                            ((call-setup :mini.completion)))})
+   (pack :echasnovski/mini.nvim)
 
    ;; Visual
    (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
@@ -115,11 +118,16 @@
          {:config (load-file "lsp")
           :requires [(pack :j-hui/fidget.nvim
                            {:after :nvim-lspconfig
-                            :config (call-setup :fidget)})
-                     (pack "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-                           {:after :nvim-lspconfig
-                            :config (call-setup :lsp_lines)})]})
+                            :config (call-setup :fidget)})]})
 
+   ;; Autocompletion
+   ;; TODO install deps and call start
+   (pack :ms-jpq/coq_nvim {:branch "coq"
+                           :after :nvim-lspconfig
+                           :config (λ []
+                                      (let [coq (require "coq")]
+                                        ; (coq.deps) ; only once after install
+                                        (coq.Now "-s")))})
 
    ;; Trouble
    (pack :folke/trouble.nvim
