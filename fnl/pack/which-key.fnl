@@ -66,7 +66,8 @@
                                        "GV"]
 
                                   "v" ["<cmd>TermExec cmd=\"glog; exit\"<cr>"
-                                       "Log"]}})
+                                       "Log"]}}
+                    {:silent true})
 
 ;; document conjure prefixes
 (which-key.register {"<localleader>E" "eval motion"

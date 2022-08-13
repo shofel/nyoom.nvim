@@ -12,7 +12,8 @@
             :list   true
             :timeoutlen 500
             :shortmess  "filnxtToOFatsc"
-            :inccommand "split"})
+            :inccommand "nosplit"
+            :cmdheight 0})
 
 ;; cmp options
 (set-opt! :completeopt [:menu :menuone :preview :noinsert])

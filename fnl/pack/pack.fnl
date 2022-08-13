@@ -157,7 +157,7 @@
    (pack :Pocco81/TrueZen.nvim
          {:cmd     "TZAtaraxis"
           :config (call-setup :true-zen
-                              {:ui {:bottom {:cmdheight 1
+                              {:ui {:bottom {:cmdheight 0
                                               :laststatus 0
                                               :ruler true
                                               :showmode false
