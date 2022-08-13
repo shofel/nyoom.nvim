@@ -1,7 +1,7 @@
 (local {: setup} (require "lualine"))
 
 (setup {:options {:icons_enabled true
-                  :theme (.. "one" vim.go.background)
+                  :theme "catppuccin"
                   :component_separators {:left "" :right ""}
                   :section_separators   {:left "" :right ""}
                   :disabled_filetypes {}
