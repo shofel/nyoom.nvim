@@ -15,7 +15,7 @@
             :inccommand "split"})
 
 ;; cmp options
-(set-opt! :completeopt [:menu :menuone :preview])
+(set-opt! :completeopt [:menu :menuone :preview :noinsert])
 
 ;; Use clipboard outside Neovim
 (set-opt! :clipboard :unnamedplus)
@@ -41,7 +41,7 @@
 (set-opt! :termguicolors true)
 
 ;; Cols and chars
-(set-opts! {:signcolumn "yes:2"})
+(set-opts! {:signcolumn "yes:1"})
 
 (set-opt! :fillchars {:eob " "
                       :horiz "━"
