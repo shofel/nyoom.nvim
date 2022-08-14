@@ -53,12 +53,19 @@
    (pack :tpope/vim-commentary)
    (pack :tpope/vim-dispatch)
    (pack :tpope/vim-eunuch)
-   (pack :tpope/vim-fugitive)
-   (pack :tpope/vim-projectionist)
    (pack :tpope/vim-repeat)
    (pack :tpope/vim-rsi)
    (pack :tpope/vim-surround)
    (pack :tpope/vim-unimpaired)
+   (pack :tpope/vim-fugitive
+         {:config (λ []
+                   (let [group (vim.api.nvim_create_augroup "fugitive"
+                                                            {:clear true})]
+                     (vim.api.nvim_create_autocmd
+                       ["FileType"]
+                       {:pattern ["fugitive"]
+                        :command "nnoremap <buffer> <silent> cc <cmd>Git commit<cr>"
+                        : group})))})
 
    ;; Follow conventions
    (pack :tpope/vim-sleuth)
