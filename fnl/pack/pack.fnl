@@ -191,9 +191,11 @@
                                     (λ [bufnr filetype buftype]
                                        ["treesitter" "indent"])})})
 
-   ;; Git signs
+   ;; Git
    (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
-                                   :requires [(pack :nvim-lua/plenary.nvim)]})])
+                                   :requires [(pack :nvim-lua/plenary.nvim)]})
+   (pack :TimUntersberger/neogit {:requires :nvim-lua/plenary.nvim
+                                  :config (call-setup :neogit)})])
 
 ;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
