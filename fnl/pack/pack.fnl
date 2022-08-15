@@ -50,17 +50,17 @@
    (pack :folke/which-key.nvim {:config (call-setup :which-key)})
 
    ;; Tim Pope
-   (pack :tpope/vim-commentary)
-   (pack :tpope/vim-dispatch)
-   (pack :tpope/vim-eunuch)
-   (pack :tpope/vim-repeat)
-   (pack :tpope/vim-rsi)
-   (pack :tpope/vim-surround)
-   (pack :tpope/vim-unimpaired)
-   (pack :tpope/vim-fugitive)
+   (pack "https://tpope.io/vim/commentary.git")
+   (pack "https://tpope.io/vim/dispatch.git")
+   (pack "https://tpope.io/vim/eunuch.git")
+   (pack "https://tpope.io/vim/repeat.git")
+   (pack "https://tpope.io/vim/rsi.git")
+   (pack "https://tpope.io/vim/surround.git")
+   (pack "https://tpope.io/vim/unimpaired.git")
+   (pack "https://tpope.io/vim/fugitive.git")
 
    ;; Follow conventions
-   (pack :tpope/vim-sleuth)
+   (pack "https://tpope.io/vim/sleuth.git")
    (pack :gpanders/editorconfig.nvim)
 
    ;; Lisps
