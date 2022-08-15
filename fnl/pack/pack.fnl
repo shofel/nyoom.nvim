@@ -57,15 +57,7 @@
    (pack :tpope/vim-rsi)
    (pack :tpope/vim-surround)
    (pack :tpope/vim-unimpaired)
-   (pack :tpope/vim-fugitive
-         {:config (λ []
-                   (let [group (vim.api.nvim_create_augroup "fugitive"
-                                                            {:clear true})]
-                     (vim.api.nvim_create_autocmd
-                       ["FileType"]
-                       {:pattern ["fugitive"]
-                        :command "nnoremap <buffer> <silent> cc <cmd>Git commit<cr>"
-                        : group})))})
+   (pack :tpope/vim-fugitive)
 
    ;; Follow conventions
    (pack :tpope/vim-sleuth)
@@ -91,9 +83,7 @@
    (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
    (pack :echasnovski/mini.nvim)
 
-   ;; Visual
-   (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
-                                   :requires [(pack :nvim-lua/plenary.nvim)]})
+   ;; Statusline
    (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")})
 
    ;; Fzf
@@ -194,12 +184,16 @@
                                                   :mode :foreground})})
 
 
-                       ;; Folds
+   ;; Folds
    (pack :kevinhwang91/nvim-ufo
          {:requires [(pack :kevinhwang91/promise-async)]
           :config (call-setup :ufo {:provider_selector
                                     (λ [bufnr filetype buftype]
-                                       ["treesitter" "indent"])})})])
+                                       ["treesitter" "indent"])})})
+
+   ;; Git signs
+   (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
+                                   :requires [(pack :nvim-lua/plenary.nvim)]})])
 
 ;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
