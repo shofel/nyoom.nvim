@@ -24,7 +24,8 @@
   (which-key.register {"<leader>b" {:name "buffers"
                                     "o" ["<cmd>only<cr>"      "close others"]
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
-                                    "h" [unshow_in_window     "hide buffer"]}}))
+                                    "h" [unshow_in_window     "hide buffer"]}}
+                      {:silent true}))
 ;; fzf
 (let [fzf-lua (require :fzf-lua)]
   (let [key-all-files (lambda []
