@@ -1,6 +1,24 @@
-# Nyoom.nvim
 
-## This fork is hopelessly direrged from the upstream
+# The purpose of this fork
+
+This is my personal neovim config, which was bootstrapped from `shaunsingh/nyoom`.
+
+### The differences:
+- I think in the original nyoom the macros are overused. Instead of huge macros I've got just a few helper functions.
+- I dont use rust in my everyday life, and this config does not requires rust toolchain.
+
+### Differences in plugins
+- I prefer fzf-lua instead of telescope
+- cmp in nyoom was broken for me, and I switched it to coq, which can work without configuration
+
+### Modularity
+- Packer provides us with modularity which is enough for me: the config is one expression per plugin.
+- The only thing I'm lacking is a better management for keymaps. 
+
+### `./fresh-start`
+- run `./fresh-start` script when you've just cloned the repo and need to bootstrap `packer`, `hotpot`, and their caches
+
+# Nyoom.nvim
 
 <div align="center">
 
