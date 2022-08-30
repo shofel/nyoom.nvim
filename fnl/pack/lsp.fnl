@@ -34,7 +34,7 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-;; example: typescript server 
+;; example: typescript server
 (lsp.tsserver.setup defaults)
 
 ;; and for trickier servers you can do it yourself

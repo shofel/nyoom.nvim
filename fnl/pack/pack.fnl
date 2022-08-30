@@ -104,6 +104,7 @@
    ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
          {:config (load-file "treesitter")
+          :run ":TSUpdate"
           :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                      (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
@@ -121,6 +122,7 @@
    ;; TODO install deps and call start
    (pack :ms-jpq/coq_nvim {:branch "coq"
                            :after :nvim-lspconfig
+                           :run ":COQdeps"
                            :config (λ []
                                       (let [coq (require "coq")]
                                         ; (coq.deps) ; only once after install
@@ -193,9 +195,7 @@
 
    ;; Git
    (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
-                                   :requires [(pack :nvim-lua/plenary.nvim)]})
-   (pack :TimUntersberger/neogit {:requires :nvim-lua/plenary.nvim
-                                  :config (call-setup :neogit)})])
+                                   :requires [(pack :nvim-lua/plenary.nvim)]})])
 
 ;; Call `startup` with the plugins described.
 (packer.startup (lambda [use]
