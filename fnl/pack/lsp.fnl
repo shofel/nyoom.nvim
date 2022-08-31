@@ -34,10 +34,8 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-;; example: typescript server
-(lsp.tsserver.setup defaults)
+; (lsp.tsserver.setup defaults)
 
-;; and for trickier servers you can do it yourself
 (lsp.sumneko_lua.setup {: on_attach
                         : capabilities
                         :settings {:Lua {:diagnostics {:globals {1 :vim}}
@@ -49,9 +47,6 @@
 
 (lsp.powershell_es.setup {: on_attach
                           :bundle_path "/home/shovel/opt/PowerShellEditorServices/"})
-
-(lsp.flow.setup {: on_attach
-                 :cmd ["yarn" "flow" "lsp"]})
 
 
 (lsp.eslint.setup {:on_attach (fn [] (vim.api.nvim_command "autocmd BufWritePre <buffer> EslintFixAll"))})
