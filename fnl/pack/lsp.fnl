@@ -34,6 +34,11 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
+(lsp.flow.setup {: on_attach
+                 :cmd ["yarn" "flow" "lsp"]})
+
+;; TODO: detect a TS project and start tsserver.
+;; TODO: start flow or tsserver. At last one of them.
 ; (lsp.tsserver.setup defaults)
 
 (lsp.sumneko_lua.setup {: on_attach
