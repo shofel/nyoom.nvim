@@ -139,8 +139,7 @@
    (pack :catppuccin/nvim {:as "catpuccin"
                            :config (λ []
                                       ; [latte frappe macchiato mocha]
-                                      (set vim.g.catppuccin_flavour "frappe")
-                                      (vim.cmd "colorscheme catppuccin"))})
+                                      (vim.cmd "colorscheme catppuccin-macciato"))})
    (pack :rcarriga/nvim-notify
          {:config
            (λ []
