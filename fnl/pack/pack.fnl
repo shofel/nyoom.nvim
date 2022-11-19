@@ -93,6 +93,7 @@
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
+   ;; TODO call :Neorg sync-parsers
    (pack :nvim-neorg/neorg
          {:config (call-setup :neorg {:load {:core.defaults {}
                                              :core.norg.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
@@ -139,7 +140,7 @@
    (pack :catppuccin/nvim {:as "catpuccin"
                            :config (λ []
                                       ; [latte frappe macchiato mocha]
-                                      (vim.cmd "colorscheme catppuccin-macciato"))})
+                                      (vim.cmd "colorscheme catppuccin-frappe"))})
    (pack :rcarriga/nvim-notify
          {:config
            (λ []
