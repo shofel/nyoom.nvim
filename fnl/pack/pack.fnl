@@ -80,7 +80,11 @@
 
    ;; Various small plugins
    (pack :tommcdo/vim-exchange)
-   (pack :ggandor/lightspeed.nvim {:config (load-file "lightspeed")})
+   (pack :ggandor/leap.nvim {:as :leap
+                             :config (λ [] (let [leap (require :leap)]
+                                                (leap.add_default_mappings)))})
+   (pack :ggandor/flit.nvim {:as :flit
+                             :config (call-setup :flit {})})
    (pack :echasnovski/mini.nvim)
 
    ;; Statusline
@@ -109,8 +113,7 @@
           :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                      (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
-                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
-                     (pack :p00f/nvim-ts-rainbow {:after :nvim-treesitter})]})
+                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})]})
 
    ;; LSP
    (pack :neovim/nvim-lspconfig
@@ -139,8 +142,13 @@
    ;; Look
    (pack :catppuccin/nvim {:as "catpuccin"
                            :config (λ []
+                                      ((call-setup :catppuccin
+                                                   {:custom_highlights {:MatchParen {:fg "#FE640B"
+                                                                                     :bg "#000000"
+                                                                                     :style ["bold"]}}}))
                                       ; [latte frappe macchiato mocha]
                                       (vim.cmd "colorscheme catppuccin-frappe"))})
+
    (pack :rcarriga/nvim-notify
          {:config
            (λ []
