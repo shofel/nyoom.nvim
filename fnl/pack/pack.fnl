@@ -50,7 +50,6 @@
    (pack :folke/which-key.nvim {:config (call-setup :which-key)})
 
    ;; Tim Pope
-   (pack "https://tpope.io/vim/commentary.git")
    (pack "https://tpope.io/vim/dispatch.git")
    (pack "https://tpope.io/vim/eunuch.git")
    (pack "https://tpope.io/vim/repeat.git")
@@ -85,7 +84,7 @@
                                                 (leap.add_default_mappings)))})
    (pack :ggandor/flit.nvim {:as :flit
                              :config (call-setup :flit {})})
-   (pack :echasnovski/mini.nvim)
+   (pack :echasnovski/mini.nvim {:config (call-setup "mini.comment")})
 
    ;; Statusline
    (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")})
