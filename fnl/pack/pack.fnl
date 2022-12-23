@@ -54,7 +54,6 @@
    (pack "https://tpope.io/vim/eunuch.git")
    (pack "https://tpope.io/vim/repeat.git")
    (pack "https://tpope.io/vim/rsi.git")
-   (pack "https://tpope.io/vim/surround.git")
    (pack "https://tpope.io/vim/unimpaired.git")
    (pack "https://tpope.io/vim/fugitive.git")
 
@@ -84,7 +83,10 @@
                                                 (leap.add_default_mappings)))})
    (pack :ggandor/flit.nvim {:as :flit
                              :config (call-setup :flit {})})
-   (pack :echasnovski/mini.nvim {:config (call-setup "mini.comment")})
+
+   (pack :echasnovski/mini.nvim {:config (λ []
+                                            ((call-setup "mini.surround"))
+                                            ((call-setup "mini.comment")))})
 
    ;; Statusline
    (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")})

@@ -19,6 +19,12 @@
                      "<leader>k" ["[" "unimpared-prev"]}
                     {:noremap false})
 
+;; Lep
+(each [_ mode (ipairs ["n" "x" "o"])]
+  (which-key.register {"l" ["<Plug>(leap-forward-to)" "leap forward"]
+                       "h" ["<Plug>(leap-backward-to)" "leap forward"]}
+                      {: mode}))
+
 ;; buffers
 (let [{: unshow_in_window} (require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"
@@ -26,6 +32,7 @@
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
                                     "h" [unshow_in_window     "hide buffer"]}}
                       {:silent true}))
+
 ;; fzf
 (let [fzf-lua (require :fzf-lua)]
   (let [key-all-files (lambda []
@@ -77,11 +84,11 @@
                      "<localleader>r" "reset"
                      "<localleader>t" "test"})
 
-;; A tree for lsp keys. They don't shadow anyting,
-;; so I believe it's safe to not wait until lsp attaches.
 (local list-workspace-folders
        [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
         "list workspace folders"])
+
+;; basic lsp keys
 (which-key.register {"<leader>d" {:name "lsp:inspect"
                                   "d" (key vim.lsp.buf :definition)
                                   "D" (key vim.lsp.buf :declaration)
