@@ -25,6 +25,25 @@
                        "h" ["<Plug>(leap-backward-to)" "leap forward"]}
                       {: mode}))
 
+;; ThePrimeagen/refactoring.nvim
+(fn refactor [x] [(.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
+                  x])
+;
+; Visual mode
+(which-key.register {"<leader>r" {:name "refactoring"
+                                  "f" (refactor "Extract Function")
+                                  "F" (refactor "Extract Function To File")
+                                  "v" (refactor "Extract Variable")
+                                  "i" (refactor "Inline Variable")}}
+                    {:mode "v"})
+;
+; Normal mode
+(which-key.register {"<leader>r" {:name "refactoring"
+                                  "b" (refactor "Extract Block")
+                                  "B" (refactor "Extract Block To File")
+                                  "i" (refactor "Inline Variable")}}
+                    {:mode "n"})
+
 ;; buffers
 (let [{: unshow_in_window} (require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"

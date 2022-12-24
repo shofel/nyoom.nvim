@@ -114,7 +114,8 @@
           :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                      (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
-                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})]})
+                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
+                     (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})]})
 
    ;; LSP
    (pack :neovim/nvim-lspconfig
