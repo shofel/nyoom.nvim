@@ -103,9 +103,9 @@
    ;; TODO call :Neorg sync-parsers
    (pack :nvim-neorg/neorg
          {:config (call-setup :neorg {:load {:core.defaults {}
-                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
-                                                                                      :gtd "~/10-19-Computer/15-GTD"}}}
-                                             :core.gtd.base {:config {:workspace :gtd}}}})
+                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"}}}}})
+                                                                                      ; :gtd "~/10-19-Computer/15-GTD"}}}}})
+                                             ; :core.gtd.base {:config {:workspace :gtd}}}})
           :requires [(pack :nvim-lua/plenary.nvim)]
           :after :nvim-treesitter})
 
@@ -116,6 +116,7 @@
           :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
                      (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
+                     (pack :RRethy/nvim-treesitter-textsubjects {:after :nvim-treesitter})
                      (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
                      (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})]})
 
