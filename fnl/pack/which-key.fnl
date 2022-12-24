@@ -32,8 +32,8 @@
 (each [_ mode (ipairs ["n" "x" "o"])]
   (which-key.register {"j" ["}" "}"]
                        "k" ["{" "{"]
-                       "+" ["j" "j"]
-                       "-" ["k" "k"]}
+                       "}" ["j" "j"]
+                       "{" ["k" "k"]}
                       {: mode}))
 
 ;; f to search left ; t to search right
