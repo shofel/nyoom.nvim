@@ -76,13 +76,15 @@
    (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs
                                                      {:disable_filetype lisp-filetypes})})
 
-   ;; Various small plugins
    (pack :tommcdo/vim-exchange)
+
+   ;; Motion
    (pack :ggandor/leap.nvim {:as :leap
                              :config (λ [] (let [leap (require :leap)]
                                                 (leap.add_default_mappings)))})
-   (pack :ggandor/flit.nvim {:as :flit
-                             :config (call-setup :flit {})})
+   ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
+   (set vim.g.clever_f_mark_char_color "LeapMatch")
+   (pack :rhysd/clever-f.vim)
 
    (pack :echasnovski/mini.nvim {:config (λ []
                                             ((call-setup "mini.surround"))

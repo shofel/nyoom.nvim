@@ -19,11 +19,33 @@
                      "<leader>k" ["[" "unimpared-prev"]}
                     {:noremap false})
 
-;; Lep
+;; Leap
 (each [_ mode (ipairs ["n" "x" "o"])]
-  (which-key.register {"l" ["<Plug>(leap-forward-to)" "leap forward"]
-                       "h" ["<Plug>(leap-backward-to)" "leap forward"]}
+  (which-key.register {"l" ["<Plug>(leap-forward-to)" ""]
+                       "h" ["<Plug>(leap-backward-to)" ""]
+                       "L" ["<Plug>(leap-forward-till)" ""]
+                       "H" ["<Plug>(leap-backward-till)" ""]
+                       "gs" ["<Plug>(leap-cross-window)" ""]}
+                      {: mode :noremap false}))
+
+;; jk to navigate paragraphs
+(each [_ mode (ipairs ["n" "x" "o"])]
+  (which-key.register {"j" ["}" "}"]
+                       "k" ["{" "{"]
+                       "+" ["j" "j"]
+                       "-" ["k" "k"]}
                       {: mode}))
+
+;; f to search left ; t to search right
+(each [_ mode (ipairs ["n" "x" "o"])]
+  (which-key.register {"t" ["<Plug>(clever-f-f)" ""]
+                       "f" ["<Plug>(clever-f-F)" ""]
+                       "F" ["<Plug>(clever-f-t)" ""]
+                       "T" ["<Plug>(clever-f-T)" ""]
+                       "<Esc>" ["<Plug>(clever-f-reset)" ""]
+                       ";" ["<Plug>(clever-f-repeat-forward)" ""]}))
+                       ; "," ["<Plug>(clever-f-repeat-back)" ""]}))
+
 
 ;; ThePrimeagen/refactoring.nvim
 (fn refactor [x] [(.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
