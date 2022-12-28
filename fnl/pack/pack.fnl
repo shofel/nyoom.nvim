@@ -84,6 +84,7 @@
                                                 (leap.add_default_mappings)))})
    ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
    (set vim.g.clever_f_mark_char_color "LeapMatch")
+   (set vim.g.clever_f_fix_key_direction 1)
    (pack :rhysd/clever-f.vim)
 
    (pack :echasnovski/mini.nvim {:config (λ []

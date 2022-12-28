@@ -40,12 +40,10 @@
 (each [_ mode (ipairs ["n" "x" "o"])]
   (which-key.register {"t" ["<Plug>(clever-f-f)" ""]
                        "f" ["<Plug>(clever-f-F)" ""]
-                       "F" ["<Plug>(clever-f-t)" ""]
-                       "T" ["<Plug>(clever-f-T)" ""]
-                       "<Esc>" ["<Plug>(clever-f-reset)" ""]
-                       ";" ["<Plug>(clever-f-repeat-forward)" ""]}))
-                       ; "," ["<Plug>(clever-f-repeat-back)" ""]}))
-
+                       "T" ["<Plug>(clever-f-t)" ""]
+                       "F" ["<Plug>(clever-f-T)" ""]
+                       "<Esc>" ["<Plug>(clever-f-reset)" ""]}
+                      {: mode}))
 
 ;; ThePrimeagen/refactoring.nvim
 (fn refactor [x] [(.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
