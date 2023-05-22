@@ -85,9 +85,18 @@
    (set vim.g.clever_f_fix_key_direction 1)
    (pack :rhysd/clever-f.vim)
 
-   (pack :echasnovski/mini.nvim {:config (λ []
-                                            ((call-setup "mini.surround"))
-                                            ((call-setup "mini.comment")))})
+   (pack :echasnovski/mini.nvim
+         {:config (λ []
+                      ((call-setup "mini.surround" {:mappings {:add "sa"
+                                                               :delete "sd"
+                                                               :find "st"
+                                                               :find_left "sf"
+                                                               :highlight "sh"
+                                                               :replace "sr"
+                                                               :update_n_lines "sn"}
+                                                    :n_lines 50}))
+
+                      ((call-setup "mini.comment")))})
 
    ;; Statusline
    (pack :nvim-lualine/lualine.nvim {:config (load-file "lualine")})
@@ -117,7 +126,9 @@
                      (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
                      (pack :RRethy/nvim-treesitter-textsubjects {:after :nvim-treesitter})
                      (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
-                     (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})]})
+                     (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})
+                     (pack "simrat39/symbols-outline.nvim" {:after :nvim-treesitter
+                                                            :config (call-setup :symbols-outline {})})]})
 
    ;; LSP
    (pack :neovim/nvim-lspconfig

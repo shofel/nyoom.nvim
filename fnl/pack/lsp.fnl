@@ -34,8 +34,6 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-(lsp.tsserver.setup defaults)
-
 (lsp.sumneko_lua.setup {: on_attach
                         : capabilities
                         :settings {:Lua {:diagnostics {:globals {1 :vim}}
@@ -53,9 +51,7 @@
 
 
 (lsp.stylelint_lsp.setup {:cmd ["yarn" "dlx" "-p" "stylelint-lsp" "stylelint-lsp" "--stdio"]
-                          :filetypes ["css" "less" "scss" "sugarss"
-                                      "vue" "wxss" "javascript" "javascriptreact"
-                                      "typescript" "typescriptreact"]
+                          :filetypes ["css" "less" "scss" "sugarss" "vue" "wxss"]
                           :root_dir (lsp.util.root_pattern ".stylelintrc" "package.json")
                           :settings {}})
 
