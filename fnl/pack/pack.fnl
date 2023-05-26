@@ -164,6 +164,9 @@
                                       ; [latte frappe macchiato mocha]
                                       (vim.cmd "colorscheme catppuccin-frappe"))})
 
+   (pack :folke/noice.nvim {:requires [(pack :rcarriga/nvim-notify)
+                                   (pack :MunifTanjim/nui.nvim)]})
+
    (pack :rcarriga/nvim-notify
          {:config
            (λ []
