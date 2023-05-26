@@ -34,13 +34,13 @@
                  : capabilities
                  :flags {:debounce_text_changes 150}})
 
-(lsp.sumneko_lua.setup {: on_attach
-                        : capabilities
-                        :settings {:Lua {:diagnostics {:globals {1 :vim}}
-                                         :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-                                                               (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
-                                                     :maxPreload 100000
-                                                     :preloadFileSize 10000}}}})
+(lsp.lua_ls.setup {: on_attach
+                   : capabilities
+                   :settings {:Lua {:diagnostics {:globals {1 :vim}}
+                                    :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+                                                          (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}
+                                                :maxPreload 100000
+                                                :preloadFileSize 10000}}}})
 
 
 (lsp.powershell_es.setup {: on_attach
