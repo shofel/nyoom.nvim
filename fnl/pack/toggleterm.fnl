@@ -5,8 +5,10 @@
 
 ;;
 
-(setup {:direction "float"})
+(setup {:direction "float"
+        :float_opts {:width vim.o.columns
+                     :height vim.o.lines}})
 
-(let [first (Terminal:new {:cmd "fish" :hidden false})
-      second (Terminal:new {:cmd "fish"})]
+(let [first (Terminal:new)
+      second (Terminal:new)]
   (keymaps.set-toggleterm-keys! first second))
