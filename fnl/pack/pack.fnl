@@ -81,9 +81,11 @@
    ;; Motion
    (pack :ggandor/leap.nvim {:as :leap})
    ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
-   (set vim.g.clever_f_mark_char_color "LeapMatch")
-   (set vim.g.clever_f_fix_key_direction 1)
-   (pack :rhysd/clever-f.vim)
+   (do
+     (set vim.g.clever_f_mark_char_color "LeapMatch")
+     (set vim.g.clever_f_fix_key_direction 1)
+     (set vim.g.clever_f_timeout_ms 500)
+     (pack :rhysd/clever-f.vim))
 
    (pack :echasnovski/mini.nvim
          {:config (λ []
@@ -111,8 +113,8 @@
    ;; TODO call :Neorg sync-parsers
    (pack :nvim-neorg/neorg
          {:config (call-setup :neorg {:load {:core.defaults {}
-                                             :core.norg.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"}}}}})
-                                                                                      ; :gtd "~/10-19-Computer/15-GTD"}}}}})
+                                             :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
+                                                                                 :gtd "~/10-19-Computer/15-GTD"}}}}})
                                              ; :core.gtd.base {:config {:workspace :gtd}}}})
           :requires [(pack :nvim-lua/plenary.nvim)]
           :after :nvim-treesitter})
