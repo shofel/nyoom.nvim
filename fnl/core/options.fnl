@@ -24,9 +24,6 @@
 ;; Enable mouse input
 (set-opt! :mouse :a)
 
-;; Faster macros
-(set-opt! :lazyredraw true)
-
 ;; Disable swapfiles and enable undofiles
 (set-opts! {:backup false :backupcopy "yes"
             :swapfile false :updatetime 20
