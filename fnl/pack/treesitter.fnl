@@ -6,7 +6,10 @@
 
 (local {: setup} (require :nvim-treesitter.configs))
 
-(setup {:ensure_installed "all"
+(setup {:ensure_installed ["javascript" "typescript" "html" "scss" "css" "json" "json5" "jsdoc" "vue"
+                           "bash" "fish" "git_config" "git_rebase"
+                           "markdown" "markdown_inline" 
+                           "norg" "regex" "nix" "terraform" "hcl" "python" "clojure"]
         :ignore_install []
         :highlight {:enable true
                     :use_languagetree true
