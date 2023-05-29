@@ -129,12 +129,13 @@
 
    ;; Look
    (pack :catppuccin/nvim {:name "catpuccin"
+                           :lazy false
+                           :priority 1000
                            :config (λ []
                                       ((call-setup :catppuccin
                                                    {:custom_highlights {:MatchParen {:fg "#FE640B"
                                                                                      :bg "#000000"
                                                                                      :style ["bold"]}}}))
-                                      ; [latte frappe macchiato mocha]
                                       (vim.cmd "colorscheme catppuccin-frappe"))})
 
    (pack :folke/noice.nvim {:dependencies [(pack :rcarriga/nvim-notify)
