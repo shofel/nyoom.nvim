@@ -118,7 +118,6 @@
                            :build ":COQdeps"
                            :config (λ []
                                       (let [coq (require "coq")]
-                                        ; (coq.deps) ; only once after install
                                         (coq.Now "-s")))})
 
    ;; Trouble
