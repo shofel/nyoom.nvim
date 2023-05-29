@@ -92,10 +92,10 @@
                                   "a" ["<cmd>Gwrite<cr>"
                                        "Stage file"]
 
-                                  "p" ["<cmd>Dispatch git push<cr>"
+                                  "p" ["<cmd>G push<cr>"
                                        "Push"]
 
-                                  "P" ["<cmd>Dispatch git push --force-with-lease<cr>"
+                                  "P" ["<cmd>G push --force-with-lease<cr>"
                                        "Push force"]
 
                                   "m" ["<cmd>GitMessenger<cr>"
