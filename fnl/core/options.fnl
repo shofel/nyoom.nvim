@@ -99,6 +99,5 @@
                          "o-r:hor100-Cursor/lCursor"))
 
 ;; Russian keymap
-(set-opts! {:keymap "russian-dvorak"
-            :iminsert 0
-            :imsearch 0})
+(set-opt! :keymap "russian-dvorak")
+(set-opt! :iminsert 0)
