@@ -72,7 +72,6 @@
                                                                :replace "sr"
                                                                :update_n_lines "sn"}
                                                     :n_lines 50}))
-
                       ((call-setup "mini.comment")))})
 
    ;; Statusline
@@ -85,12 +84,11 @@
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
-   ;; TODO call :Neorg sync-parsers
    (pack :nvim-neorg/neorg
-         {:config :ft "neorg"
-                  (call-setup :neorg {:load {:core.defaults {}
-                                                        :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
-                                                                                            :gtd "~/10-19-Computer/15-GTD"}}}}})
+         {:build ":Neorg sync-parsers"
+          :config (call-setup :neorg {:load {:core.defaults {}
+                                             :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
+                                                                                           :gtd "~/10-19-Computer/15-GTD"}}}}})
                                              ; :core.gtd.base {:config {:workspace :gtd}}}})
           :dependencies [(pack :nvim-lua/plenary.nvim)
                          (pack :nvim-treesitter)]})
