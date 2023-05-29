@@ -4,5 +4,5 @@
 ; ;; Set vim options
 (require :core.options)
 
-;; load packer
+;; load plugins
 (require :pack.pack)

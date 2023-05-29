@@ -1,7 +1,7 @@
 ;; Helpers.
 
 (λ pack [identifier ?options]
-  "Make a mixed table to use it as an arg for `packer.use`."
+  "Make a mixed table to use it as an arg for `lazy.setup`."
   (doto (or ?options {})
     (tset 1 identifier)))
 
