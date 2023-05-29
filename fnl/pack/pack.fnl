@@ -41,7 +41,8 @@
    (pack :Olical/conjure {:branch :develop
                           :ft lisp-filetypes
                           :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
-   (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
+   (pack :guns/vim-sexp {:ft lisp-filetypes
+                         :config (load-file "vim-sexp")})
 
    ;; Languages
    (pack :fladson/vim-kitty)
@@ -86,9 +87,10 @@
    ;; Neorg
    ;; TODO call :Neorg sync-parsers
    (pack :nvim-neorg/neorg
-         {:config (call-setup :neorg {:load {:core.defaults {}
-                                             :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
-                                                                                 :gtd "~/10-19-Computer/15-GTD"}}}}})
+         {:config :ft "neorg"
+                  (call-setup :neorg {:load {:core.defaults {}
+                                                        :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
+                                                                                            :gtd "~/10-19-Computer/15-GTD"}}}}})
                                              ; :core.gtd.base {:config {:workspace :gtd}}}})
           :dependencies [(pack :nvim-lua/plenary.nvim)
                          (pack :nvim-treesitter)]})
