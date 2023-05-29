@@ -80,7 +80,7 @@
    ;; Fzf
    (pack :ibhagwan/fzf-lua
          {:branch :main
-          :dependencies [(pack :junegunn/fzf {:run ":call fzf#install()"})]
+          :dependencies [(pack :junegunn/fzf {:build ":call fzf#install()"})]
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
@@ -90,34 +90,32 @@
                                              :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
                                                                                  :gtd "~/10-19-Computer/15-GTD"}}}}})
                                              ; :core.gtd.base {:config {:workspace :gtd}}}})
-          :dependencies [(pack :nvim-lua/plenary.nvim)]
-          :after :nvim-treesitter})
+          :dependencies [(pack :nvim-lua/plenary.nvim)
+                         (pack :nvim-treesitter)]})
 
    ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
          {:config (load-file "treesitter")
-          :run ":TSUpdate"
+          :build ":TSUpdate"
           :dependencies [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                         (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
-                         (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
-                         (pack :RRethy/nvim-treesitter-textsubjects {:after :nvim-treesitter})
-                         (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
-                         (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})
-                         (pack "simrat39/symbols-outline.nvim" {:after :nvim-treesitter
-                                                                :config (call-setup :symbols-outline {})})]})
+                         (pack :nvim-treesitter/nvim-treesitter-refactor)
+                         (pack :nvim-treesitter/nvim-treesitter-textobjects)
+                         (pack :RRethy/nvim-treesitter-textsubjects)
+                         (pack "RRethy/nvim-treesitter-endwise")
+                         (pack "ThePrimeagen/refactoring.nvim")
+                         (pack "simrat39/symbols-outline.nvim" {:config (call-setup :symbols-outline)})]})
 
    ;; LSP
    (pack :neovim/nvim-lspconfig
          {:config (load-file "lsp")
           :dependencies [(pack :j-hui/fidget.nvim
-                               {:after :nvim-lspconfig
-                                :config (call-setup :fidget)})]})
+                               {:config (call-setup :fidget)})]})
 
    ;; Autocompletion
    ;; TODO install deps and call start
    (pack :ms-jpq/coq_nvim {:branch "coq"
-                           :after :nvim-lspconfig
-                           :run ":COQdeps"
+                           :dependencies (pack :nvim-lspconfig)
+                           :build ":COQdeps"
                            :config (λ []
                                       (let [coq (require "coq")]
                                         ; (coq.deps) ; only once after install

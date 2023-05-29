@@ -9,7 +9,7 @@
 (setup {:ensure_installed ["javascript" "typescript" "html" "scss" "css" "json" "json5" "jsdoc" "vue"
                            "bash" "fish" "git_config" "git_rebase"
                            "markdown" "markdown_inline" 
-                           "norg" "regex" "nix" "terraform" "hcl" "python" "clojure"]
+                           "norg" "regex" "nix" "terraform" "hcl" "python" "clojure" "fennel"]
         :ignore_install []
         :highlight {:enable true
                     :use_languagetree true
