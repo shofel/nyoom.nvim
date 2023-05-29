@@ -54,13 +54,13 @@
    (pack :tommcdo/vim-exchange)
 
    ;; Motion
-   (pack :ggandor/leap.nvim {:name :leap}
+   (pack :ggandor/leap.nvim {:name :leap})
    ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
-     (pack :rhysd/clever-f.vim
-           {:init (λ []
-                     (set vim.g.clever_f_mark_char_color "LeapMatch")
-                     (set vim.g.clever_f_fix_key_direction 1)
-                     (set vim.g.clever_f_timeout_ms 500))}))
+   (pack :rhysd/clever-f.vim
+         {:init (λ []
+                   (set vim.g.clever_f_mark_char_color "LeapMatch")
+                   (set vim.g.clever_f_fix_key_direction 1)
+                   (set vim.g.clever_f_timeout_ms 500))})
 
    (pack :echasnovski/mini.nvim
          {:config (λ []

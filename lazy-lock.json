@@ -1,6 +1,7 @@
 {
   "TrueZen.nvim": { "branch": "main", "commit": "98740c76254c65576ec294551028b65081053588" },
   "catpuccin": { "branch": "main", "commit": "1d3eda15703ba70f57e94e6451db55914ff7017f" },
+  "clever-f.vim": { "branch": "master", "commit": "6a3ac5e3688598af9411ab741737f98c47370c22" },
   "conjure": { "branch": "develop", "commit": "704eee1a960e8bef0cebd2063fa66c35f852a8ac" },
   "coq_nvim": { "branch": "coq", "commit": "c1365375558fb320a90522d5a980393d7b98576d" },
   "dispatch": { "branch": "master", "commit": "6cc2691576f97d43f8751664d1a1a908b99927e5" },
