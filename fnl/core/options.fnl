@@ -39,7 +39,7 @@
 (set-opt! :termguicolors true)
 
 ;; Cols and chars
-(set-opts! {:signcolumn "yes:1"})
+(set-opt! :signcolumn "yes:1")
 
 (set-opt! :fillchars {:eob " "
                       :horiz "━"
@@ -83,15 +83,11 @@
 (set-opt! :conceallevel 2)
 
 ;; Default split directions
-(set-opts! {:splitright true
+(set-opts! {:splitright false
             :splitbelow true})
 
 ;; Scroll off
 (set-opt! :scrolloff 0)
-
-;; Cursor guides
-(set-opts! {:cursorcolumn false
-            :cursorline   false})
 
 ;; Cursor
 (set-opt! :guicursor (.. "n-v-ve:block-Cursor/lCursor,"
