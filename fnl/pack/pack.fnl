@@ -1,28 +1,3 @@
-(local packer (require :packer))
-
-;; Manage compilation.
-
-(local compile-path (.. (vim.fn.stdpath :config)
-                        "/lua/packer_compiled.lua"))
-
-(λ assure-compiled []
-  (let [compiled? (= (vim.fn.filereadable compile-path) 1)
-        load-compiled #(require :packer_compiled)]
-   (if compiled?
-       (load-compiled)
-       (packer.sync))))
-
-;; Setup packer
-(packer.init {:max_jobs 50
-              :autoremove true
-              :git {:clone_timeout 300}
-              :profile {:enable true}
-              :compile_path compile-path
-              :auto_reload_compiled true
-              :display {:header_lines 2
-                        :open_fn (λ open_fn []
-                                         (local {: float} (require :packer.util))
-                                         (float {:border :solid}))}})
 ;; Helpers.
 
 (λ pack [identifier ?options]
@@ -45,8 +20,7 @@
 (local lisp-filetypes ["fennel" "clojure" "lisp" "racket" "scheme"])
 
 (local plugins
-  [(pack :wbthomason/packer.nvim)
-   ;; Set and document keymaps
+  [;; Set and document keymaps
    (pack :folke/which-key.nvim {:config (call-setup :which-key)})
 
    ;; Tim Pope
@@ -64,9 +38,9 @@
    ;; Lisps
    (pack :rktjmp/hotpot.nvim) ;; in sync with init.lua
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:branch :develop}
-                         :ft lisp-filetypes
-                         :config (tset vim.g "conjure#extract#tree_sitter#enabled" true))
+   (pack :Olical/conjure {:branch :develop
+                          :ft lisp-filetypes
+                          :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
    (pack :guns/vim-sexp {:config (load-file "vim-sexp")})
 
    ;; Languages
@@ -79,13 +53,13 @@
    (pack :tommcdo/vim-exchange)
 
    ;; Motion
-   (pack :ggandor/leap.nvim {:as :leap})
+   (pack :ggandor/leap.nvim {:name :leap}
    ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
-   (do
-     (set vim.g.clever_f_mark_char_color "LeapMatch")
-     (set vim.g.clever_f_fix_key_direction 1)
-     (set vim.g.clever_f_timeout_ms 500)
-     (pack :rhysd/clever-f.vim))
+     (pack :rhysd/clever-f.vim
+           {:init (λ []
+                     (set vim.g.clever_f_mark_char_color "LeapMatch")
+                     (set vim.g.clever_f_fix_key_direction 1)
+                     (set vim.g.clever_f_timeout_ms 500))}))
 
    (pack :echasnovski/mini.nvim
          {:config (λ []
@@ -106,7 +80,7 @@
    ;; Fzf
    (pack :ibhagwan/fzf-lua
          {:branch :main
-          :requires [(pack :junegunn/fzf {:run ":call fzf#install()"})]
+          :dependencies [(pack :junegunn/fzf {:run ":call fzf#install()"})]
           :config (call-setup :fzf-lua {:border :single})})
 
    ;; Neorg
@@ -116,28 +90,28 @@
                                              :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
                                                                                  :gtd "~/10-19-Computer/15-GTD"}}}}})
                                              ; :core.gtd.base {:config {:workspace :gtd}}}})
-          :requires [(pack :nvim-lua/plenary.nvim)]
+          :dependencies [(pack :nvim-lua/plenary.nvim)]
           :after :nvim-treesitter})
 
    ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
          {:config (load-file "treesitter")
           :run ":TSUpdate"
-          :requires [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
-                     (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
-                     (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
-                     (pack :RRethy/nvim-treesitter-textsubjects {:after :nvim-treesitter})
-                     (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
-                     (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})
-                     (pack "simrat39/symbols-outline.nvim" {:after :nvim-treesitter
-                                                            :config (call-setup :symbols-outline {})})]})
+          :dependencies [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
+                         (pack :nvim-treesitter/nvim-treesitter-refactor {:after :nvim-treesitter})
+                         (pack :nvim-treesitter/nvim-treesitter-textobjects {:after :nvim-treesitter})
+                         (pack :RRethy/nvim-treesitter-textsubjects {:after :nvim-treesitter})
+                         (pack "RRethy/nvim-treesitter-endwise" {:after :nvim-treesitter})
+                         (pack "ThePrimeagen/refactoring.nvim" {:after :nvim-treesitter})
+                         (pack "simrat39/symbols-outline.nvim" {:after :nvim-treesitter
+                                                                :config (call-setup :symbols-outline {})})]})
 
    ;; LSP
    (pack :neovim/nvim-lspconfig
          {:config (load-file "lsp")
-          :requires [(pack :j-hui/fidget.nvim
-                           {:after :nvim-lspconfig
-                            :config (call-setup :fidget)})]})
+          :dependencies [(pack :j-hui/fidget.nvim
+                               {:after :nvim-lspconfig
+                                :config (call-setup :fidget)})]})
 
    ;; Autocompletion
    ;; TODO install deps and call start
@@ -157,7 +131,7 @@
    (pack :akinsho/toggleterm.nvim {:config (load-file "toggleterm")})
 
    ;; Look
-   (pack :catppuccin/nvim {:as "catpuccin"
+   (pack :catppuccin/nvim {:name "catpuccin"
                            :config (λ []
                                       ((call-setup :catppuccin
                                                    {:custom_highlights {:MatchParen {:fg "#FE640B"
@@ -166,8 +140,8 @@
                                       ; [latte frappe macchiato mocha]
                                       (vim.cmd "colorscheme catppuccin-frappe"))})
 
-   (pack :folke/noice.nvim {:requires [(pack :rcarriga/nvim-notify)
-                                       (pack :MunifTanjim/nui.nvim)]
+   (pack :folke/noice.nvim {:dependencies [(pack :rcarriga/nvim-notify)
+                                           (pack :MunifTanjim/nui.nvim)]
                             :config (call-setup :noice
                                                 {; override markdown rendering so that **cmp** and other plugins use **Treesitter**
                                                  :lsp {:override {:vim.lsp.util.convert_input_to_markdown_lines true
@@ -227,18 +201,15 @@
 
    ;; Folds
    (pack :kevinhwang91/nvim-ufo
-         {:requires [(pack :kevinhwang91/promise-async)]
+         {:dependencies [(pack :kevinhwang91/promise-async)]
           :config (call-setup :ufo {:provider_selector
                                     (λ [bufnr filetype buftype]
                                        ["treesitter" "indent"])})})
 
    ;; Git
    (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
-                                   :requires [(pack :nvim-lua/plenary.nvim)]})])
+                                   :dependencies [(pack :nvim-lua/plenary.nvim)]})])
 
-;; Call `startup` with the plugins described.
-(packer.startup (lambda [use]
-                  (each [_ x (pairs plugins)]
-                    (use x))))
-
-(assure-compiled)
+;; Call `setup` with the plugins described.
+(let [lazy (require :lazy)]
+  (lazy.setup plugins))

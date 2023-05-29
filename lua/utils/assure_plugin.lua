@@ -1,22 +1,20 @@
 -- A function that verifies if the plugin passed as a parameter is installed,
 -- if it isn't it will be installed
----@param plugin string #the plugin, must follow the format `username/repository`
----@param branch string #the branch of the plugin
-return function (plugin, branch)
-    local _, _, plugin_name = string.find(plugin, [[%S+/(%S+)]])
+---@param name string
+---@param url string
+return function (name, url)
+    local path = vim.fn.stdpath("data") .. "/lazy/" .. name
 
-    local plugin_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/" .. plugin_name
-
-    if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
-        print("An essential plugin not found: " .. plugin .. "\n" ..
-              "It will be installed at path " .. plugin_path)
+    if not vim.loop.fs_stat(vim.fn.glob(path)) then
+        vim.notify("Bootstrapping " .. name .. "...", vim.log.levels.INFO)
 
         vim.fn.system({
             "git", "clone",
-            "--depth", "1",
-            "https://github.com/" .. plugin,
-            "--branch", branch,
-            plugin_path,
+            "--single-branch",
+            "--filter=blob:none",
+            url, path,
         })
     end
+
+    vim.opt.rtp:prepend(path)
 end
