@@ -159,12 +159,6 @@
 ;; truezen:n
 (which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
 
-;; toggleterm
-(λ set-toggleterm-keys! [first second]
-  (which-key.register {"<leader>t" {"f" [#(first:toggle) "toggeterm first"]
-                                    "s" [#(second:toggle) "toggleterm second"]
-                                    "h" ["<cmd>ToggleTerm<cr>" "toggle term"]}}))
-
 (λ set-sexp-keys! [{: buf}]
   "@see https://github.com/tpope/vim-sexp-mappings-for-regular-people"
   (which-key.register {"dsf" ["<Plug>(sexp_splice_list)" "sexp splice list"]
@@ -191,5 +185,4 @@
 
 ;; export
 {: set-lsp-keys!
- : set-toggleterm-keys!
  : set-sexp-keys!}

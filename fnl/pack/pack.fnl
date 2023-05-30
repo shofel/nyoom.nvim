@@ -132,9 +132,13 @@
           :config (call-setup :trouble {:icons false})})
 
    (pack :akinsho/toggleterm.nvim
-         {:config (load-file "toggleterm")
-          :keys [(key "<c-z>" "<cmd>ToggleTerm<cr>")
-                 (key "<c-z>" "" {:mode "t"})]})
+         {:opts {:direction "float"
+                 :float_opts {:width vim.o.columns
+                              :height vim.o.lines}}
+          :keys [(key "<c-z>" "<cmd>1ToggleTerm<cr>")
+                 (key "<c-z>" "" {:mode "t"})
+                 (key "<leader>tf" "<cmd>1ToggleTerm<cr>")
+                 (key "<leader>ts" "<cmd>2ToggleTerm<cr>")]})
 
    ;; Look
    (pack :catppuccin/nvim {:name "catpuccin"
