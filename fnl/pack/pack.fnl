@@ -1,9 +1,15 @@
 ;; Helpers.
 
 (λ pack [identifier ?options]
-  "Make a mixed table to use it as an arg for `lazy.setup`."
-  (doto (or ?options {})
-    (tset 1 identifier)))
+   "Make a mixed table to use it as an arg for `lazy.setup`."
+   (doto (or ?options {})
+     (tset 1 identifier)))
+
+(λ key [lhs rhs ?opts]
+   "Make a LazyKey spec."
+   (doto (or ?opts {})
+     (tset 1 lhs)
+     (tset 2 rhs)))
 
 (macro call-setup [name config]
   "To config a plugin: call the setup function."
@@ -127,7 +133,8 @@
 
    (pack :akinsho/toggleterm.nvim
          {:config (load-file "toggleterm")
-          :keys [["<c-z>" "<cmd>ToggleTerm<cr>"]]})
+          :keys [(key "<c-z>" "<cmd>ToggleTerm<cr>")
+                 (key "<c-z>" "" {:mode "t"})]})
 
    ;; Look
    (pack :catppuccin/nvim {:name "catpuccin"
