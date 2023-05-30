@@ -44,8 +44,7 @@
    ;; Lisps
    (pack :rktjmp/hotpot.nvim) ;; in sync with init.lua
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:branch :develop
-                          :ft lisp-filetypes
+   (pack :Olical/conjure {:ft lisp-filetypes
                           :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
    (pack :guns/vim-sexp {:ft lisp-filetypes
                          :config (load-file "vim-sexp")})
