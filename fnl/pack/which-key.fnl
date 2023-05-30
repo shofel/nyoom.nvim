@@ -18,22 +18,12 @@
                      "<leader>k" ["[" "unimpared-prev"]}
                     {:noremap false})
 
-;; Leap
-(each [_ mode (ipairs ["n" "x" "o"])]
-  (which-key.register {"l" ["<Plug>(leap-forward-to)" ""]
-                       "h" ["<Plug>(leap-backward-to)" ""]
-                       "L" ["<Plug>(leap-forward-till)" ""]
-                       "H" ["<Plug>(leap-backward-till)" ""]
-                       "gs" ["<Plug>(leap-cross-window)" ""]}
-                      {: mode :noremap false}))
-
 ;; f to search left ; t to search right
 (each [_ mode (ipairs ["n" "x" "o"])]
   (which-key.register {"t" ["<Plug>(clever-f-f)" ""]
                        "f" ["<Plug>(clever-f-F)" ""]
                        "T" ["<Plug>(clever-f-t)" ""]
-                       "F" ["<Plug>(clever-f-T)" ""]
-                       "<Esc>" ["<Plug>(clever-f-reset)" ""]}
+                       "F" ["<Plug>(clever-f-T)" ""]}
                       {: mode}))
 
 ;; ThePrimeagen/refactoring.nvim

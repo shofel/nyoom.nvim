@@ -60,7 +60,13 @@
    (pack :tommcdo/vim-exchange)
 
    ;; Motion
-   (pack :ggandor/leap.nvim {:name :leap})
+   (pack :ggandor/leap.nvim
+         {:keys [(key "l" "<Plug>(leap-forward-to)"    {:mode [:n :x :o]})
+                 (key "h" "<Plug>(leap-backward-to)"   {:mode [:n :x :o]})
+                 (key "9" "<Plug>(leap-forward-till)"  {:mode [:n :x :o]})
+                 (key "H" "<Plug>(leap-backward-till)" {:mode [:n :x :o]})
+                 (key "gs" "<Plug>(leap-cross-window)" {:mode [:n :x :o]})]})
+
    ; ggandor/flit.nvim is cool, but clever-f is a lot more mature and better tested.
    (pack :rhysd/clever-f.vim
          {:init (λ []
