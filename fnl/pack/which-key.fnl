@@ -18,14 +18,6 @@
                      "<leader>k" ["[" "unimpared-prev"]}
                     {:noremap false})
 
-;; f to search left ; t to search right
-(each [_ mode (ipairs ["n" "x" "o"])]
-  (which-key.register {"t" ["<Plug>(clever-f-f)" ""]
-                       "f" ["<Plug>(clever-f-F)" ""]
-                       "T" ["<Plug>(clever-f-t)" ""]
-                       "F" ["<Plug>(clever-f-T)" ""]}
-                      {: mode}))
-
 ;; ThePrimeagen/refactoring.nvim
 (fn refactor [x] [(.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
                   x])
