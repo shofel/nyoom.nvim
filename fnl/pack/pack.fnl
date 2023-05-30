@@ -46,10 +46,7 @@
    (pack :gpanders/nvim-parinfer)
    (pack :Olical/conjure {:ft lisp-filetypes
                           :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
-   (pack :guns/vim-sexp {:ft lisp-filetypes
-                         :config (load-file "vim-sexp")})
 
-   ;; Languages
    (pack :fladson/vim-kitty)
    (pack :mbbill/undotree {:cmd :UndotreeToggle})
 
@@ -63,7 +60,7 @@
    (pack :ggandor/leap.nvim
          {:keys [(key "l" "<Plug>(leap-forward-to)"    {:mode [:n :x :o]})
                  (key "h" "<Plug>(leap-backward-to)"   {:mode [:n :x :o]})
-                 (key "9" "<Plug>(leap-forward-till)"  {:mode [:n :x :o]})
+                 (key "L" "<Plug>(leap-forward-till)"  {:mode [:n :x :o]})
                  (key "H" "<Plug>(leap-backward-till)" {:mode [:n :x :o]})
                  (key "gs" "<Plug>(leap-cross-window)" {:mode [:n :x :o]})]})
 
