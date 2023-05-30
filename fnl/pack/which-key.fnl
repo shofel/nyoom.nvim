@@ -3,8 +3,7 @@
 (lambda key [tbl prop] [(. tbl prop) prop])
 
 ;; Suppress probably unused keys.
-(which-key.register {"<C-z>" [:<Nop> "nop"]
-                     "Q"     [:<Nop> "nop"]})
+(which-key.register {"Q"     [:<Nop> "nop"]})
 
 ;;
 (which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
@@ -56,12 +55,13 @@
                                   "i" (refactor "Inline Variable")}}
                     {:mode "n"})
 
-;; buffers
+;; buffers and windows
 (let [{: unshow_in_window} (require "mini.bufremove")]
   (which-key.register {"<leader>b" {:name "buffers"
                                     "o" ["<cmd>only<cr>"      "close others"]
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
-                                    "h" [unshow_in_window     "hide buffer"]}}
+                                    "h" [unshow_in_window     "hide buffer"]
+                                    "c" ["<cmd>close<cr>"     "hide buffer"]}}
                       {:silent true}))
 
 ;; fzf

@@ -16,7 +16,7 @@
             :cmdheight 0})
 
 ;; cmp options
-(set-opt! :completeopt [:menu :menuone :preview :noinsert])
+(set-opt! :completeopt [:menu :menuone :preview :noinsert :noselect])
 
 ;; Use clipboard outside Neovim
 (set-opt! :clipboard :unnamedplus)

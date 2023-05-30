@@ -125,7 +125,9 @@
          {:cmd :Trouble
           :config (call-setup :trouble {:icons false})})
 
-   (pack :akinsho/toggleterm.nvim {:config (load-file "toggleterm")})
+   (pack :akinsho/toggleterm.nvim
+         {:config (load-file "toggleterm")
+          :keys [["<c-z>" "<cmd>ToggleTerm<cr>"]]})
 
    ;; Look
    (pack :catppuccin/nvim {:name "catpuccin"
