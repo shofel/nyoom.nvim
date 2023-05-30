@@ -51,6 +51,7 @@
 
    ;; Languages
    (pack :fladson/vim-kitty)
+   (pack :mbbill/undotree {:cmd :UndotreeToggle})
 
    ;; Pairs
    (pack :windwp/nvim-autopairs {:config (call-setup :nvim-autopairs
