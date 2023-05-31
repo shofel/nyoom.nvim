@@ -70,6 +70,9 @@
                                        "Log"]}}
                     {:silent true})
 
+;; fzf prefix
+(which-key.register {"<leader>f" "fzf"})
+
 ;; document conjure prefixes
 (which-key.register {"<localleader>E" "eval motion"
                      "<localleader>e" "execute"
