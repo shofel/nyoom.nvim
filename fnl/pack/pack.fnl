@@ -51,9 +51,8 @@
    ;; Lisps
    (pack :rktjmp/hotpot.nvim) ;; in sync with init.lua
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:event  "BufReadPre *.\\(fnl\\|clj\\)"
-                          :filetype lisp-filetypes
-                          :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
+   (pack :Olical/conjure {:event "BufReadPre"
+                          :init (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
    (pack :fladson/vim-kitty {:ft "kitty"})
    (pack :mbbill/undotree {:cmd :UndotreeToggle})
@@ -151,11 +150,10 @@
    ;; Autocompletion
    ;; TODO install deps and call start
    (pack :ms-jpq/coq_nvim {:branch "coq"
-                           :dependencies (pack :nvim-lspconfig)
                            :build ":COQdeps"
-                           :config (λ []
-                                      (let [coq (require "coq")]
-                                        (coq.Now "-s")))})
+                           :dependencies (pack :nvim-lspconfig)
+                           :event "InsertEnter"
+                           :config (λ [] (vim.cmd ":COQnow"))})
 
    ;; Trouble
    (pack :folke/trouble.nvim
