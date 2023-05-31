@@ -87,7 +87,25 @@
    (pack :ibhagwan/fzf-lua
          {:branch :main
           :dependencies [(pack :junegunn/fzf {:build ":call fzf#install()"})]
-          :config (call-setup :fzf-lua {:border :single})})
+          :opts {:border "single"}
+          :cmd "FzfLua"
+          :keys (let [_ (λ [lhs method] { 1 lhs
+                                          2 (λ [?opts] ((. (require :fzf-lua) method) ?opts))
+                                          :desc method})]
+                  [(_ "<leader>ff" :git_files)
+                   (_ "<leader>fF" :files {:fd-opts "--no-ignore --hidden"})
+                   (_ "<leader>fs" :git_status)
+                   (_ "<leader>fg" :live_grep)
+                   (_ "<leader>fh" :help_tags)
+                   (_ "<leader>fH" :command_history)
+                   (_ "<leader>fc" :commands)
+                   (_ "<leader>f," :builtin)
+                   (_ "<leader>fk" :keymaps)
+                   (_ "<leader>f." :resume)
+                   (_ "<leader>fw" :grep_cword)
+                   (_ "<leader>fW" :grep_cWORD)
+                   (_ "<leader>/"  :blines)
+                   (_ "<leader>bl" :buffers)])})
 
    ;; Neorg
    (pack :nvim-neorg/neorg
