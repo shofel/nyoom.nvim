@@ -47,7 +47,6 @@
 
    ;; Follow conventions
    (pack "https://tpope.io/vim/sleuth.git")
-   (pack :gpanders/editorconfig.nvim)
 
    ;; Lisps
    (pack :rktjmp/hotpot.nvim) ;; in sync with init.lua
