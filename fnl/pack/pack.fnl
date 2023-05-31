@@ -34,7 +34,9 @@
    (pack "https://tpope.io/vim/eunuch.git")
    (pack "https://tpope.io/vim/repeat.git")
    (pack "https://tpope.io/vim/rsi.git")
-   (pack "https://tpope.io/vim/unimpaired.git")
+   (pack "https://tpope.io/vim/unimpaired.git"
+         {:keys [["["] ["]"]]})
+                 
    (pack "https://tpope.io/vim/fugitive.git"
          {:cmd ["G" "Git"]
           :keys [["<leader>gs" "<cmd>vert Git<cr>" "Fugitive"]
