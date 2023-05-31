@@ -2,9 +2,6 @@
 
 (lambda key [tbl prop] [(. tbl prop) prop])
 
-;; Suppress probably unused keys.
-(which-key.register {"Q"     [:<Nop> "nop"]})
-
 ;;
 (which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
                      "<leader>n" ["<cmd>nohlsearch<cr>" "<c-l>"]})
@@ -19,23 +16,23 @@
                     {:noremap false})
 
 ;; ThePrimeagen/refactoring.nvim
-(fn refactor [x] [(.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
-                  x])
-;
-; Visual mode
-(which-key.register {"<leader>r" {:name "refactoring"
-                                  "f" (refactor "Extract Function")
-                                  "F" (refactor "Extract Function To File")
-                                  "v" (refactor "Extract Variable")
-                                  "i" (refactor "Inline Variable")}}
-                    {:mode "v"})
-;
-; Normal mode
-(which-key.register {"<leader>r" {:name "refactoring"
-                                  "b" (refactor "Extract Block")
-                                  "B" (refactor "Extract Block To File")
-                                  "i" (refactor "Inline Variable")}}
-                    {:mode "n"})
+(let [refactor (λ [x] [ (.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
+                        x])]
+  ;
+  ; Visual mode
+  (which-key.register {"<leader>r" {:name "refactoring"
+                                    "f" (refactor "Extract Function")
+                                    "F" (refactor "Extract Function To File")
+                                    "v" (refactor "Extract Variable")
+                                    "i" (refactor "Inline Variable")}}
+                      {:mode "v"})
+  ;
+  ; Normal mode
+  (which-key.register {"<leader>r" {:name "refactoring"
+                                    "b" (refactor "Extract Block")
+                                    "B" (refactor "Extract Block To File")
+                                    "i" (refactor "Inline Variable")}}
+                      {:mode "n"}))
 
 ;; buffers and windows
 (let [{: unshow_in_window} (require "mini.bufremove")]

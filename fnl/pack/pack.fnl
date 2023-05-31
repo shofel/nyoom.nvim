@@ -27,7 +27,7 @@
 
 (local plugins
   [;; Set and document keymaps
-   (pack :folke/which-key.nvim {:config (call-setup :which-key)})
+   (pack :folke/which-key.nvim {:event "VeryLazy" :config (call-setup :which-key)})
 
    ;; Tim Pope
    (pack "https://tpope.io/vim/dispatch.git")
@@ -133,8 +133,8 @@
           :dependencies [(pack :nvim-treesitter/playground
                                {:cmd :TSPlayground
                                 :keys [(key "<Leader>tp" "<cmd>TSPlayground<cr>")
-                                       (key "<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>")]
-                                })
+                                       (key "<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>")]})
+                                
                          (pack :nvim-treesitter/nvim-treesitter-refactor)
                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
                          (pack :RRethy/nvim-treesitter-textsubjects)
