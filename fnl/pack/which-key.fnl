@@ -7,7 +7,7 @@
 
 ;;
 (which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
-                     "<leader>n" ["<cmd>nohlsearch<cr>" "nohlsearch"]})
+                     "<leader>n" ["<cmd>nohlsearch<cr>" "<c-l>"]})
 
 ;; A handier unimpared
 (which-key.register {"[d" (key vim.diagnostic :goto_prev)
