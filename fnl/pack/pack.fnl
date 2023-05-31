@@ -51,7 +51,8 @@
    ;; Lisps
    (pack :rktjmp/hotpot.nvim) ;; in sync with init.lua
    (pack :gpanders/nvim-parinfer)
-   (pack :Olical/conjure {:ft lisp-filetypes
+   (pack :Olical/conjure {:event  "BufReadPre *.\\(fnl\\|clj\\)"
+                          :filetype lisp-filetypes
                           :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
    (pack :fladson/vim-kitty {:ft "kitty"})
