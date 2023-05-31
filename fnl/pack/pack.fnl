@@ -30,8 +30,7 @@
    (pack :folke/which-key.nvim {:event "VeryLazy" :config (call-setup :which-key)})
 
    ;; Tim Pope
-   (pack "https://tpope.io/vim/dispatch.git")
-   (pack "https://tpope.io/vim/eunuch.git")
+   (pack "https://tpope.io/vim/eunuch.git" {:cmd "MkDir"})
    (pack "https://tpope.io/vim/repeat.git")
    (pack "https://tpope.io/vim/rsi.git")
    (pack "https://tpope.io/vim/unimpaired.git"
@@ -116,24 +115,23 @@
 
    ;; Neorg
    (pack :nvim-neorg/neorg
-         {:build ":Neorg sync-parsers"
-          :config (call-setup :neorg {:load {:core.defaults {}
-                                             :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
-                                                                                           :gtd "~/10-19-Computer/15-GTD"}}}}})
-                                             ; :core.gtd.base {:config {:workspace :gtd}}}})
+         {:ft "norg"
+          :build ":Neorg sync-parsers"
+          :opts {:load {:core.defaults {}
+                        :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
+                                                            :gtd "~/10-19-Computer/15-GTD"}}}}}
           :dependencies [(pack :nvim-lua/plenary.nvim)
-                         (pack :nvim-treesitter)]})
+                         (pack :nvim-treesitter/nvim-treesitter)]})
 
    ;; Treesitter
    (pack :nvim-treesitter/nvim-treesitter
-         {:config (load-file "treesitter")
+         {:event "VeryLazy"
+          :config (load-file "treesitter")
           :build ":TSUpdate"
-          :keys []
           :dependencies [(pack :nvim-treesitter/playground
                                {:cmd :TSPlayground
                                 :keys [(key "<Leader>tp" "<cmd>TSPlayground<cr>")
                                        (key "<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>")]})
-                                
                          (pack :nvim-treesitter/nvim-treesitter-refactor)
                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
                          (pack :RRethy/nvim-treesitter-textsubjects)
@@ -143,7 +141,8 @@
 
    ;; LSP
    (pack :neovim/nvim-lspconfig
-         {:config (load-file "lsp")
+         {:event "VeryLazy"
+          :config (load-file "lsp")
           :dependencies [(pack :j-hui/fidget.nvim
                                {:config (call-setup :fidget)})]})
 
@@ -180,7 +179,8 @@
                                                                                      :style ["bold"]}}}))
                                       (vim.cmd "colorscheme catppuccin-frappe"))})
 
-   (pack :folke/noice.nvim {:dependencies [(pack :rcarriga/nvim-notify)
+   (pack :folke/noice.nvim {:event "VeryLazy"
+                            :dependencies [(pack :rcarriga/nvim-notify)
                                            (pack :MunifTanjim/nui.nvim)]
                             :config (call-setup :noice
                                                 {; override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -195,7 +195,8 @@
                                                            :lsp_doc_border false}})}) ; add a border to hover docs and signature help
 
    (pack :rcarriga/nvim-notify
-         {:config
+         {:events "VeryLazy"
+          :config
            (λ []
               (set vim.notify (require :notify))
               ((call-setup "notify" {:stages :fade_in_slide_out
@@ -242,7 +243,8 @@
 
    ;; Folds
    (pack :kevinhwang91/nvim-ufo
-         {:dependencies [(pack :kevinhwang91/promise-async)]
+         {:event "BufRead"
+          :dependencies [(pack :kevinhwang91/promise-async)]
           :opts {:provider_selector (λ [bufnr filetype buftype]
                                       ["treesitter" "indent"])}})
 
@@ -251,7 +253,8 @@
           :config (λ [] (set vim.g.startuptime_tries 10))})
 
    ;; Git
-   (pack :lewis6991/gitsigns.nvim {:config true
+   (pack :lewis6991/gitsigns.nvim {:event "VeryLazy"
+                                   :config true
                                    :dependencies [(pack :nvim-lua/plenary.nvim)]})])
 
 ;; Call `setup` with the plugins described.
