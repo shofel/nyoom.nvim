@@ -248,6 +248,10 @@
           :opts {:provider_selector (λ [bufnr filetype buftype]
                                       ["treesitter" "indent"])}})
 
+   (pack :dstein64/vim-startuptime
+         {:cmd "StartupTime"
+          :config (λ [] (set vim.g.startuptime_tries 10))})
+
    ;; Git
    (pack :lewis6991/gitsigns.nvim {:config true
                                    :dependencies [(pack :nvim-lua/plenary.nvim)]})])
