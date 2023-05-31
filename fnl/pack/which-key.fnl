@@ -93,15 +93,5 @@
                        "gD" (key vim.lsp.buf :declaration)}
                       {:buffer bufnr}))
 
-;; treesitter
-(which-key.register {"<Leader>th" ["<cmd>TSHighlightCapturesUnderCursor<cr>"
-                                   "TS highlight captures"]})
-
-(which-key.register {"<Leader>tp" ["<cmd>TSPlayground<cr>"
-                                   "TSPlayground"]})
-
-;; truezen:n
-(which-key.register {"<leader>tz" ["<cmd>TZAtaraxis<cr>" "truezen"]})
-
 ;; export
 {: set-lsp-keys!}

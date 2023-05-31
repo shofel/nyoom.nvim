@@ -36,7 +36,7 @@
    (pack "https://tpope.io/vim/rsi.git")
    (pack "https://tpope.io/vim/unimpaired.git"
          {:keys [["["] ["]"]]})
-                 
+
    (pack "https://tpope.io/vim/fugitive.git"
          {:cmd ["G" "Git"]
           :keys [["<leader>gs" "<cmd>vert Git<cr>" "Fugitive"]
@@ -129,7 +129,12 @@
    (pack :nvim-treesitter/nvim-treesitter
          {:config (load-file "treesitter")
           :build ":TSUpdate"
-          :dependencies [(pack :nvim-treesitter/playground {:cmd :TSPlayground})
+          :keys []
+          :dependencies [(pack :nvim-treesitter/playground
+                               {:cmd :TSPlayground
+                                :keys [(key "<Leader>tp" "<cmd>TSPlayground<cr>")
+                                       (key "<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>")]
+                                })
                          (pack :nvim-treesitter/nvim-treesitter-refactor)
                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
                          (pack :RRethy/nvim-treesitter-textsubjects)
@@ -205,6 +210,7 @@
 
    (pack :Pocco81/TrueZen.nvim
          {:cmd     "TZAtaraxis"
+          :keys [(key "<leader>tz" "<cmd>TZAtaraxis<cr>" {:desc "truezen"})]
           :config (call-setup :true-zen
                               {:ui {:bottom {:cmdheight 0
                                               :laststatus 0
