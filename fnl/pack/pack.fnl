@@ -35,7 +35,13 @@
    (pack "https://tpope.io/vim/repeat.git")
    (pack "https://tpope.io/vim/rsi.git")
    (pack "https://tpope.io/vim/unimpaired.git")
-   (pack "https://tpope.io/vim/fugitive.git")
+   (pack "https://tpope.io/vim/fugitive.git"
+         {:cmd ["G" "Git"]
+          :keys [["<leader>gs" "<cmd>vert Git<cr>" "Fugitive"]
+                 ["<leader>ga" "<cmd>Gwrite<cr>"   "Stage file"]
+                 ["<leader>gp" "<cmd>G push<cr>"   "Push"]
+                 ["<leader>gP" "<cmd>G push --force-with-lease<cr>" "Push force"]
+                 ["<leader>gm" "<cmd>GitMessenger<cr>" "GitMessenger"]]})
 
    ;; Follow conventions
    (pack "https://tpope.io/vim/sleuth.git")

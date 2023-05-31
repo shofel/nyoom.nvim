@@ -47,31 +47,10 @@
                       {:silent true}))
 
 ;; git
-(which-key.register {"<leader>g" {:name "git"
-                                  "s" ["<cmd>vert Git<cr>"
-                                       "Fugitive"]
-
-                                  "a" ["<cmd>Gwrite<cr>"
-                                       "Stage file"]
-
-                                  "p" ["<cmd>G push<cr>"
-                                       "Push"]
-
-                                  "P" ["<cmd>G push --force-with-lease<cr>"
-                                       "Push force"]
-
-                                  "m" ["<cmd>GitMessenger<cr>"
-                                       "GitMessenger"]
-
-                                  "V" ["<cmd>GV!<cr>"
-                                       "GV"]
-
-                                  "v" ["<cmd>TermExec cmd=\"glog; exit\"<cr>"
-                                       "Log"]}}
-                    {:silent true})
+(which-key.register {"<leader>g" {:name "git"}})
 
 ;; fzf prefix
-(which-key.register {"<leader>f" "fzf"})
+(which-key.register {"<leader>f" {:name "fzf"}})
 
 ;; document conjure prefixes
 (which-key.register {"<localleader>E" "eval motion"
