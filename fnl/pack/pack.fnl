@@ -55,7 +55,7 @@
    (pack :Olical/conjure {:ft lisp-filetypes
                           :config (tset vim.g "conjure#extract#tree_sitter#enabled" true)})
 
-   (pack :fladson/vim-kitty)
+   (pack :fladson/vim-kitty {:ft "kitty"})
    (pack :mbbill/undotree {:cmd :UndotreeToggle})
 
    ;; Pairs
@@ -239,12 +239,11 @@
    ;; Folds
    (pack :kevinhwang91/nvim-ufo
          {:dependencies [(pack :kevinhwang91/promise-async)]
-          :config (call-setup :ufo {:provider_selector
-                                    (λ [bufnr filetype buftype]
-                                       ["treesitter" "indent"])})})
+          :opts {:provider_selector (λ [bufnr filetype buftype]
+                                      ["treesitter" "indent"])}})
 
    ;; Git
-   (pack :lewis6991/gitsigns.nvim {:config (call-setup :gitsigns)
+   (pack :lewis6991/gitsigns.nvim {:config true
                                    :dependencies [(pack :nvim-lua/plenary.nvim)]})])
 
 ;; Call `setup` with the plugins described.
