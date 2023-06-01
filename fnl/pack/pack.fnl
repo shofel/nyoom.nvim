@@ -117,17 +117,17 @@
    {:url "nvim-treesitter/nvim-treesitter"
     :config (load-file "treesitter")
     :build ":TSUpdate"
-    :dependencies {:url "nvim-treesitter/playground"
-                   :cmd :TSPlayground
-                   :keys [["<Leader>tp" "<cmd>TSPlayground<cr>"]
-                          ["<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>"]]
+    :dependencies [{:url "nvim-treesitter/playground"
+                    :cmd :TSPlayground
+                    :keys [["<Leader>tp" "<cmd>TSPlayground<cr>"]
+                           ["<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>"]]}
                    ["nvim-treesitter/nvim-treesitter-refactor"]
                    ["nvim-treesitter/nvim-treesitter-textobjects"]
                    ["RRethy/nvim-treesitter-textsubjects"]
                    ["RRethy/nvim-treesitter-endwise"]
                    {:url "ThePrimeagen/refactoring.nvim"
                     :keys [{1 "<leader>r" :modes ["n" "x"]}]}
-                   {:url "simrat39/symbols-outline.nvim" :config true}}}
+                   {:url "simrat39/symbols-outline.nvim" :config true}]}
 
    ;; LSP
    {:url "neovim/nvim-lspconfig"
