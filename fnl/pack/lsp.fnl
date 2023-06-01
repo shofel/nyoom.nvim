@@ -60,4 +60,6 @@
 (lsp.terraformls.setup defaults)
 (lsp.tsserver.setup defaults)
 (lsp.vimls.setup defaults)
-(lsp.yamlls.setup defaults)
+(lsp.yamlls.setup {: on_attach
+                   : capabilities
+                   :settings {:yaml {:keyOrdering false}}})
