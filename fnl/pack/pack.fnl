@@ -30,7 +30,7 @@
    (pack :folke/which-key.nvim {:event "VeryLazy" :config (call-setup :which-key)})
 
    ;; Tim Pope
-   (pack "https://tpope.io/vim/eunuch.git" {:cmd "MkDir"})
+   (pack "https://tpope.io/vim/eunuch.git" {:cmd ["MkDir" "Chmod"]})
    (pack "https://tpope.io/vim/repeat.git")
    (pack "https://tpope.io/vim/rsi.git")
    (pack "https://tpope.io/vim/unimpaired.git"
@@ -136,7 +136,8 @@
                          (pack :nvim-treesitter/nvim-treesitter-textobjects)
                          (pack :RRethy/nvim-treesitter-textsubjects)
                          (pack "RRethy/nvim-treesitter-endwise")
-                         (pack "ThePrimeagen/refactoring.nvim")
+                         (pack "ThePrimeagen/refactoring.nvim"
+                               {:keys [{1 "<leader>r" :modes ["n" "x"]}]})
                          (pack "simrat39/symbols-outline.nvim" {:config (call-setup :symbols-outline)})]})
 
    ;; LSP
@@ -147,12 +148,11 @@
                                {:config (call-setup :fidget)})]})
 
    ;; Autocompletion
-   ;; TODO install deps and call start
    (pack :ms-jpq/coq_nvim {:branch "coq"
                            :build ":COQdeps"
                            :dependencies (pack :nvim-lspconfig)
                            :event "InsertEnter"
-                           :config (λ [] (vim.cmd ":COQnow"))})
+                           :config (λ [] (vim.cmd ":COQnow -s"))})
 
    ;; Trouble
    (pack :folke/trouble.nvim
