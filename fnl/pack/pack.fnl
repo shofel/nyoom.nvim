@@ -52,12 +52,12 @@
 
    ;; Motion
    {:url "ggandor/leap.nvim"
-    ; TODO a helper for fancier key spec
-    :keys [{1 "l" 2 "<Plug>(leap-forward-to)"    :mode [:n :x :o]}
-           {1 "h" 2 "<Plug>(leap-backward-to)"   :mode [:n :x :o]}
-           {1 "L" 2 "<Plug>(leap-forward-till)"  :mode [:n :x :o]}
-           {1 "H" 2 "<Plug>(leap-backward-till)" :mode [:n :x :o]}
-           {1 "gs"2  "<Plug>(leap-cross-window)" :mode [:n :x :o]}]}
+    :keys (let [_ #{1 $1 2 $2 :mode [:n :x :o]}]
+            [(_ "l" "<Plug>(leap-forward-to)")
+             (_ "h" "<Plug>(leap-backward-to)")
+             (_ "L" "<Plug>(leap-forward-till)")
+             (_ "H" "<Plug>(leap-backward-till)")
+             (_ "gs" "<Plug>(leap-cross-window)")])}
 
    {:url "ggandor/flit.nvim"
     :opts {:keys {:f "t" :t "T" ; forward
