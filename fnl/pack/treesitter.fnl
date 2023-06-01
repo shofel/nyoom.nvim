@@ -27,12 +27,12 @@
                                           :list_definitions_toc "gO"
                                           :goto_next_usage "<M-8>" ; like *, which is <S-8>
                                           :goto_previous_usage "<M-3>"}}}
-        :textobjects {:select {:enable true}
-                      :lookahead true
-                      :keymaps {:af "@function.outer"
-                                :if "@function.inner"
-                                :ac "@class.outer"
-                                :ic "@class.inner"}
+        :textobjects {:select {:enable true
+                               :lookahead true
+                               :keymaps {:af "@function.outer"
+                                         :if "@function.inner"
+                                         :ac "@class.outer"
+                                         :ic "@class.inner"}}
                       :move {:enable true
                              :set_jumps true
                              :goto_next_start {"]m" "@function.outer"
