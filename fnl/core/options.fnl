@@ -1,10 +1,10 @@
 (local {: set-opt! : set-opts!} (require :utils.options))
 
-;; set leader keys
+;; Leader keys
 (set vim.g.mapleader " ")
 (set vim.g.maplocalleader ",")
 
-;; shell
+;; Shell
 (set-opt! :shell "fish")
 
 ;;; Global options
@@ -15,7 +15,7 @@
             :inccommand "nosplit"
             :cmdheight 0})
 
-;; cmp options
+;; Wildmenu
 (set-opt! :completeopt [:menu :menuone :preview :noinsert :noselect])
 
 ;; Use clipboard outside Neovim
@@ -72,7 +72,6 @@
 (set-opts! {:copyindent true
             :smartindent true
             :preserveindent true
-            ; numbers
             :tabstop 2
             :shiftwidth 2
             :softtabstop 2

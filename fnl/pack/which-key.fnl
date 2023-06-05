@@ -2,9 +2,12 @@
 
 (lambda key [tbl prop] [(. tbl prop) prop])
 
-;;
-(which-key.register {"<leader>s" ["<cmd>w<cr>"          "Save file"]
-                     "<leader>n" ["<cmd>nohlsearch<cr>" "<c-l>"]})
+;; Without prefix
+(let [maps [["<leader>s" "<cmd>w<cr>"]
+            ["<leader>n" "<cmd>nohlsearch<cr>"]
+            ["<leader>e" ":"]]]
+  (icollect [i [lhs rhs] (ipairs maps)]
+    (vim.keymap.set :n lhs rhs)))
 
 ;; A handier unimpared
 (which-key.register {"[d" (key vim.diagnostic :goto_prev)
@@ -40,8 +43,7 @@
                                     "o" ["<cmd>only<cr>"      "close others"]
                                     "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
                                     "h" [unshow_in_window     "hide buffer"]
-                                    "c" ["<cmd>close<cr>"     "hide buffer"]}}
-                      {:silent true}))
+                                    "c" ["<cmd>close<cr>"     "close buffer"]}}))
 
 ;; git
 (which-key.register {"<leader>g" {:name "git"}})
