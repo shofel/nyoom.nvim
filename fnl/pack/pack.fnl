@@ -79,7 +79,7 @@
 
    ;; Statusline
    {:url (gh "nvim-lualine/lualine.nvim")
-    :config (load-file "lualine")}
+    :opts (load-file "lualine_opts")}
 
    ;; Fzf
    {:url (gh "ibhagwan/fzf-lua")
