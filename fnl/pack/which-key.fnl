@@ -18,25 +18,6 @@
               "<leader>k" ["[" "unimpared-prev"]}
              {:noremap false})
 
-;; ThePrimeagen/refactoring.nvim
-(let [refactor (λ [x] [ (.. "<Esc><Cmd>lua require('refactoring').refactor('" x "')<CR>")
-                        x])]
-  ;
-  ; Visual mode
-  (wk.register {"<leader>r" {:name "refactoring"
-                             "f" (refactor "Extract Function")
-                             "F" (refactor "Extract Function To File")
-                             "v" (refactor "Extract Variable")
-                             "i" (refactor "Inline Variable")}}
-               {:mode "v"})
-  ;
-  ; Normal mode
-  (wk.register {"<leader>r" {:name "refactoring"
-                             "b" (refactor "Extract Block")
-                             "B" (refactor "Extract Block To File")
-                             "i" (refactor "Inline Variable")}}
-               {:mode "n"}))
-
 ;; buffers and windows
 (let [{: unshow_in_window} (require "mini.bufremove")]
   (wk.register {"<leader>b" {:name "buffers"

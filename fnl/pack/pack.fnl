@@ -125,8 +125,6 @@
                    ["nvim-treesitter/nvim-treesitter-textobjects"]
                    ["RRethy/nvim-treesitter-textsubjects"]
                    ["RRethy/nvim-treesitter-endwise"]
-                   {:url "ThePrimeagen/refactoring.nvim"
-                    :keys [{1 "<leader>r" :modes ["n" "x"]}]}
                    {:url "simrat39/symbols-outline.nvim" :config true}]}
 
    ;; LSP
