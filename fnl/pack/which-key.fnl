@@ -29,9 +29,6 @@
 ;; git
 (wk.register {"<leader>g" {:name "git"}})
 
-;; fzf prefix
-(wk.register {"<leader>f" {:name "fzf"}})
-
 ;; document conjure prefixes
 (wk.register {"<localleader>E" "eval motion"
               "<localleader>e" "execute"

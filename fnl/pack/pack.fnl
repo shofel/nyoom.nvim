@@ -10,19 +10,21 @@
   "To config a plugin: load a file from pack/ folder."
   `#(require ,(.. "pack." name)))
 
+(λ gh [x] (.. "https://github.com/" x ".git"))
+
 ;; Describe plugins.
 
 (local lisp-filetypes ["fennel" "clojure" "lisp" "racket" "scheme"])
 
 (local plugins
   [;; Set and document keymaps
-   {:url "folke/which-key.nvim" :config true}
+   {:url (gh "folke/which-key.nvim") :config true}
 
    ;; Tim Pope
-   ["https://tpope.io/vim/eunuch.git"]
-   ["https://tpope.io/vim/repeat.git"]
-   ["https://tpope.io/vim/rsi.git"]
-   ["https://tpope.io/vim/unimpaired.git"]
+   {:url "https://tpope.io/vim/eunuch.git"}
+   {:url "https://tpope.io/vim/repeat.git"}
+   {:url "https://tpope.io/vim/rsi.git"}
+   {:url "https://tpope.io/vim/unimpaired.git"}
 
    {:url "https://tpope.io/vim/fugitive.git"
     :cmd ["G" "Git"]
@@ -36,22 +38,22 @@
    ["https://tpope.io/vim/sleuth.git"]
 
    ;; Lisps
-   ["rktjmp/hotpot.nvim"] ;; in sync with init.lua
-   ["gpanders/nvim-parinfer"]
-   {:url "Olical/conjure"
+   {:url (gh "rktjmp/hotpot.nvim")} ;; in sync with init.lua
+   {:url (gh "gpanders/nvim-parinfer")}
+   {:url (gh "Olical/conjure")
     :event ["BufReadPre *.fnl" "BufReadPre *.clj"]
     :init (tset vim.g "conjure#extract#tree_sitter#enabled" true)}
 
-   {:url "fladson/vim-kitty" :ft "kitty"}
+   {:url (gh "fladson/vim-kitty" ):ft "kitty"}
    [:mbbill/undotree]
 
    ;; Pairs
-   {:url "windwp/nvim-autopairs" :opts {:disable_filetype lisp-filetypes}}
+   {:url (gh "windwp/nvim-autopairs" ):opts {:disable_filetype lisp-filetypes}}
 
-   ["tommcdo/vim-exchange"]
+   [(gh "tommcdo/vim-exchange")]
 
    ;; Motion
-   {:url "ggandor/leap.nvim"
+   {:url (gh "ggandor/leap.nvim")
     :keys (let [_ #{1 $1 2 $2 :mode [:n :x :o]}]
             [(_ "l" "<Plug>(leap-forward-to)")
              (_ "h" "<Plug>(leap-backward-to)")
@@ -59,11 +61,11 @@
              (_ "H" "<Plug>(leap-backward-till)")
              (_ "gs" "<Plug>(leap-cross-window)")])}
 
-   {:url "ggandor/flit.nvim"
+   {:url (gh "ggandor/flit.nvim")
     :opts {:keys {:f "t" :t "T" ; forward
                   :F "f" :T "F"}}}
 
-   {:url "echasnovski/mini.nvim"
+   {:url (gh "echasnovski/mini.nvim")
     :config (λ []
                ((call-setup "mini.surround" {:mappings {:add "sa"
                                                         :delete "sd"
@@ -76,65 +78,71 @@
                ((call-setup "mini.comment")))}
 
    ;; Statusline
-   {:url "nvim-lualine/lualine.nvim"
+   {:url (gh "nvim-lualine/lualine.nvim")
     :config (load-file "lualine")}
 
    ;; Fzf
-   {:url "ibhagwan/fzf-lua"
+   {:url (gh "ibhagwan/fzf-lua")
     :branch :main
-    :dependencies {:url "junegunn/fzf" :build ":call fzf#install()"}
     :opts {:border "single"}
     :cmd "FzfLua"
-    :keys (let [_ (λ [lhs method] { 1 lhs
-                                    2 (λ [?opts] ((. (require :fzf-lua) method) ?opts))
-                                    :desc method})]
-            [(_ "<leader>ff" :git_files)
-             (_ "<leader>fF" :files {:fd-opts "--no-ignore --hidden"})
-             (_ "<leader>fs" :git_status)
-             (_ "<leader>fg" :live_grep)
-             (_ "<leader>fh" :help_tags)
-             (_ "<leader>fH" :command_history)
-             (_ "<leader>fc" :commands)
-             (_ "<leader>f," :builtin)
-             (_ "<leader>fk" :keymaps)
-             (_ "<leader>f." :resume)
-             (_ "<leader>fw" :grep_cword)
-             (_ "<leader>fW" :grep_cWORD)
-             (_ "<leader>/"  :blines)
-             (_ "<leader>bl" :buffers)])}
+    :keys [["<leader>f"]]
+    :dependencies [{:url (gh "junegunn/fzf") :build ":call fzf#install()"}
+                   {:url (gh "folke/which-key.nvim")
+                    :config #(let [wk (require "which-key")
+                                   fzf (λ [method ?opts]
+                                          [#((. (require "fzf-lua") method) ?opts)
+                                           method])
+                                   keys {:name "fzf"
+                                         "f" (fzf :git_files)
+                                         "F" (fzf :files {:fd-opts "--no-ignore --hidden"})
+                                         "s" (fzf :git_status)
+                                         "g" (fzf :live_grep)
+                                         "h" (fzf :help_tags)
+                                         "H" (fzf :command_history)
+                                         "c" (fzf :commands)
+                                         "," (fzf :builtin)
+                                         "k" (fzf :keymaps)
+                                         "." (fzf :resume)
+                                         "w" (fzf :grep_cword)
+                                         "W" (fzf :grep_cWORD)
+                                         "/" (fzf :lines)
+                                         "l" (fzf :buffers)}]
+                               (wk.register {"<leader>f" keys
+                                             "<leader>/" (fzf :blines)}))}]}
 
    ;; Neorg
-   {:url "nvim-neorg/neorg"
+   {:url (gh "nvim-neorg/neorg")
     :ft "norg"
     :build ":Neorg sync-parsers"
     :opts {:load {:core.defaults {}
                   :core.dirman {:config {:workspaces {:knowledge "~/10-19-Computer/14-Notes"
                                                       :gtd "~/10-19-Computer/15-GTD"}}}}}
-    :dependencies [{:url "nvim-lua/plenary.nvim"}
-                   {:url "nvim-treesitter/nvim-treesitter"}]}
+    :dependencies [{:url (gh "nvim-lua/plenary.nvim")}
+                   {:url (gh "nvim-treesitter/nvim-treesitter")}]}
 
    ;; Treesitter
-   {:url "nvim-treesitter/nvim-treesitter"
+   {:url (gh "nvim-treesitter/nvim-treesitter")
     :config (load-file "treesitter")
     :build ":TSUpdate"
-    :dependencies [{:url "nvim-treesitter/playground"
+    :dependencies [{:url (gh "nvim-treesitter/playground")
                     :cmd :TSPlayground
                     :keys [["<Leader>tp" "<cmd>TSPlayground<cr>"]
                            ["<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>"]]}
-                   ["nvim-treesitter/nvim-treesitter-refactor"]
-                   ["nvim-treesitter/nvim-treesitter-textobjects"]
-                   ["RRethy/nvim-treesitter-textsubjects"]
-                   ["RRethy/nvim-treesitter-endwise"]
-                   {:url "simrat39/symbols-outline.nvim" :config true}]}
+                   {:url (gh "nvim-treesitter/nvim-treesitter-refactor")}
+                   {:url (gh "nvim-treesitter/nvim-treesitter-textobjects")}
+                   {:url (gh "RRethy/nvim-treesitter-textsubjects")}
+                   {:url (gh "RRethy/nvim-treesitter-endwise")}
+                   {:url (gh "simrat39/symbols-outline.nvim") :config true}]}
 
    ;; LSP
-   {:url "neovim/nvim-lspconfig"
+   {:url (gh "neovim/nvim-lspconfig")
     :config (load-file "lsp")
-    :dependencies {:url "j-hui/fidget.nvim"
+    :dependencies {:url (gh "j-hui/fidget.nvim")
                    :config true}}
 
    ;; Autocompletion
-   {:url "ms-jpq/coq_nvim"
+   {:url (gh "ms-jpq/coq_nvim")
     :branch "coq"
     :build ":COQdeps"
     :dependencies ["nvim-lspconfig"]
@@ -142,11 +150,11 @@
     :config (λ [] (vim.cmd ":COQnow -s"))}
 
    ;; Trouble
-   {:url "folke/trouble.nvim"
+   {:url (gh "folke/trouble.nvim")
     :cmd "Trouble"
     :opts {:icons false}}
 
-   {:url "akinsho/toggleterm.nvim"
+   {:url (gh "akinsho/toggleterm.nvim")
     :opts {:direction "float"
            :float_opts {:width vim.o.columns
                         :height vim.o.lines}}
@@ -156,7 +164,7 @@
            ["<leader>ts" "<cmd>2ToggleTerm<cr>"]]}
 
    ;; Look
-   {:url "catppuccin/nvim"
+   {:url (gh "catppuccin/nvim")
     :name "catpuccin"
     :lazy false
     :priority 1000
@@ -167,10 +175,10 @@
                                                               :style ["bold"]}}}))
                (vim.cmd "colorscheme catppuccin-frappe"))}
 
-   {:url "folke/noice.nvim"
+   {:url (gh "folke/noice.nvim")
     :lazy false
-    :dependencies [{:url "rcarriga/nvim-notify"}
-                   {:url "MunifTanjim/nui.nvim"}]
+    :dependencies [{:url (gh "rcarriga/nvim-notify")}
+                   {:url (gh "MunifTanjim/nui.nvim")}]
     :opts {; override markdown rendering so that **cmp** and other plugins use **Treesitter**
            :lsp {:override {:vim.lsp.util.convert_input_to_markdown_lines true
                             :vim.lsp.util.stylize_markdown true
@@ -182,7 +190,7 @@
                      :inc_rename false ; enables an input dialog for inc-rename.nvim
                      :lsp_doc_border false}}} ; add a border to hover docs and signature help
 
-   {:url "rcarriga/nvim-notify"
+   {:url (gh "rcarriga/nvim-notify")
     :config (λ []
                (set vim.notify (require :notify))
                ((call-setup "notify" {:stages :fade_in_slide_out
@@ -193,7 +201,7 @@
                                               :DEBUG ""
                                                :TRACE "✎"}})))}
 
-   {:url "Pocco81/TrueZen.nvim"
+   {:url (gh "Pocco81/TrueZen.nvim")
     :cmd     "TZAtaraxis"
     :keys [["<leader>tz" "<cmd>TZAtaraxis<cr>"]]
     :opts {:ui {:bottom {:cmdheight 0
@@ -215,7 +223,7 @@
                            :focus_method :experimental}}}}
 
 
-   {:url "norcalli/nvim-colorizer.lua"
+   {:url (gh "norcalli/nvim-colorizer.lua")
     :event [:BufRead :BufNewFile]
     :config (call-setup "colorizer" ["*"] {:RGB true
                                            :RRGGBB true
@@ -226,20 +234,20 @@
                                            :mode :foreground})}
 
    ;; Folds
-   {:url "kevinhwang91/nvim-ufo"
+   {:url (gh "kevinhwang91/nvim-ufo")
     :event "BufRead"
     :dependencies [["kevinhwang91/promise-async"]]
     :opts {:provider_selector (λ [bufnr filetype buftype]
                                  ["treesitter" "indent"])}}
 
-   {:url "dstein64/vim-startuptime"
+   {:url (gh "dstein64/vim-startuptime")
     :cmd "StartupTime"
     :config (λ [] (set vim.g.startuptime_tries 10))}
 
    ;; Git
-   {:url "lewis6991/gitsigns.nvim"
+   {:url (gh "lewis6991/gitsigns.nvim")
     :config true
-    :dependencies [{:url "nvim-lua/plenary.nvim"}]}])
+    :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]}])
 
 ;; Call `setup` with the plugins described.
 (let [lazy (require :lazy)]
