@@ -2,20 +2,18 @@
 
 (lambda key [tbl prop] [(. tbl prop) prop])
 
-;; Without prefix
-(let [maps [["<leader>s" "<cmd>w<cr>"]
-            ["<leader>n" "<cmd>nohlsearch<cr>"]
-            ["<leader>e" ":"]]]
-  (icollect [i [lhs rhs] (ipairs maps)]
-    (vim.keymap.set :n lhs rhs)))
+;; Root leader keys
+(wk.register {"<leader>" {:s ["<cmd>w<cr>" "Write buffer"]
+                          :n ["<cmd>nohlsearch<cr>" "Clear search"]
+                          :e [":" ":"]}})
 
 ;; A handier unimpared
 (wk.register {"[d" (key vim.diagnostic :goto_prev)
               "]d" (key vim.diagnostic :goto_next)
               "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
               "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]
-              "<leader>j" ["]" "unimpared-next"]
-              "<leader>k" ["[" "unimpared-prev"]}
+              "<leader>j" ["]" "Unimpared next"]
+              "<leader>k" ["[" "Unimpared prev"]}
              {:noremap false})
 
 ;; buffers and windows
