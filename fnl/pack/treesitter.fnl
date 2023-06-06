@@ -9,6 +9,19 @@
    (let [{: setup} (require :nvim-treesitter.configs)]
      (setup opts)))
 
+(λ gh [x] (.. "https://github.com/" x ".git"))
+
+(local dependencies
+       [{:url (gh "nvim-treesitter/playground")
+         :cmd :TSPlayground
+         :keys [["<Leader>tp" "<cmd>TSPlayground<cr>"]
+                ["<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>"]]}
+        {:url (gh "nvim-treesitter/nvim-treesitter-refactor")}
+        {:url (gh "nvim-treesitter/nvim-treesitter-textobjects")}
+        {:url (gh "RRethy/nvim-treesitter-textsubjects")}
+        {:url (gh "RRethy/nvim-treesitter-endwise")}
+        {:url (gh "simrat39/symbols-outline.nvim") :config true}])
+
 (local opts {:ensure_installed ["javascript" "typescript" "html" "scss" "css" "json" "json5" "jsdoc" "vue"
                                 "bash" "fish" "git_config" "git_rebase"
                                 "markdown" "markdown_inline" 
@@ -49,19 +62,10 @@
 
 
 
-(λ gh [x] (.. "https://github.com/" x ".git"))
-
 {:url (gh "nvim-treesitter/nvim-treesitter")
+ : dependencies
  :config (λ []
-           (install-gcc)
            (setup-treesitter opts))
- :build ":TSUpdate"
- :dependencies [{:url (gh "nvim-treesitter/playground")
-                 :cmd :TSPlayground
-                 :keys [["<Leader>tp" "<cmd>TSPlayground<cr>"]
-                        ["<Leader>th" "<cmd>TSHighlightCapturesUnderCursor<cr>"]]}
-                {:url (gh "nvim-treesitter/nvim-treesitter-refactor")}
-                {:url (gh "nvim-treesitter/nvim-treesitter-textobjects")}
-                {:url (gh "RRethy/nvim-treesitter-textsubjects")}
-                {:url (gh "RRethy/nvim-treesitter-endwise")}
-                {:url (gh "simrat39/symbols-outline.nvim") :config true}]}
+ :build (λ []
+          (install-gcc)
+          (vim.cmd ":TSUpdate"))}
