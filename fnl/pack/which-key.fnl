@@ -27,13 +27,6 @@
 ;; git
 (wk.register {"<leader>g" {:name "git"}})
 
-;; document conjure prefixes
-(wk.register {"<localleader>E" "eval motion"
-              "<localleader>e" "execute"
-              "<localleader>l" "log"
-              "<localleader>r" "reset"
-              "<localleader>t" "test"})
-
 (local list-workspace-folders
        [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
         "list workspace folders"])

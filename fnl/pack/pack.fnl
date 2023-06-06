@@ -42,7 +42,13 @@
    {:url (gh "gpanders/nvim-parinfer")}
    {:url (gh "Olical/conjure")
     :event ["BufReadPre *.fnl" "BufReadPre *.clj"]
-    :init (tset vim.g "conjure#extract#tree_sitter#enabled" true)}
+    :init (tset vim.g "conjure#extract#tree_sitter#enabled" true)
+    :config #(let [wk (require "which-key")]
+               (wk.register {"<localleader>E" "eval motion"
+                             "<localleader>e" "execute"
+                             "<localleader>l" "log"
+                             "<localleader>r" "reset"
+                             "<localleader>t" "test"}))}
 
    {:url (gh "fladson/vim-kitty" ):ft "kitty"}
    [:mbbill/undotree]
