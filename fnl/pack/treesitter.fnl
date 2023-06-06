@@ -19,8 +19,7 @@
         {:url (gh "nvim-treesitter/nvim-treesitter-refactor")}
         {:url (gh "nvim-treesitter/nvim-treesitter-textobjects")}
         {:url (gh "RRethy/nvim-treesitter-textsubjects")}
-        {:url (gh "RRethy/nvim-treesitter-endwise")}
-        {:url (gh "simrat39/symbols-outline.nvim") :config true}])
+        {:url (gh "RRethy/nvim-treesitter-endwise")}])
 
 (local opts {:ensure_installed ["javascript" "typescript" "html" "scss" "css" "json" "json5" "jsdoc" "vue"
                                 "bash" "fish" "git_config" "git_rebase"
