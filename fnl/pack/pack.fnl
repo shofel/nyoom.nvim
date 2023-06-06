@@ -38,7 +38,7 @@
                             {:noremap false}))}
 
    {:url "https://tpope.io/vim/fugitive.git"
-    :cmd ["G" "Git"]
+    :cmd ["G" "Git" "Gread"]
     :keys [{1 "<leader>g" :desc "git"}]
     :config #(let [wk (require "which-key")]
                (wk.register
