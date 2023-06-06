@@ -22,9 +22,17 @@
 
    ;; Tim Pope
    {:url "https://tpope.io/vim/eunuch.git"}
-   {:url "https://tpope.io/vim/repeat.git"}
    {:url "https://tpope.io/vim/rsi.git"}
-   {:url "https://tpope.io/vim/unimpaired.git"}
+   {:url "https://tpope.io/vim/unimpaired.git"
+    :keys [["["] ["]"] ["<leader>j"] ["<leader>k"]]
+    :config #(let [wk (require "which-key")]
+               (wk.register {"[d" [vim.diagnostic.goto_prev "Previous diagnostic"]
+                             "]d" [vim.diagnostic.goto_next "Next diagnostic"]
+                             "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
+                             "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]
+                             "<leader>j" ["]" "Unimpared next"]
+                             "<leader>k" ["[" "Unimpared prev"]}
+                            {:noremap false}))}
 
    {:url "https://tpope.io/vim/fugitive.git"
     :cmd ["G" "Git"]

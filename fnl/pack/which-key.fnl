@@ -7,15 +7,6 @@
                           :n ["<cmd>nohlsearch<cr>" "Clear search"]
                           :e [":" ":"]}})
 
-;; A handier unimpared
-(wk.register {"[d" (key vim.diagnostic :goto_prev)
-              "]d" (key vim.diagnostic :goto_next)
-              "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
-              "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]
-              "<leader>j" ["]" "Unimpared next"]
-              "<leader>k" ["[" "Unimpared prev"]}
-             {:noremap false})
-
 ;; buffers and windows
 (let [{: unshow_in_window} (require "mini.bufremove")]
   (wk.register {"<leader>b" {:name "buffers"
