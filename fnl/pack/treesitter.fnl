@@ -61,11 +61,11 @@
                                                       "[]" "@class.outer"}}}})
 
 
-
 {:url (gh "nvim-treesitter/nvim-treesitter")
  : dependencies
  :config (λ []
-           (setup-treesitter opts))
+          (install-gcc)
+          (setup-treesitter opts))
  :build (λ []
           (install-gcc)
           (vim.cmd ":TSUpdate"))}

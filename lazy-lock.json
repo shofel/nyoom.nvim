@@ -32,7 +32,6 @@
   "playground": { "branch": "master", "commit": "2b81a018a49f8e476341dfcb228b7b808baba68b" },
   "plenary.nvim": { "branch": "master", "commit": "499e0743cf5e8075cd32af68baa3946a1c76adf1" },
   "promise-async": { "branch": "main", "commit": "e94f35161b8c5d4a4ca3b6ff93dd073eb9214c0e" },
-  "refactoring.nvim": { "branch": "master", "commit": "a85dfff2602b739627b9f8a831de8c3e7b2993ae" },
   "repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
   "rsi": { "branch": "master", "commit": "45540637ead22f011e8215f1c90142e49d946a54" },
   "sleuth": { "branch": "master", "commit": "1cc4557420f215d02c4d2645a748a816c220e99b" },
