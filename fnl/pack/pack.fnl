@@ -126,10 +126,10 @@
                                          "." (fzf :resume)
                                          "w" (fzf :grep_cword)
                                          "W" (fzf :grep_cWORD)
-                                         "/" (fzf :lines)
-                                         "l" (fzf :buffers)}]
+                                         "/" (fzf :lines)}]
                                (wk.register {"<leader>f" keys
-                                             "<leader>/" (fzf :blines)}))}]}
+                                             "<leader>/" (fzf :blines)
+                                             "<leader>bl" (fzf :buffers)}))}]}
 
    ;; Neorg
    {:url (gh "nvim-neorg/neorg")
