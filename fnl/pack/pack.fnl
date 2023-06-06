@@ -23,24 +23,30 @@
    ;; Tim Pope
    {:url "https://tpope.io/vim/eunuch.git"}
    {:url "https://tpope.io/vim/rsi.git"}
+
    {:url "https://tpope.io/vim/unimpaired.git"
-    :keys [["["] ["]"] ["<leader>j"] ["<leader>k"]]
+    :keys [["["]
+           ["]"]
+           {1 "<leader>k" 2 "[" :remap true :desc "Unimpared prev"}
+           {1 "<leader>j" 2 "]" :remap true :desc "Unimpared next"}]
     :config #(let [wk (require "which-key")]
+               ; TODO sort them out
                (wk.register {"[d" [vim.diagnostic.goto_prev "Previous diagnostic"]
                              "]d" [vim.diagnostic.goto_next "Next diagnostic"]
                              "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
-                             "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]
-                             "<leader>j" ["]" "Unimpared next"]
-                             "<leader>k" ["[" "Unimpared prev"]}
+                             "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]}
                             {:noremap false}))}
 
    {:url "https://tpope.io/vim/fugitive.git"
     :cmd ["G" "Git"]
-    :keys [["<leader>gs" "<cmd>vert Git<cr>"]
-           ["<leader>ga" "<cmd>Gwrite<cr>"]
-           ["<leader>gp" "<cmd>10sp +term\\ git\\ push<cr>"]
-           ["<leader>gP" "<cmd>G push --force-with-lease<cr>"]
-           ["<leader>gm" "<cmd>GitMessenger<cr>"]]}
+    :keys [{1 "<leader>g" :desc "git"}]
+    :config #(let [wk (require "which-key")]
+               (wk.register
+                 {"<leader>g" {"s" ["<cmd>vert Git<cr>" "Git"]
+                               "a" ["<cmd>Gwrite<cr>" "Stage file"]
+                               "p" ["<cmd>10sp +term\\ git\\ push<cr>" "Git push"]
+                               "P" ["<cmd>G push --force-with-lease<cr>" "Git push f"]
+                               "m" ["<cmd>GitMessenger<cr>"]}}))}
 
    ;; Follow conventions
    ["https://tpope.io/vim/sleuth.git"]

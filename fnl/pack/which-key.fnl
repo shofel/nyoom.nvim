@@ -15,9 +15,6 @@
                              "h" [unshow_in_window     "hide buffer"]
                              "c" ["<cmd>close<cr>"     "close buffer"]}}))
 
-;; git
-(wk.register {"<leader>g" {:name "git"}})
-
 (local list-workspace-folders
        [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
         "list workspace folders"])
