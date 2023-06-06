@@ -86,16 +86,17 @@
                   :F "f" :T "F"}}}
 
    {:url (gh "echasnovski/mini.nvim")
-    :config #(((call-setup "mini.comment"))
-              ((call-setup "mini.surround"
-                           {:n_lines 50
-                            :mappings {:add "sa"
-                                       :delete "sd"
-                                       :find "st"
-                                       :find_left "sf"
-                                       :highlight "sh"
-                                       :replace "sr"
-                                       :update_n_lines "sn"}})))}
+    :config (λ []
+               ((call-setup "mini.comment"))
+               ((call-setup "mini.surround"
+                            {:n_lines 50
+                             :mappings {:add "sa"
+                                        :delete "sd"
+                                        :find "st"
+                                        :find_left "sf"
+                                        :highlight "sh"
+                                        :replace "sr"
+                                        :update_n_lines "sn"}})))}
 
    ;; Statusline
    (require "pack.lualine")
