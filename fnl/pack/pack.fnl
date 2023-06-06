@@ -78,8 +78,7 @@
                ((call-setup "mini.comment")))}
 
    ;; Statusline
-   {:url (gh "nvim-lualine/lualine.nvim")
-    :opts (load-file "lualine_opts")}
+   (require "pack.lualine")
 
    ;; Fzf
    {:url (gh "ibhagwan/fzf-lua")
