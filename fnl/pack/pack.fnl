@@ -25,10 +25,9 @@
    {:url "https://tpope.io/vim/rsi.git"}
 
    {:url "https://tpope.io/vim/unimpaired.git"
-    :keys [["["]
-           ["]"]
-           {1 "<leader>k" 2 "[" :remap true :desc "Unimpared prev"}
-           {1 "<leader>j" 2 "]" :remap true :desc "Unimpared next"}]
+    :keys [["["] ["yo"] ["]"]
+           {1 "<leader>k" 2 "[" :remap true :desc "Unimpaired prev"}
+           {1 "<leader>j" 2 "]" :remap true :desc "Unimpaired next"}]
     :config #(let [wk (require "which-key")]
                ; TODO sort them out
                (wk.register {"[d" [vim.diagnostic.goto_prev "Previous diagnostic"]
@@ -65,7 +64,8 @@
                              "<localleader>t" "test"}))}
 
    {:url (gh "fladson/vim-kitty" ):ft "kitty"}
-   [:mbbill/undotree]
+   {:url (gh "mbbill/undotree")}
+   {:url (gh "bfrg/vim-jq") :ft "jq"}
 
    ;; Pairs
    {:url (gh "windwp/nvim-autopairs" ):opts {:disable_filetype lisp-filetypes}}
@@ -104,32 +104,34 @@
    ;; Fzf
    {:url (gh "ibhagwan/fzf-lua")
     :branch :main
-    :opts {:border "single"}
     :cmd "FzfLua"
     :keys [["<leader>f"]]
-    :dependencies [{:url (gh "junegunn/fzf") :build ":call fzf#install()"}
-                   {:url (gh "folke/which-key.nvim")
-                    :config #(let [wk (require "which-key")
-                                   fzf (λ [method ?opts]
-                                          [#((. (require "fzf-lua") method) ?opts)
-                                           method])
-                                   keys {:name "fzf"
-                                         "f" (fzf :git_files)
-                                         "F" (fzf :files {:fd-opts "--no-ignore --hidden"})
-                                         "s" (fzf :git_status)
-                                         "g" (fzf :live_grep)
-                                         "h" (fzf :help_tags)
-                                         "H" (fzf :command_history)
-                                         "c" (fzf :commands)
-                                         "," (fzf :builtin)
-                                         "k" (fzf :keymaps)
-                                         "." (fzf :resume)
-                                         "w" (fzf :grep_cword)
-                                         "W" (fzf :grep_cWORD)
-                                         "/" (fzf :lines)}]
-                               (wk.register {"<leader>f" keys
-                                             "<leader>/" (fzf :blines)
-                                             "<leader>bl" (fzf :buffers)}))}]}
+    :dependencies [{:url (gh "junegunn/fzf") :build ":call fzf#install()"}]
+    :config (λ []
+               (let [wk (require "which-key")
+                     fzf-opts {:border "single"}
+                     fzf (require "fzf-lua")
+                     key (λ [method ?opts]
+                            [#((. fzf method) ?opts)
+                             method])
+                     keys {:name "fzf"
+                           "f" (key :git_files)
+                           "F" (key :files {:fd-opts "--no-ignore --hidden"})
+                           "s" (key :git_status)
+                           "g" (key :live_grep)
+                           "h" (key :help_tags)
+                           "H" (key :command_history)
+                           "c" (key :commands)
+                           "," (key :builtin)
+                           "k" (key :keymaps)
+                           "." (key :resume)
+                           "w" (key :grep_cword)
+                           "W" (key :grep_cWORD)
+                           "/" (key :lines)}]
+                 (fzf.setup fzf-opts)
+                 (wk.register {"<leader>f" keys
+                               "<leader>/" (key :blines)
+                               "<leader>bl" (key :buffers)})))}
 
    ;; Neorg
    {:url (gh "nvim-neorg/neorg")
@@ -160,8 +162,7 @@
 
    ;; Trouble
    {:url (gh "folke/trouble.nvim")
-    :cmd "Trouble"
-    :opts {:icons false}}
+    :cmd "Trouble"}
 
    {:url (gh "akinsho/toggleterm.nvim")
     :opts {:direction "float"
