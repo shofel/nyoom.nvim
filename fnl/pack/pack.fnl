@@ -120,9 +120,11 @@
                  (wk-register {"<leader>b"
                                {:name "buffers"
                                 "o" ["<cmd>only<cr>"      "close others"]
-                                "k" [_.delete             "kill buffer and close window"]
+                                "k" ["<cmd>bwipeout<cr>"  "delete buffer and close window"]
+                                "K" ["<cmd>bwipeout!<cr>" "delete buffer and close window"]
+                                "d" [_.delete             "delete buffer"]
                                 "h" [_.unshow_in_window   "unshow buffer"]
-                                "c" ["<cmd>close<cr>"     "close buffer"]}})))}
+                                "c" ["<cmd>close<cr>"     "close window"]}})))}
 
 
    ;; Statusline
