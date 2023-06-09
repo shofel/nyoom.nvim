@@ -3,9 +3,11 @@
 (lambda key [tbl prop] [(. tbl prop) prop])
 
 ;; Root leader keys
-(wk.register {"<leader>" {:s ["<cmd>w<cr>" "Write buffer"]
-                          :n ["<cmd>nohlsearch<cr>" "Clear search"]
-                          :e [":" ":"]}})
+(wk.register {"<leader>" {:s ["<cmd>write<cr>" "Write buffer"]
+                          :n ["<cmd>nohlsearch<cr>" "Clear search"]}})
+
+;; TODO fix bug in which-key
+(vim.keymap.set :n "<leader>e" :: {:desc ":"})
 
 ;; buffers and windows
 (let [{: unshow_in_window} (require "mini.bufremove")]

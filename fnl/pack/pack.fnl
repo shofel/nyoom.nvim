@@ -12,6 +12,10 @@
 
 (λ gh [x] (.. "https://github.com/" x ".git"))
 
+(λ wk-register [keys]
+   (let [wk (require "which-key")]
+     (wk.register keys)))
+
 ;; Describe plugins.
 
 (local lisp-filetypes ["fennel" "clojure" "lisp" "racket" "scheme"])
@@ -28,24 +32,32 @@
     :keys [["["] ["yo"] ["]"]
            {1 "<leader>k" 2 "[" :remap true :desc "Unimpaired prev"}
            {1 "<leader>j" 2 "]" :remap true :desc "Unimpaired next"}]
-    :config #(let [wk (require "which-key")]
-               ; TODO sort them out
-               (wk.register {"[d" [vim.diagnostic.goto_prev "Previous diagnostic"]
-                             "]d" [vim.diagnostic.goto_next "Next diagnostic"]
-                             "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
-                             "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]}
-                            {:noremap false}))}
+    :config #(wk-register {"[d" [vim.diagnostic.goto_prev "Previous diagnostic"]
+                           "]d" [vim.diagnostic.goto_next "Next diagnostic"]
+                           "[c" ["<cmd>Gitsigns prev_hunk<cr>" "prev hunk"]
+                           "]c" ["<cmd>Gitsigns next_hunk<cr>" "next hunk"]}
+                          {:noremap false})}
 
    {:url "https://tpope.io/vim/fugitive.git"
     :cmd ["G" "Git" "Gread"]
     :keys [{1 "<leader>g" :desc "git"}]
-    :config #(let [wk (require "which-key")]
-               (wk.register
+    :config #(wk-register
                  {"<leader>g" {"s" ["<cmd>vert Git<cr>" "Git"]
-                               "a" ["<cmd>Gwrite<cr>" "Stage file"]
                                "p" ["<cmd>10sp +term\\ git\\ push<cr>" "Git push"]
-                               "P" ["<cmd>G push --force-with-lease<cr>" "Git push f"]
-                               "m" ["<cmd>GitMessenger<cr>"]}}))}
+                               "P" ["<cmd>G push --force-with-lease<cr>" "Git push f"]}})}
+
+   {:url (gh "lewis6991/gitsigns.nvim")
+    :event ["VeryLazy"]
+    :config true
+    :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]
+    :config (λ []
+               ((call-setup "gitsigns"))
+               (wk-register (let [gitsigns (λ [cmd opts]
+                                              [(.. "<cmd>Gitsigns " cmd "<cr>")
+                                               cmd])]
+                              {"<leader>g" {"r" (gitsigns "preview_hunk_inline")
+                                            "R" (gitsigns "preview_hunk")
+                                            "a" (gitsigns "stage_hunk")}})))}
 
    ;; Follow conventions
    ["https://tpope.io/vim/sleuth.git"]
@@ -56,12 +68,11 @@
    {:url (gh "Olical/conjure")
     :event ["BufReadPre *.fnl" "BufReadPre *.clj"]
     :init (tset vim.g "conjure#extract#tree_sitter#enabled" true)
-    :config #(let [wk (require "which-key")]
-               (wk.register {"<localleader>E" "eval motion"
-                             "<localleader>e" "execute"
-                             "<localleader>l" "log"
-                             "<localleader>r" "reset"
-                             "<localleader>t" "test"}))}
+    :config #(wk-register {"<localleader>E" "eval motion"
+                           "<localleader>e" "execute"
+                           "<localleader>l" "log"
+                           "<localleader>r" "reset"
+                           "<localleader>t" "test"})}
 
    {:url (gh "fladson/vim-kitty" ):ft "kitty"}
    {:url (gh "mbbill/undotree")}
@@ -115,19 +126,20 @@
                             [#((. fzf method) ?opts)
                              method])
                      keys {:name "fzf"
-                           "f" (key :git_files)
+                           "," (key :builtin)
+                           "." (key :resume)
+                           "/" (key :lines)
                            "F" (key :files {:fd-opts "--no-ignore --hidden"})
-                           "s" (key :git_status)
+                           "H" (key :command_history)
+                           "W" (key :grep_cWORD)
+                           "c" (key :commands)
+                           "f" (key :git_files)
                            "g" (key :live_grep)
                            "h" (key :help_tags)
-                           "H" (key :command_history)
-                           "c" (key :commands)
-                           "," (key :builtin)
                            "k" (key :keymaps)
-                           "." (key :resume)
-                           "w" (key :grep_cword)
-                           "W" (key :grep_cWORD)
-                           "/" (key :lines)}]
+                           "r" (key :registers)
+                           "s" (key :git_status)
+                           "w" (key :grep_cword)}]
                  (fzf.setup fzf-opts)
                  (wk.register {"<leader>f" keys
                                "<leader>/" (key :blines)
@@ -252,12 +264,7 @@
 
    {:url (gh "dstein64/vim-startuptime")
     :cmd "StartupTime"
-    :config (λ [] (set vim.g.startuptime_tries 10))}
-
-   ;; Git
-   {:url (gh "lewis6991/gitsigns.nvim")
-    :config true
-    :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]}])
+    :config (λ [] (set vim.g.startuptime_tries 10))}])
 
 ;; Call `setup` with the plugins described.
 (let [lazy (require :lazy)]
