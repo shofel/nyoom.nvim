@@ -121,7 +121,7 @@
                                {:name "buffers"
                                 "o" ["<cmd>only<cr>"      "close others"]
                                 "k" ["<cmd>bwipeout<cr>"  "delete buffer and close window"]
-                                "K" ["<cmd>bwipeout!<cr>" "delete buffer and close window"]
+                                "K" ["<cmd>bwipeout!<cr>" "delete! buffer and close window"]
                                 "d" [_.delete             "delete buffer"]
                                 "h" [_.unshow_in_window   "unshow buffer"]
                                 "c" ["<cmd>close<cr>"     "close window"]}})))}
