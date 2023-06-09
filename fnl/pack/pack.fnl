@@ -22,7 +22,15 @@
 
 (local plugins
   [;; Set and document keymaps
-   {:url (gh "folke/which-key.nvim") :config true}
+   {:url (gh "folke/which-key.nvim")
+    :config (λ []
+               ((call-setup "which-key"))
+               ;; Root leader keys
+               (wk-register {"<leader>" {:s ["<cmd>write<cr>" "Write buffer"]
+                                         :n ["<cmd>nohlsearch<cr>" "Clear search"]}})
+               ;; TODO fix bug in which-key
+               ; (wk.register {"<leader>e" [":" ":"]})
+               (vim.keymap.set :n "<leader>e" :: {:desc ":"}))}
 
    ;; Tim Pope
    {:url "https://tpope.io/vim/eunuch.git"}
@@ -48,11 +56,10 @@
 
    {:url (gh "lewis6991/gitsigns.nvim")
     :event ["VeryLazy"]
-    :config true
     :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]
     :config (λ []
                ((call-setup "gitsigns"))
-               (wk-register (let [gitsigns (λ [cmd opts]
+               (wk-register (let [gitsigns (λ [cmd]
                                               [(.. "<cmd>Gitsigns " cmd "<cr>")
                                                cmd])]
                               {"<leader>g" {"r" (gitsigns "preview_hunk_inline")
@@ -107,7 +114,16 @@
                                         :find_left "sf"
                                         :highlight "sh"
                                         :replace "sr"
-                                        :update_n_lines "sn"}})))}
+                                        :update_n_lines "sn"}}))
+               ;; buffers and windows
+               (let [_ (require "mini.bufremove")]
+                 (wk-register {"<leader>b"
+                               {:name "buffers"
+                                "o" ["<cmd>only<cr>"      "close others"]
+                                "k" [_.delete             "kill buffer and close window"]
+                                "h" [_.unshow_in_window   "unshow buffer"]
+                                "c" ["<cmd>close<cr>"     "close buffer"]}})))}
+
 
    ;; Statusline
    (require "pack.lualine")

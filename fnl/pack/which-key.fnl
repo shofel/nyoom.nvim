@@ -2,21 +2,6 @@
 
 (lambda key [tbl prop] [(. tbl prop) prop])
 
-;; Root leader keys
-(wk.register {"<leader>" {:s ["<cmd>write<cr>" "Write buffer"]
-                          :n ["<cmd>nohlsearch<cr>" "Clear search"]}})
-
-;; TODO fix bug in which-key
-(vim.keymap.set :n "<leader>e" :: {:desc ":"})
-
-;; buffers and windows
-(let [{: unshow_in_window} (require "mini.bufremove")]
-  (wk.register {"<leader>b" {:name "buffers"
-                             "o" ["<cmd>only<cr>"      "close others"]
-                             "k" ["<cmd>bwipeout!<cr>" "kill buffer and close window"]
-                             "h" [unshow_in_window     "hide buffer"]
-                             "c" ["<cmd>close<cr>"     "close buffer"]}}))
-
 (local list-workspace-folders
        [(fn [] (print (vim.inspect (vim.lsp.buf.list_workspace_folders))))
         "list workspace folders"])
