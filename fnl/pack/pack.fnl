@@ -152,9 +152,16 @@
                            "W" (key :grep_cWORD)
                            "c" (key :commands)
                            "f" (key :git_files)
-                           "g" (key :live_grep)
-                           "h" (key :help_tags)
+                           "g" {:name "git"}
+                           "gb" (key :git_branches)
+                           "gc" (key :git_bcommits)
+                           "gC" (key :git_commits)
+                           "gf" (key :git_files)
+                           "gs" (key :git_status)
+                           "gz" (key :git_stash)
+                           "u" (key :help_tags)
                            "k" (key :keymaps)
+                           "l" (key :live_grep)
                            "r" (key :registers)
                            "s" (key :git_status)
                            "w" (key :grep_cword)}]
