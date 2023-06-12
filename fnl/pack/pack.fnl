@@ -52,20 +52,24 @@
     :config #(wk-register
                  {"<leader>g" {"s" ["<cmd>vert Git<cr>" "Git"]
                                "p" ["<cmd>10sp +term\\ git\\ push<cr>" "Git push"]
-                               "P" ["<cmd>G push --force-with-lease<cr>" "Git push f"]}})}
+                               "P" ["<cmd>G push --force-with-lease<cr>"
+                                    "Git push force"]}})}
 
    {:url (gh "lewis6991/gitsigns.nvim")
     :event ["VeryLazy"]
     :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]
     :config (λ []
                ((call-setup "gitsigns"))
-               (wk-register (let [gitsigns (λ [cmd]
-                                              [(.. "<cmd>Gitsigns " cmd "<cr>")
-                                               cmd])]
-                              {"<leader>g" {"r" (gitsigns "preview_hunk_inline")
-                                            "R" (gitsigns "preview_hunk")
-                                            "a" (gitsigns "stage_hunk")}})))}
-
+               (wk-register (let [_ (require "gitsigns")
+                                  cmd (λ [cmd] [(.. "<cmd>Gitsigns " cmd "<cr>") cmd])
+                                  cmd_ (λ [cmd] [(.. ":Gitsigns " cmd " ") cmd])]
+                              {"<leader>g" {"r" (cmd "preview_hunk_inline")
+                                            "R" (cmd "preview_hunk")
+                                            "a" (cmd "stage_hunk")
+                                            "l" [#(_.setqflist "all") "qflist"]
+                                            "d" [_.diffthis "diff"]
+                                            "B" (cmd_ "change_base")
+                                            "b" (cmd "blame_line")}})))}
    ;; Follow conventions
    ["https://tpope.io/vim/sleuth.git"]
 
@@ -199,6 +203,7 @@
 
    ;; Trouble
    {:url (gh "folke/trouble.nvim")
+    :opts {:icons false}
     :cmd "Trouble"}
 
    {:url (gh "akinsho/toggleterm.nvim")
