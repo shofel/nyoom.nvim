@@ -64,13 +64,16 @@
                (wk-register (let [_ (require "gitsigns")
                                   cmd (λ [cmd] [(.. "<cmd>Gitsigns " cmd "<cr>") cmd])
                                   cmd_ (λ [cmd] [(.. ":Gitsigns " cmd " ") cmd])]
-                              {"<leader>g" {"r" (cmd "preview_hunk_inline")
+                              {"<leader>g" {:name "git"
+                                            "B" (cmd_ "change_base")
                                             "R" (cmd "preview_hunk")
                                             "a" (cmd "stage_hunk")
-                                            "l" [#(_.setqflist "all") "qflist"]
+                                            "b" (cmd "blame_line")
                                             "d" [_.diffthis "diff"]
-                                            "B" (cmd_ "change_base")
-                                            "b" (cmd "blame_line")}})))}
+                                            "l" [#(_.setqflist "all") "qflist"]
+                                            "r" (cmd "preview_hunk_inline")
+                                            "u" (cmd "reset_hunk")}})))}
+
    ;; Follow conventions
    ["https://tpope.io/vim/sleuth.git"]
 
