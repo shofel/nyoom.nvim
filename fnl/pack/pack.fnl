@@ -167,7 +167,7 @@
                            "gf" (key :git_files)
                            "gs" (key :git_status)
                            "gz" (key :git_stash)
-                           "u" (key :help_tags)
+                           "h" (key :help_tags)
                            "k" (key :keymaps)
                            "l" (key :live_grep)
                            "r" (key :registers)
