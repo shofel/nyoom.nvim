@@ -34,6 +34,7 @@
 
    ;; Tim Pope
    {:url "https://tpope.io/vim/eunuch.git"}
+   {:url "https://tpope.io/vim/repeat.git"}
    {:url "https://tpope.io/vim/rsi.git"}
 
    {:url "https://tpope.io/vim/unimpaired.git"
