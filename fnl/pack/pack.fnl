@@ -1,10 +1,9 @@
 ;; Helpers.
 
-(macro call-setup [name config]
+(macro call-setup [name opts]
   "To config a plugin: call the setup function."
-  `(λ []
-      ((. (require ,name) :setup)
-       ,config)))
+  `((. (require ,name) :setup)
+    ,opts))
 
 (macro load-file [name]
   "To config a plugin: load a file from pack/ folder."
@@ -24,7 +23,7 @@
   [;; Set and document keymaps
    {:url (gh "folke/which-key.nvim")
     :config (λ []
-               ((call-setup "which-key"))
+               (call-setup "which-key")
                ;; Root leader keys
                (wk-register {"<leader>" {:s ["<cmd>write<cr>" "Write buffer"]
                                          :n ["<cmd>nohlsearch<cr>" "Clear search"]}})
@@ -60,7 +59,7 @@
     :event ["VeryLazy"]
     :dependencies [{:url (gh "nvim-lua/plenary.nvim")}]
     :config (λ []
-               ((call-setup "gitsigns"))
+               (call-setup "gitsigns")
                (wk-register (let [_ (require "gitsigns")
                                   cmd (λ [cmd] [(.. "<cmd>Gitsigns " cmd "<cr>") cmd])
                                   cmd_ (λ [cmd] [(.. ":Gitsigns " cmd " ") cmd])]
@@ -72,7 +71,8 @@
                                             "d" [_.diffthis "diff"]
                                             "l" [#(_.setqflist "all") "qflist"]
                                             "r" (cmd "preview_hunk_inline")
-                                            "u" (cmd "reset_hunk")}})))}
+                                            "u" (cmd "reset_hunk")
+                                            "w" (cmd "stage_buffer")}})))}
 
    ;; Follow conventions
    ["https://tpope.io/vim/sleuth.git"]
@@ -113,8 +113,8 @@
 
    {:url (gh "echasnovski/mini.nvim")
     :config (λ []
-               ((call-setup "mini.comment"))
-               ((call-setup "mini.surround"
+               (call-setup "mini.comment")
+               (call-setup "mini.surround"
                             {:n_lines 50
                              :mappings {:add "sa"
                                         :delete "sd"
@@ -122,7 +122,7 @@
                                         :find_left "sf"
                                         :highlight "sh"
                                         :replace "sr"
-                                        :update_n_lines "sn"}}))
+                                        :update_n_lines "sn"}})
                ;; buffers and windows
                (let [_ (require "mini.bufremove")]
                  (wk-register {"<leader>b"
@@ -142,11 +142,10 @@
    {:url (gh "ibhagwan/fzf-lua")
     :branch :main
     :cmd "FzfLua"
-    :keys [["<leader>f"]]
+    :keys [["<leader>f"] ["<leader>/"] ["<leader>bl"]]
     :dependencies [{:url (gh "junegunn/fzf") :build ":call fzf#install()"}]
     :config (λ []
-               (let [wk (require "which-key")
-                     fzf-opts {:border "single"}
+               (let [fzf-opts {:border "single"}
                      fzf (require "fzf-lua")
                      key (λ [method ?opts]
                             [#((. fzf method) ?opts)
@@ -174,9 +173,22 @@
                            "s" (key :git_status)
                            "w" (key :grep_cword)}]
                  (fzf.setup fzf-opts)
-                 (wk.register {"<leader>f" keys
+                 (wk-register {"<leader>f" keys
                                "<leader>/" (key :blines)
                                "<leader>bl" (key :buffers)})))}
+
+   ;; clipboard
+   {:url (gh "gbprod/yanky.nvim")
+    :config (λ []
+               (call-setup "yanky")
+               (vim.keymap.set ["n" "x"] "y"  "<Plug>(YankyYank)")
+               (vim.keymap.set ["n" "x"] "p"  "<Plug>(YankyPutAfter)")
+               (vim.keymap.set ["n" "x"] "P"  "<Plug>(YankyPutBefore)")
+               (vim.keymap.set ["n" "x"] "gp" "<Plug>(YankyGPutAfter)")
+               (vim.keymap.set ["n" "x"] "gP" "<Plug>(YankyGPutBefore)")
+               (vim.keymap.set ["n"]  "<a-n>" "<Plug>(YankyCycleForward)")
+               (vim.keymap.set ["n"]  "<a-p>" "<Plug>(YankyCycleBackward)"))}
+   {:url (gh "AckslD/nvim-neoclip.lua") :opts {}}
 
    ;; Neorg
    {:url (gh "nvim-neorg/neorg")
@@ -225,10 +237,10 @@
     :lazy false
     :priority 1000
     :config (λ []
-               ((call-setup :catppuccin
+               (call-setup :catppuccin
                             {:custom_highlights {:MatchParen {:fg "#FE640B"
                                                               :bg "#000000"
-                                                              :style ["bold"]}}}))
+                                                              :style ["bold"]}}})
                (vim.cmd "colorscheme catppuccin-frappe"))}
 
    {:url (gh "folke/noice.nvim")
@@ -249,13 +261,13 @@
    {:url (gh "rcarriga/nvim-notify")
     :config (λ []
                (set vim.notify (require :notify))
-               ((call-setup "notify" {:stages :fade_in_slide_out
-                                      :fps 60
-                                      :icons {:ERROR ""
-                                              :WARN ""
-                                              :INFO ""
-                                              :DEBUG ""
-                                               :TRACE "✎"}})))}
+               (call-setup "notify" {:stages :fade_in_slide_out
+                                     :fps 60
+                                     :icons {:ERROR ""
+                                             :WARN ""
+                                             :INFO ""
+                                             :DEBUG ""
+                                              :TRACE "✎"}}))}
 
    {:url (gh "Pocco81/TrueZen.nvim")
     :cmd     "TZAtaraxis"
@@ -281,13 +293,13 @@
 
    {:url (gh "norcalli/nvim-colorizer.lua")
     :event [:BufRead :BufNewFile]
-    :config (call-setup "colorizer" ["*"] {:RGB true
-                                           :RRGGBB true
-                                           :names true
-                                           :RRGGBBAA true
-                                           :rgb_fn true
-                                           :hsl_fn true
-                                           :mode :foreground})}
+    :opts {"*" {:RGB true
+                :RRGGBB true
+                :names true
+                :RRGGBBAA true
+                :rgb_fn true
+                :hsl_fn true
+                :mode :foreground}}}
 
    ;; Folds
    {:url (gh "kevinhwang91/nvim-ufo")
