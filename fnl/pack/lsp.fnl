@@ -63,3 +63,5 @@
 (lsp.yamlls.setup {: on_attach
                    : capabilities
                    :settings {:yaml {:keyOrdering false}}})
+
+(lsp.jsonnet_ls.setup {})
