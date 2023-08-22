@@ -58,7 +58,8 @@
 (lsp.rnix.setup defaults)
 (lsp.hls.setup defaults)
 (lsp.terraformls.setup defaults)
-(lsp.tsserver.setup defaults)
+(lsp.tsserver.setup {: on_attach
+                     : capabilities})
 (lsp.vimls.setup defaults)
 (lsp.yamlls.setup {: on_attach
                    : capabilities

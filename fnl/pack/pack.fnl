@@ -11,9 +11,9 @@
 
 (λ gh [x] (.. "https://github.com/" x ".git"))
 
-(λ wk-register [keys]
+(λ wk-register [keys ?opts]
    (let [wk (require "which-key")]
-     (wk.register keys)))
+     (wk.register keys ?opts)))
 
 ;; Describe plugins.
 
@@ -143,7 +143,10 @@
    {:url (gh "ibhagwan/fzf-lua")
     :branch :main
     :cmd "FzfLua"
-    :keys [["<leader>f"] ["<leader>/"] ["<leader>bl"]]
+    :keys [["<leader>f"]
+           ["<leader>/"]
+           ["<leader>bl"]
+           {1 "<c-x><c-f>" :mode "i"}]
     :dependencies [{:url (gh "junegunn/fzf") :build ":call fzf#install()"}]
     :config (λ []
                (let [fzf-opts {:border "single"}
@@ -176,7 +179,9 @@
                  (fzf.setup fzf-opts)
                  (wk-register {"<leader>f" keys
                                "<leader>/" (key :blines)
-                               "<leader>bl" (key :buffers)})))}
+                               "<leader>bl" (key :buffers)})
+                 (wk-register {"<c-x><c-f>" (key :complete_path)}
+                              {:mode "i"})))}
 
    ;; clipboard
    {:url (gh "gbprod/yanky.nvim")
