@@ -29,8 +29,7 @@
                                          :n ["<cmd>nohlsearch<cr>" "Clear search"]}})
                ;; TODO fix bug in which-key
                ; (wk.register {"<leader>e" [":" ":"]})
-               (vim.keymap.set :n "<leader>e" :: {:desc ":"})
-               (vim.keymap.set :n ":" "<esc>" {:desc ":"}))}
+               (vim.keymap.set :n "<leader>e" :: {:desc ":"}))}
 
    ;; Tim Pope
    {:url "https://tpope.io/vim/eunuch.git"}
