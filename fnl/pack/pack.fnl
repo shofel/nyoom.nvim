@@ -78,7 +78,7 @@
    ["https://tpope.io/vim/sleuth.git"]
 
    ;; Lisps
-   {:url (gh "rktjmp/hotpot.nvim")} ;; in sync with init.lua
+   {:url (gh "Olical/nfnl")} ;; in sync with init.lua
    {:url (gh "gpanders/nvim-parinfer")}
    {:url (gh "Olical/conjure")
     :event ["BufReadPre *.fnl" "BufReadPre *.clj"]
