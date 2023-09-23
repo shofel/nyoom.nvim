@@ -9,7 +9,7 @@ set_opts_21({hidden = true, list = true, timeoutlen = 500, shortmess = "filnxtTo
 set_opt_21("completeopt", {"menu", "menuone", "preview", "noinsert", "noselect"})
 set_opt_21("clipboard", "unnamedplus")
 set_opt_21("mouse", "a")
-set_opts_21({backupcopy = "yes", updatetime = 20, undofile = true, backup = false, swapfile = false})
+set_opts_21({backupcopy = "yes", updatetime = 20, undofile = true, swapfile = false, backup = false})
 set_opt_21("ruler", false)
 set_opt_21("number", false)
 set_opt_21("termguicolors", true)
